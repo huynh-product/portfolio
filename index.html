@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Huynh Tran — Product Owner</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,8 +29,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;padding:0 48px;
 /* solid state (non-home pages OR scrolled past hero) */
 nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.07);box-shadow:0 1px 0 rgba(0,0,0,.4)}
 /* logo */
-.nlogo{font-size:22px;font-weight:800;font-style:italic;letter-spacing:-.03em;cursor:pointer;text-decoration:none;color:#fff}
-.nlogo .acc{color:#b3aaf8}
+.nlogo{cursor:pointer;text-decoration:none;display:flex;align-items:center;height:32px}
+.nlogo img{height:32px;width:auto;display:block}
 /* links — always white (on both dark transparent and dark solid) */
 .nlinks{display:flex;align-items:center;gap:2px;list-style:none}
 .nlinks a{font-size:14px;font-weight:500;color:rgba(255,255,255,.75);padding:6px 13px;border-radius:8px;cursor:pointer;transition:color .15s,background .15s;text-decoration:none}
@@ -107,8 +108,8 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .hph.c5{background:linear-gradient(135deg,#1a2a1a,#0e1a0e)}
 .hph.dk{background:#060610}
 
-/* MARQUEE — on dark bg */
-.mwrap{overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:17px 0;background:#0d0c16}
+/* MARQUEE — transparent overlay at bottom of hero */
+.mwrap{overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:17px 0;background:transparent;position:relative;z-index:2}
 .mtrack{display:flex;width:max-content;animation:mq 28s linear infinite}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .mitem{display:inline-flex;align-items:center;gap:8px;padding:0 38px;font-size:15px;font-weight:700;font-style:italic;color:rgba(255,255,255,.75);white-space:nowrap;letter-spacing:-.01em}
@@ -118,8 +119,8 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 /* ── SCROLL REVEAL WRAPPER ──
    All home sections after the hero start dark and fade to light */
 .reveal-wrap{position:relative}
-/* dark-to-light gradient bridge above first light section */
-.dark-bridge{height:200px;background:linear-gradient(to bottom,#0d0c16 0%,#0d0c16 25%,#f7f7f7 100%);position:relative;z-index:1}
+/* dark-to-light bridge — clean cut */
+.dark-bridge{height:0;position:relative;z-index:1}
 
 /* ABOUT — light */
 .about-sec{padding:96px 48px;background:#fff}
@@ -234,7 +235,7 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 /* ════════════════════════════════
    KRESNA-STYLE FOOTER (from prompt)
 ════════════════════════════════ */
-.footer-section{background:#fff;padding:0 24px 48px;font-family:'DM Sans',sans-serif}
+.footer-section{background:#fff;padding:80px 24px 48px;font-family:'DM Sans',sans-serif}
 .footer-wrapper{max-width:1150px;margin:0 auto;display:grid;grid-template-columns:350px 1fr;gap:16px;align-items:stretch}
 /* LEFT card */
 .footer-left{position:relative;min-height:340px;border-radius:28px;padding:32px;overflow:hidden;background:#1e4fc0;box-shadow:0 12px 40px rgba(21,76,189,.25);display:flex;flex-direction:column;justify-content:space-between}
@@ -473,7 +474,7 @@ footer{background:#0d0c16;padding:44px 48px}
 
 <!-- NAV -->
 <nav id="mainnav">
-  <span class="nlogo" onclick="go('home')">Huynh<span class="acc">Product</span></span>
+  <span class="nlogo" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct"></span>
   <ul class="nlinks">
     <li><a onclick="go('about')" id="na-about">About</a></li>
     <li><a onclick="go('portfolio')" id="na-portfolio">Portfolio</a></li>
@@ -509,12 +510,8 @@ footer{background:#0d0c16;padding:44px 48px}
       </div>
     </section>
   </div>
-</div>
-
-
-
-<!-- dark marquee -->
-<div class="mwrap">
+  <!-- ticker at bottom of hero, transparent so video shows through -->
+  <div class="mwrap">
   <div class="mtrack">
     <span class="mitem">Inspectorio <em>SaaS B2B</em></span><span class="msep">✦</span>
     <span class="mitem">VeXeRe <em>Travel OTA</em></span><span class="msep">✦</span>
@@ -534,8 +531,9 @@ footer{background:#0d0c16;padding:44px 48px}
     <span class="mitem">Foreign Trade University <em>Vietnam</em></span><span class="msep">✦</span>
   </div>
 </div>
+</div><!-- end hero-wrap -->
 
-<!-- gradient bridge: dark → white -->
+<!-- anchor for scroll target -->
 <div class="dark-bridge" id="about-anchor"></div>
 
 <!-- ABOUT (white) -->
@@ -648,8 +646,7 @@ footer{background:#0d0c16;padding:44px 48px}
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
       </video>
       <div class="footer-logo">
-        <div class="footer-logo-mark">H</div>
-        <span class="footer-logo-name">HuynhProduct</span>
+        <img src="logo.svg" alt="HuynhProduct" style="height:30px;width:auto">
       </div>
       <div class="footer-tagline-container">
         <p class="footer-tagline">Senior Product Owner &amp; Product Manager,<br><span>building products that matter.</span></p>
@@ -674,17 +671,6 @@ footer{background:#0d0c16;padding:44px 48px}
     </div>
     <!-- RIGHT card -->
     <div class="footer-right">
-      <div class="footer-lucky-graphic">
-        <div class="lucky-cube"><span class="lucky-cube-mark">H</span></div>
-        <div class="lucky-text-row">
-          <svg class="lucky-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 20 C 6 14, 10 9, 18 5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18 5 L 12 5" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18 5 L 18 11" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="lucky-text">Feeling lucky?</span>
-        </div>
-      </div>
       <div class="footer-right-top">
         <div class="footer-nav-cols">
           <div class="footer-col">
@@ -726,7 +712,7 @@ footer{background:#0d0c16;padding:44px 48px}
       <video class="iphero-vid" autoplay muted loop playsinline>
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
       </video>
-      <div class="iphero-logo"><div class="iphero-logo-mark">H</div><span class="iphero-logo-name">HuynhProduct</span></div>
+      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
       <div class="iphero-left-bottom">
         <p class="iphero-tagline">Senior Product Owner &amp; Product Manager,<br><span>building products that matter.</span></p>
         <span class="iphero-social-lbl">Stay in touch!</span>
@@ -833,7 +819,7 @@ footer{background:#0d0c16;padding:44px 48px}
     </div>
   </div>
 </section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')">Huynh<span class="footer-acc">Product</span></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <!-- ═══════════ PORTFOLIO ═══════════ -->
@@ -844,7 +830,7 @@ footer{background:#0d0c16;padding:44px 48px}
       <video class="iphero-vid" autoplay muted loop playsinline>
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
       </video>
-      <div class="iphero-logo"><div class="iphero-logo-mark">H</div><span class="iphero-logo-name">HuynhProduct</span></div>
+      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
       <div class="iphero-left-bottom">
         <p class="iphero-tagline">6 products shipped across<br><span>SaaS, OTA, Social &amp; EdTech.</span></p>
         <span class="iphero-social-lbl">Stay in touch!</span>
@@ -875,7 +861,7 @@ footer{background:#0d0c16;padding:44px 48px}
     </div>
   </div>
 </section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')">Huynh<span class="footer-acc">Product</span></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div><!-- end portfolio -->
 
 <!-- ═══════════ PRODUCT MANAGEMENT ═══════════ -->
@@ -886,7 +872,7 @@ footer{background:#0d0c16;padding:44px 48px}
       <video class="iphero-vid" autoplay muted loop playsinline>
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
       </video>
-      <div class="iphero-logo"><div class="iphero-logo-mark">H</div><span class="iphero-logo-name">HuynhProduct</span></div>
+      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
       <div class="iphero-left-bottom">
         <p class="iphero-tagline">Real experience, written down<br><span>for you to use.</span></p>
         <span class="iphero-social-lbl">Stay in touch!</span>
@@ -917,7 +903,7 @@ footer{background:#0d0c16;padding:44px 48px}
   <a href="#" class="art fu"><div><span class="atag">Data Analytics</span><div class="atitle">The 5 metrics I always define before any MVP launch</div><div class="adesc">Lessons learned from launching Goyolo and GMS — what to measure, when, and how to use the data.</div></div><div class="aarr">→</div></a>
   <a href="#" class="art fu"><div><span class="atag">Quality Assurance</span><div class="atitle">How to run UAT when you have 10 stakeholders and 2 weeks</div><div class="adesc">From my experience running pre-release testing at Golden Equator and Inspectorio. Practical, not theoretical.</div></div><div class="aarr">→</div></a>
 </div></section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')">Huynh<span class="footer-acc">Product</span></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <!-- ═══════════ CASE STUDIES ═══════════ -->
@@ -928,7 +914,7 @@ footer{background:#0d0c16;padding:44px 48px}
       <video class="iphero-vid" autoplay muted loop playsinline>
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
       </video>
-      <div class="iphero-logo"><div class="iphero-logo-mark">H</div><span class="iphero-logo-name">HuynhProduct</span></div>
+      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
       <div class="iphero-left-bottom">
         <p class="iphero-tagline">Real PM exercises from<br><span>real interview rounds.</span></p>
         <span class="iphero-social-lbl">Stay in touch!</span>
@@ -951,7 +937,7 @@ footer{background:#0d0c16;padding:44px 48px}
     <a href="#" class="csc fu"><div class="csc-bg t"></div><div class="csh"><span class="cstag">Travel</span><h3>How do you prioritize a backlog when business and user needs conflict?</h3></div></a>
   </div>
 </div></section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')">Huynh<span class="footer-acc">Product</span></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <!-- ═══════════ PODCAST ═══════════ -->
@@ -962,7 +948,7 @@ footer{background:#0d0c16;padding:44px 48px}
       <video class="iphero-vid" autoplay muted loop playsinline>
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
       </video>
-      <div class="iphero-logo"><div class="iphero-logo-mark">H</div><span class="iphero-logo-name">HuynhProduct</span></div>
+      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
       <div class="iphero-left-bottom">
         <p class="iphero-tagline">Honest conversations about<br><span>Product in Vietnamese &amp; English.</span></p>
         <span class="iphero-social-lbl">Stay in touch!</span>
@@ -977,12 +963,6 @@ footer{background:#0d0c16;padding:44px 48px}
 </div>
 <div class="iphero-bridge"></div>
 <section class="inner-sec"><div class="si">
-  <span class="slbl">Listen on</span>
-  <div class="plat-row">
-    <a href="https://www.youtube.com/" target="_blank" class="plbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> YouTube</a>
-    <a href="https://open.spotify.com/" target="_blank" class="plbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg> Spotify</a>
-    <a href="https://www.facebook.com/productbuddy.official" target="_blank" class="plbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a>
-  </div>
   <span class="slbl">All episodes</span><span class="gbar"></span>
   <h2 class="stitle" style="margin-bottom:24px">Latest episodes.</h2>
   <div class="ep-list">
@@ -994,7 +974,7 @@ footer{background:#0d0c16;padding:44px 48px}
     <a href="https://www.facebook.com/productbuddy.official" target="_blank" class="epc fu"><div class="epth c6">🎓</div><div class="epbody"><span class="epnum">Episode 01</span><span class="eptitle">Tại sao tôi bắt đầu Product Buddy — và điều tôi muốn bạn biết</span></div></a>
   </div>
 </div></section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')">Huynh<span class="footer-acc">Product</span></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <script>
