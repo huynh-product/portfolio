@@ -147,13 +147,15 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 
 /* IMAGE SLOT BADGE */
 .img-slot{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.06em;z-index:10;pointer-events:none;font-family:var(--ff)}
-/* FEATURES — purple/green/blue palette only */
-.feat-sec{padding:96px 48px;background:#fff}
-.feat-hdr{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:56px}
-.feat-hdr-h{font-size:clamp(30px,4vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
-.feat-hdr-p{font-size:16px;color:var(--ink2);line-height:1.7;padding-top:6px}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.feat{border-radius:20px;height:340px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;text-align:left;box-shadow:0 10px 30px -10px rgba(0,0,0,.12);cursor:default;transition:transform .25s,box-shadow .25s}
+/* FEATURES — parallax 2-col layout */
+.feat-sec{padding:96px 48px;background:#fff;overflow:hidden}
+.feat-par-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;align-items:start}
+.feat-par-text{padding-top:40px}
+.feat-par-text h2{font-size:clamp(28px,3.5vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:16px}
+.feat-par-text p{font-size:15px;color:var(--ink2);line-height:1.7}
+.feat-col{display:flex;flex-direction:column;gap:16px}
+.feat-col-b{transform:translateY(60px);transition:transform .15s linear}
+.feat{border-radius:20px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;text-align:left;box-shadow:0 10px 30px -10px rgba(0,0,0,.12);cursor:default;transition:transform .25s,box-shadow .25s}
 .feat:hover{transform:translateY(-4px);box-shadow:0 20px 48px -10px rgba(0,0,0,.18)}
 /* purple/blue/green only */
 .feat-1{background:radial-gradient(circle at 50% 0%,#7c3aed 0%,#a78bfa 30%,#f4f8f9 65%)}
@@ -162,10 +164,11 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .feat-4{background:radial-gradient(circle at 50% 0%,#4f46e5 0%,#818cf8 30%,#f4f8f9 65%)}
 .feat-5{background:radial-gradient(circle at 50% 0%,#0891b2 0%,#22d3ee 30%,#f4f8f9 65%)}
 .feat-6{background:radial-gradient(circle at 50% 0%,#7c3aed 0%,#c4b5fd 30%,#f4f8f9 65%)}
-.feat-visual{position:absolute;top:0;left:0;right:0;bottom:68px;display:flex;align-items:center;justify-content:center}
-.feat-ico-lg{width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
-.feat-body{padding:20px 24px;position:relative;z-index:2}
-.feat h3{font-size:1.05rem;font-weight:600;color:#1e293b;margin-bottom:0;letter-spacing:-.01em}
+.feat-visual{position:absolute;top:0;left:0;right:0;bottom:80px;display:flex;align-items:center;justify-content:center}
+.feat-ico-lg{width:60px;height:60px;border-radius:14px;background:rgba(255,255,255,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.feat-body{padding:16px 20px 18px;position:relative;z-index:2;background:rgba(255,255,255,.92);backdrop-filter:blur(2px)}
+.feat h3{font-size:13.5px;font-weight:700;color:#1e293b;margin-bottom:5px;letter-spacing:-.01em}
+.feat-desc{font-size:11.5px;color:#64748b;line-height:1.55}
 
 /* LOGO ROW */
 .logo-row{overflow:hidden;padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}
@@ -439,11 +442,9 @@ footer{background:#0d0c16;padding:44px 48px}
   nav{padding:0 20px}.nlinks{display:none}.nham{display:flex}
   .hero{padding:110px 20px 60px}
   .hero-imgs{grid-template-columns:repeat(2,1fr)}
-  .about-grid,.bio-grid,.feat-hdr{grid-template-columns:1fr;gap:40px}
-  .par-inner{grid-template-columns:1fr;gap:32px}
-  .par-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .pcol-b{transform:none}
-  .feat-grid{grid-template-columns:repeat(2,1fr)}.feat{height:280px}
+  .about-grid,.bio-grid{grid-template-columns:1fr;gap:40px}
+  .feat-par-wrap{grid-template-columns:1fr;gap:32px}.feat-col-b{transform:none}
+  .feat-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .port-grid{grid-template-columns:repeat(2,1fr)}.pcard{height:280px}
   .ep-list{grid-template-columns:repeat(2,1fr)}.epc{height:220px}
   .cs-grid{grid-template-columns:1fr}.csc{height:250px}
@@ -463,7 +464,8 @@ footer{background:#0d0c16;padding:44px 48px}
   footer,.footer-section{padding-left:20px!important;padding-right:20px!important}
 }
 @media(max-width:560px){
-  .feat-grid,.port-grid,.ep-list{grid-template-columns:1fr}
+  .feat-col{grid-template-columns:1fr}
+  .port-grid,.ep-list{grid-template-columns:1fr}
   .feat{height:240px}.pcard{height:260px}.epc{height:200px}
   .hero-imgs{display:none}
   .cta-btns{flex-direction:column}
@@ -566,42 +568,44 @@ footer{background:#0d0c16;padding:44px 48px}
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- FEATURES — parallax 2-col -->
 <section class="feat-sec">
   <div class="si">
-    <div class="feat-hdr fu">
-      <h2 class="feat-hdr-h">6 years of<br><span style="color:var(--accent)">product thinking.</span></h2>
-      <p class="feat-hdr-p">From SaaS compliance platforms to travel apps to my own mentorship business. Here's what I bring to every team.</p>
-    </div>
-    <div class="feat-grid">
-      <div class="feat feat-1 fu"><span class="img-slot">IMG 1</span><div class="feat-visual"><div class="feat-ico-lg">🎯</div></div><div class="feat-body"><h3>User-centric Mindset</h3></div></div>
-      <div class="feat feat-2 fu"><span class="img-slot">IMG 2</span><div class="feat-visual"><div class="feat-ico-lg">📱</div></div><div class="feat-body"><h3>Mobile &amp; Cross-platform</h3></div></div>
-      <div class="feat feat-3 fu"><span class="img-slot">IMG 3</span><div class="feat-visual"><div class="feat-ico-lg">🤖</div></div><div class="feat-body"><h3>AI-powered Products</h3></div></div>
-      <div class="feat feat-4 fu"><span class="img-slot">IMG 4</span><div class="feat-visual"><div class="feat-ico-lg">🔄</div></div><div class="feat-body"><h3>Agile &amp; Scrum (PSPO I)</h3></div></div>
-      <div class="feat feat-5 fu"><span class="img-slot">IMG 5</span><div class="feat-visual"><div class="feat-ico-lg">💡</div></div><div class="feat-body"><h3>UX / UI in Mind</h3></div></div>
-      <div class="feat feat-6 fu"><span class="img-slot">IMG 6</span><div class="feat-visual"><div class="feat-ico-lg">🌍</div></div><div class="feat-body"><h3>International Experience</h3></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PARALLAX -->
-<section class="par-sec">
-  <div class="si">
-    <div class="par-inner">
-      <div class="par-text fu">
-        <h2>B2B &amp; B2C<br><span style="color:var(--accent)">experience.</span></h2>
-        <p>From managing cargo platforms for 500+ bus operators in Vietnam to shipping global compliance tools used by Walmart and Target — I've operated across both sides of the product spectrum.</p>
-        <button class="btn-acc" onclick="go('portfolio')">See my work →</button>
+    <div class="feat-par-wrap">
+      <div class="feat-par-text fu">
+        <span class="slbl">What I bring</span>
+        <h2>6 years of<br><span style="color:var(--accent)">product thinking.</span></h2>
+        <p>From AI-powered supply chain tools to travel apps and mentorship — here's the craft I bring to every team and problem.</p>
       </div>
-      <div class="pcol pcol-a" id="pcolA">
-        <div class="pbox c1" style="height:275px;position:relative"><span class="img-slot">IMG 7</span>🔬</div>
-        <div class="pbox c3" style="height:195px;position:relative"><span class="img-slot">IMG 8</span>✈️</div>
-        <div class="pbox c5" style="height:215px;position:relative"><span class="img-slot">IMG 9</span>📚</div>
+      <!-- Col A -->
+      <div class="feat-col feat-col-a" id="featColA">
+        <div class="feat feat-1 fu" style="height:300px">
+          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg></div></div>
+          <div class="feat-body"><h3>User-centric Mindset</h3><p class="feat-desc">User interviews, usability tests, and pilot programs ground every product decision in real behaviour — not assumptions.</p></div>
+        </div>
+        <div class="feat feat-3 fu" style="height:260px">
+          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div></div>
+          <div class="feat-body"><h3>Agile &amp; Scrum</h3><p class="feat-desc">PSPO I certified. Led 2-week sprint cycles and all Scrum ceremonies for cross-functional squads of 10+ members.</p></div>
+        </div>
+        <div class="feat feat-5 fu" style="height:300px">
+          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div></div>
+          <div class="feat-body"><h3>International Delivery</h3><p class="feat-desc">Products live in Vietnam, Singapore, and the US — used by Walmart, Target, Tesco, and Crocs at global enterprise scale.</p></div>
+        </div>
       </div>
-      <div class="pcol pcol-b" id="pcolB">
-        <div class="pbox c2" style="height:195px;position:relative"><span class="img-slot">IMG 10</span>🤝</div>
-        <div class="pbox c4" style="height:275px;position:relative"><span class="img-slot">IMG 11</span>🚌</div>
-        <div class="pbox c6" style="height:195px;position:relative"><span class="img-slot">IMG 12</span>🃏</div>
+      <!-- Col B -->
+      <div class="feat-col feat-col-b" id="featColB">
+        <div class="feat feat-2 fu" style="height:260px">
+          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4M19 17v4M3 5h4M17 19h4"/></svg></div></div>
+          <div class="feat-body"><h3>AI-powered Products</h3><p class="feat-desc">Shipped AI agents for document validation, auto-fill, and compliance at Inspectorio — leveraging AI to accelerate scope and quality.</p></div>
+        </div>
+        <div class="feat feat-4 fu" style="height:300px">
+          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/><path d="m15 5 3 3"/></svg></div></div>
+          <div class="feat-body"><h3>UX / UI in Mind</h3><p class="feat-desc">Collaborate with designers on PRDs that balance user needs, business goals, and technical constraints — from discovery through delivery.</p></div>
+        </div>
+        <div class="feat feat-6 fu" style="height:260px">
+          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div></div>
+          <div class="feat-body"><h3>Data-driven Roadmapping</h3><p class="feat-desc">Mixpanel, Microsoft Clarity, and funnel analysis replace gut feel — every roadmap decision tied to measurable product outcomes.</p></div>
+        </div>
       </div>
     </div>
   </div>
@@ -615,8 +619,8 @@ footer{background:#0d0c16;padding:44px 48px}
       <div class="srow" id="sr3"></div><div class="srow" id="sr4"></div>
     </div>
     <div class="scroll-sub fu">
-      <p class="scroll-desc">Great products aren't built on gut feel — they're built on real user data, clear metrics, and honest retrospectives. Every product I've shipped taught me something new. I document all of it.</p>
-      <div style="text-align:right"><button class="btn-acc" onclick="go('pm')">Read articles →</button></div>
+      <p class="scroll-desc">I'm a Product Owner who leads with user empathy, thinks in long-term outcomes, and uses AI to extend my reach into design and engineering — building faster, scaling smarter, and shipping products that actually last.</p>
+      <div style="text-align:right"><button class="btn-acc" onclick="go('portfolio')">See my work →</button></div>
     </div>
   </div>
 </section>
@@ -733,9 +737,10 @@ footer{background:#0d0c16;padding:44px 48px}
       <div class="fu">
         <span class="slbl">My story</span><span class="gbar"></span>
         <h2 class="stitle">From business student<br>to product builder.</h2>
-        <p class="bio-p">I graduated with a <strong>Bachelor's in International Business Economics from Foreign Trade University</strong> in 2020, GPA 3.6. My career in product happened almost by accident — I applied for a warehouse role, and a sharp boss saw something else in me.</p>
-        <p class="bio-p">In a few years I've worked across <strong>B2B SaaS, B2C travel platforms, and social networks</strong> — building end-to-end products, running agile squads, and working directly with enterprise clients like Walmart, Target, and Tesco.</p>
-        <p class="bio-p">At <strong>Inspectorio</strong>, I lead two product tracks: Responsible Supply Chain compliance and Traceability — both powered increasingly by AI. Outside work, I founded <strong>Product Buddy</strong> — helping 100+ freshers land their first BA/PO role.</p>
+        <p class="bio-p">I graduated with a <strong>Bachelor's in International Business Economics from Foreign Trade University</strong>, GPA 3.6. My product career started by accident — I applied for a warehouse role, and a sharp boss saw something else in me.</p>
+        <p class="bio-p">I've spent 6+ years building products across <strong>B2B SaaS, B2C travel, and social platforms</strong> — starting at VeXeRe where I built a cargo management SaaS for 500+ bus operators and launched a flight platform that drove 130% traffic growth MoM. Then at Golden Equator, I led Swish — an invite-only professional social network on iOS, Android, and Web — growing MAU 20%+ in 3 months.</p>
+        <p class="bio-p">At <strong>Inspectorio</strong>, I spearheaded 4 major products: Responsible Sourcing Compliance, Digital Assets, LabSync, and Traceability. I work directly with global brands — Walmart, Target, Tesco, DICK'S Sporting Goods, Crocs — and was honoured as <strong>Employee of the Year</strong> and <strong>2× Hackathon Champion</strong>. I leverage AI extensively to extend my scope into design and engineering, accelerating delivery and raising quality.</p>
+        <p class="bio-p">Outside work, I founded <strong>Product Buddy</strong> — a knowledge-sharing community that has helped 40+ Vietnamese freshers land their first BA/PO roles through mentorship, real case studies, and practical curriculum.</p>
         <div class="cbtns">
           <a href="mailto:huynh.product@gmail.com" class="cbtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> huynh.product@gmail.com</a>
           <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" class="cbtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
@@ -751,71 +756,46 @@ footer{background:#0d0c16;padding:44px 48px}
 </section>
 <section class="inner-sec alt">
   <div class="si">
-    <span class="slbl">Work history</span><span class="gbar"></span>
-    <h2 class="stitle" style="margin-bottom:36px">Where I've built things.</h2>
+    <span class="slbl">Key achievements</span><span class="gbar"></span>
+    <h2 class="stitle" style="margin-bottom:36px">Work that made a difference.</h2>
     <div class="exp-grid">
-      <!-- Featured / current role -->
+      <!-- Achievement cards -->
       <div class="exp-card exp-featured">
-        <div class="exp-period">Dec 2022 – Present</div>
-        <div class="exp-co">Inspectorio</div>
-        <div class="exp-role">Product Owner — SaaS B2B</div>
-        <span class="exp-mode hybrid">Hybrid</span>
-        <div class="exp-desc">Led supply chain traceability &amp; compliance products (RSC, Traceability). Shipped AI agents for document validation, auto-fill, geolocation compliance. Worked with Walmart, Target, Tesco. Presented to CPTO. 2× Hackathon champion. Employee of the Year.</div>
+        <div class="exp-period">Inspectorio · 2023</div>
+        <div class="exp-co">Traceability $300K Pilot Win</div>
+        <div class="exp-role">Creative problem-solving under constraints</div>
+        <div class="exp-desc">Leveraged existing platform features and a creative manual hack — "fake it until you make it" — to win a major pilot and sign a +$300K client contract. The solution was designed from day one to scale cleanly into full development.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-period">Inspectorio · 2× Champion</div>
+        <div class="exp-co">Hackathon Champion</div>
+        <div class="exp-role">Company-wide innovation competition</div>
+        <span class="exp-mode hybrid">2× Winner</span>
+        <div class="exp-desc">Won Inspectorio's hackathon twice — competing to identify real problems, ideate solutions, and ship fast in front of the whole company.<br><br><strong style="color:rgba(255,255,255,.7)">Win 1:</strong> Spotlight Search — improved platform navigation for all users.<br><strong style="color:rgba(255,255,255,.7)">Win 2:</strong> AI Assistant Agent — automated manual processes using AI.</div>
         <div class="exp-badge-row">
-          <span class="exp-badge">AI Agents</span>
-          <span class="exp-badge">Supply Chain</span>
-          <span class="exp-badge">B2B SaaS</span>
-          <span class="exp-badge">EUDR / UFLPA</span>
+          <a href="https://huynhproduct.webflow.io/case-studies/inspectorio-hackathon-championship" target="_blank" class="exp-badge" style="text-decoration:none;cursor:pointer">Read case study →</a>
         </div>
       </div>
       <div class="exp-card">
-        <div class="exp-period">Apr 2025 – Present</div>
+        <div class="exp-period">Inspectorio · 2024</div>
+        <div class="exp-co">API Cost Optimisation</div>
+        <div class="exp-role">Digital Assets · $40K/year saved</div>
+        <span class="exp-mode hybrid">Impact</span>
+        <div class="exp-desc">Digital Assets consumed costly 3rd-party API calls. Partnered with engineers to redesign code and user flows — significantly reducing API usage, saving the company $40K+/year and making the product more scalable.</div>
+        <div class="exp-badge-row">
+          <a href="https://huynhproduct.webflow.io/case-studies/inspectorio-optimizing-apis-to-save-cost" target="_blank" class="exp-badge" style="text-decoration:none;cursor:pointer">Read case study →</a>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-period">Personal · 2024–Present</div>
         <div class="exp-co">Product Buddy</div>
-        <div class="exp-role">Founder &amp; Mentor</div>
+        <div class="exp-role">Community Founder &amp; Mentor</div>
         <span class="exp-mode remote">Side project</span>
-        <div class="exp-desc">Founded Vietnamese PM mentorship platform. 100+ mentees helped into BA/PO roles. 16-module curriculum covering Agile, PRD writing, Jira, Figma, AI tools, and real case studies.</div>
+        <div class="exp-desc">Built a knowledge-sharing community to help Vietnamese freshers break into BA/PO roles. Mentored 40+ people through real case studies, practical curriculum, and 1:1 support — and helped them land their first dream jobs.</div>
+        <div class="exp-badge-row">
+          <a href="https://www.facebook.com/productbuddy.official" target="_blank" class="exp-badge" style="text-decoration:none;cursor:pointer">Visit community →</a>
+        </div>
       </div>
-      <div class="exp-card">
-        <div class="exp-period">Mar 2022 – Dec 2022</div>
-        <div class="exp-co">Golden Equator</div>
-        <div class="exp-role">Product Owner — Social Platform</div>
-        <span class="exp-mode remote">Remote</span>
-        <div class="exp-desc">Built Swish, an invite-only professional social network on Web, iOS, and Android. Led a cross-functional team of 8 devs, 1 tester, 2 designers. Boosted MAU 20%+ in 3 months.</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-period">Aug 2021 – Mar 2022</div>
-        <div class="exp-co">VeXeRe</div>
-        <div class="exp-role">Product Owner — Online Ticket B2C</div>
-        <span class="exp-mode onsite">Vietnam</span>
-        <div class="exp-desc">Launched Goyolo flight platform on top of VeXeRe's 2M user base. Led user research across 3 segments. Set up Google SEO. Drove 130% traffic increase MoM after MVP launch.</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-period">Mar 2020 – Aug 2021</div>
-        <div class="exp-co">VeXeRe</div>
-        <div class="exp-role">Product Owner — SaaS B2B &amp; B2C</div>
-        <span class="exp-mode onsite">Vietnam</span>
-        <div class="exp-desc">Built GMS cargo management SaaS for 500+ bus operators. Introduced freemium model driving 15% revenue growth. Expanded 20% during Covid via Grab &amp; DHL integrations.</div>
-      </div>
-      <div class="exp-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;background:var(--bg2);border-style:dashed;text-align:center;gap:8px">
-        <div style="font-size:28px">🎓</div>
-        <div style="font-size:15px;font-weight:700;color:var(--ink)">Foreign Trade University</div>
-        <div style="font-size:12px;color:var(--ink3)">B.Sc. International Business Economics</div>
-        <div style="font-size:11px;color:var(--ink3)">Sep 2016 – Sep 2020 · GPA 3.6 / 4.0</div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="inner-sec">
-  <div class="si">
-    <span class="slbl">Skills &amp; tools</span><span class="gbar"></span>
-    <h2 class="stitle" style="margin-bottom:32px">What I bring to the table.</h2>
-    <div class="sg">
-      <div class="sc fu"><h4>🧠 Product craft</h4><div class="stags"><span class="stag">Roadmapping</span><span class="stag">PRD / User Stories</span><span class="stag">Backlog Refinement</span><span class="stag">MVP Scoping</span><span class="stag">User Research</span><span class="stag">Usability Testing</span></div></div>
-      <div class="sc fu"><h4>🔄 Agile &amp; delivery</h4><div class="stags"><span class="stag">Scrum / PSPO I</span><span class="stag">Sprint Planning</span><span class="stag">Grooming</span><span class="stag">Retrospectives</span><span class="stag">Release Notes</span></div></div>
-      <div class="sc fu"><h4>🛠 Tools</h4><div class="stags"><span class="stag">Jira</span><span class="stag">Confluence</span><span class="stag">Figma</span><span class="stag">Miro</span><span class="stag">Mixpanel</span><span class="stag">Microsoft Clarity</span><span class="stag">Postman</span></div></div>
-      <div class="sc fu"><h4>💻 Technical</h4><div class="stags"><span class="stag">HTML / CSS / JS</span><span class="stag">REST APIs</span><span class="stag">SQL basics</span><span class="stag">GitHub</span><span class="stag">Webflow</span></div></div>
-      <div class="sc fu"><h4>📊 Data &amp; analytics</h4><div class="stags"><span class="stag">Product Analytics</span><span class="stag">Product-led Growth</span><span class="stag">Funnel Analysis</span><span class="stag">A/B Testing</span></div></div>
-      <div class="sc fu"><h4>🌍 Soft skills</h4><div class="stags"><span class="stag">Client-facing</span><span class="stag">Stakeholder Mgmt</span><span class="stag">IELTS 7.5</span><span class="stag">Cross-team Alignment</span><span class="stag">Mentoring</span></div></div>
     </div>
   </div>
 </section>
@@ -824,26 +804,28 @@ footer{background:#0d0c16;padding:44px 48px}
 
 <!-- ═══════════ LABSYNC DETAIL ═══════════ -->
 <div class="page" id="pg-labsync">
-<div class="iphero">
-  <div class="iphero-inner">
-    <div class="iphero-left">
-      <video class="iphero-vid" autoplay muted loop playsinline>
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
-      </video>
-      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
-      <div class="iphero-left-bottom">
-        <p class="iphero-tagline">Building quality &amp; compliance<br><span>tools for global supply chains.</span></p>
-        <span class="iphero-social-lbl">Stay in touch!</span>
-      </div>
+<!-- Editorial hero: dark, big title -->
+<div style="background:#0d0c16;padding:130px 48px 80px;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 800px 400px at 50% 60%,rgba(107,92,231,.18),transparent 70%);pointer-events:none"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1">
+    <button onclick="go('portfolio')" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:13px;font-weight:500;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:var(--ff);margin-bottom:32px;display:inline-flex;align-items:center;gap:6px;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">← Portfolio</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
+      <span style="background:rgba(107,92,231,.2);border:1px solid rgba(107,92,231,.35);color:#b3aaf8;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">INSPECTORIO</span>
+      <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">SaaS B2B</span>
+      <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">WEB APP</span>
+      <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">POST MVP</span>
     </div>
-    <div class="iphero-right">
-      <div class="iphero-badge">SaaS B2B · WebApp · Inspectorio</div>
-      <h1><span class="acc">LabSync</span></h1>
-      <p class="iphero-sub">A laboratory testing management platform connecting brands, retailers, suppliers and labs — centralizing data and unlocking analytics never before available in the industry.</p>
+    <h1 style="font-size:clamp(56px,9vw,120px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:.95;margin-bottom:28px">LabSync</h1>
+    <p style="font-size:18px;color:rgba(255,255,255,.45);max-width:560px;line-height:1.65">A laboratory testing management platform connecting brands, retailers, suppliers, and labs — centralizing data and unlocking supply chain analytics never before available in the industry.</p>
+    <!-- Key stat row -->
+    <div style="display:flex;gap:40px;flex-wrap:wrap;margin-top:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08)">
+      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Role</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">Business Analyst</div></div>
+      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Clients</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">Target · DICK'S · Crocs</div></div>
+      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Team</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">6 devs · 2 QA · 1 designer</div></div>
+      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Highlight</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">10+ demos · 5,000+ vendors onboarded</div></div>
     </div>
   </div>
 </div>
-<div class="iphero-bridge"></div>
 
 <!-- Meta chips -->
 <section class="inner-sec" style="padding-bottom:32px">
@@ -1219,16 +1201,21 @@ footer{background:#0d0c16;padding:44px 48px}
 <script>
 const PAGES=['home','about','portfolio','pm','cases','podcast','labsync'];
 const NIDS={about:'na-about',portfolio:'na-portfolio',pm:'na-pm',cases:'na-cases',podcast:'na-podcast'};
+const PAGE_URLS={home:'/',about:'/about',portfolio:'/portfolio',pm:'/pm',cases:'/cases',podcast:'/podcast',labsync:'/labsync'};
 let currentPage='home';
 
-function go(id){
+function go(id,pushState=true){
   currentPage=id;
   PAGES.forEach(p=>document.getElementById('pg-'+p).classList.toggle('active',p===id));
   Object.entries(NIDS).forEach(([p,n])=>document.getElementById(n).classList.toggle('active',p===id));
   window.scrollTo({top:0,behavior:'instant'});
   updateNav();
   setTimeout(()=>initFU('pg-'+id),60);
+  if(pushState){const url=PAGE_URLS[id]||'/';history.pushState({page:id},'',url);}
 }
+window.addEventListener('popstate',e=>{if(e.state&&e.state.page)go(e.state.page,false);});
+// Detect initial URL on load
+(function(){const path=window.location.pathname.replace(/^\//,'');const id=Object.entries(PAGE_URLS).find(([,u])=>u===window.location.pathname)?.[0]||'home';if(id!=='home')go(id,false);})();
 
 /* ── Hero letters ── */
 const words=[{t:'I',acc:false,it:false},{t:'build',acc:false,it:false},{t:'products',acc:true,it:false},{t:'that',acc:false,it:false},{t:'delight.',acc:false,it:true}];
@@ -1238,14 +1225,14 @@ let d=80;hEl.querySelectorAll('.letter').forEach(l=>{setTimeout(()=>l.classList.
 setTimeout(()=>{document.getElementById('heroSub').classList.add('in');document.getElementById('heroCTA').classList.add('in');},d+80);
 
 /* ── Scroll text ── */
-const rowDef=[{id:'sr1',words:['SHIP','FAST']},{id:'sr2',words:['LEARN','FROM']},{id:'sr3',words:['REAL']},{id:'sr4',words:['DATA.']}];
+const rowDef=[{id:'sr1',words:['USER']},{id:'sr2',words:['FIRST.']},{id:'sr3',words:['AI-']},{id:'sr4',words:['POWERED.']}];
 rowDef.forEach(r=>{const el=document.getElementById(r.id);r.words.forEach((w,i)=>{if(i>0){const s=document.createElement('span');s.style.display='inline-block';s.style.width='.25em';el.appendChild(s);}w.split('').forEach(ch=>{const l=document.createElement('span');l.className='sl';l.textContent=ch;el.appendChild(l);});});});
 const allSL=document.querySelectorAll('.sl');
 function lightSL(){const sec=document.querySelector('.scroll-sec');if(!sec)return;const r=sec.getBoundingClientRect(),vh=window.innerHeight;const prog=Math.max(0,Math.min(1,(-r.top+vh*.65)/(r.height*.75)));const litN=Math.floor(prog*allSL.length);allSL.forEach((l,i)=>{if(i<litN)l.classList.add('lit');else l.classList.remove('lit');});}
 
-/* ── Parallax ── */
-const pA=document.getElementById('pcolA'),pB=document.getElementById('pcolB');
-function doParallax(){if(!pA)return;const sec=pA.closest('.par-sec');const r=sec.getBoundingClientRect();const prog=-r.top*.1;pA.style.transform=`translateY(${Math.min(prog,35)}px)`;pB.style.transform=`translateY(${Math.max(50-prog*1.4,0)}px)`;}
+/* ── Parallax on feat cols ── */
+const fA=document.getElementById('featColA'),fB=document.getElementById('featColB');
+function doParallax(){if(!fA)return;const sec=fA.closest('.feat-sec');const r=sec.getBoundingClientRect();const prog=-r.top*.12;fA.style.transform=`translateY(${Math.min(prog,40)}px)`;fB.style.transform=`translateY(${Math.max(60-prog*1.5,0)}px)`;}
 window.addEventListener('scroll',()=>{lightSL();doParallax();},{passive:true});
 lightSL();
 
