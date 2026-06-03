@@ -33,9 +33,9 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .nlogo img{height:32px;width:auto;display:block}
 /* links — always white (on both dark transparent and dark solid) */
 .nlinks{display:flex;align-items:center;gap:2px;list-style:none}
-.nlinks a{font-size:14px;font-weight:500;color:rgba(255,255,255,.75);padding:6px 13px;border-radius:8px;cursor:pointer;transition:color .15s,background .15s;text-decoration:none}
+.nlinks a{font-size:14px;font-weight:500;color:rgba(255,255,255,.65);padding:6px 13px;border-radius:8px;cursor:pointer;transition:color .15s,background .15s;text-decoration:none}
 .nlinks a:hover{color:#fff;background:rgba(255,255,255,.1)}
-.nlinks a.active{color:#fff}
+.nlinks a.active{color:#fff;background:rgba(255,255,255,.15);font-weight:600;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
 /* cta pill */
 .ncta{background:var(--accent)!important;color:#fff!important;padding:8px 18px!important;border-radius:100px!important;font-weight:600!important;font-size:13px!important;transition:opacity .2s,transform .15s!important;border:none!important}
 .ncta:hover{opacity:.85!important;transform:translateY(-1px)!important}
@@ -155,7 +155,7 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .feat-par-text p{font-size:15px;color:var(--ink2);line-height:1.7}
 .feat-col{display:flex;flex-direction:column;gap:16px}
 .feat-col-b{transform:translateY(60px);transition:transform .15s linear}
-.feat{border-radius:20px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;text-align:left;box-shadow:0 10px 30px -10px rgba(0,0,0,.12);cursor:default;transition:transform .25s,box-shadow .25s}
+.feat{border-radius:20px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;text-align:left;box-shadow:0 10px 30px -10px rgba(0,0,0,.12);cursor:default;transition:transform .25s,box-shadow .25s;min-height:180px}
 .feat:hover{transform:translateY(-4px);box-shadow:0 20px 48px -10px rgba(0,0,0,.18)}
 /* purple/blue/green only */
 .feat-1{background:radial-gradient(circle at 50% 0%,#7c3aed 0%,#a78bfa 30%,#f4f8f9 65%)}
@@ -164,11 +164,12 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .feat-4{background:radial-gradient(circle at 50% 0%,#4f46e5 0%,#818cf8 30%,#f4f8f9 65%)}
 .feat-5{background:radial-gradient(circle at 50% 0%,#0891b2 0%,#22d3ee 30%,#f4f8f9 65%)}
 .feat-6{background:radial-gradient(circle at 50% 0%,#7c3aed 0%,#c4b5fd 30%,#f4f8f9 65%)}
-.feat-visual{position:absolute;top:0;left:0;right:0;bottom:80px;display:flex;align-items:center;justify-content:center}
-.feat-ico-lg{width:60px;height:60px;border-radius:14px;background:rgba(255,255,255,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.08)}
-.feat-body{padding:16px 20px 18px;position:relative;z-index:2;background:rgba(255,255,255,.92);backdrop-filter:blur(2px)}
-.feat h3{font-size:13.5px;font-weight:700;color:#1e293b;margin-bottom:5px;letter-spacing:-.01em}
-.feat-desc{font-size:11.5px;color:#64748b;line-height:1.55}
+.feat-visual{display:none}
+.feat-ico-lg{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.55);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feat-body{padding:22px 24px 24px;position:relative;z-index:2;background:rgba(255,255,255,.92);backdrop-filter:blur(2px);flex:1;display:flex;flex-direction:column;justify-content:flex-end}
+.feat-title-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.feat h3{font-size:16px;font-weight:700;color:#1e293b;margin-bottom:0;letter-spacing:-.02em;line-height:1.2}
+.feat-desc{font-size:13px;color:#64748b;line-height:1.6}
 
 /* LOGO ROW */
 .logo-row{overflow:hidden;padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}
@@ -194,7 +195,12 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .pbox.c6{background:linear-gradient(135deg,#d1fae5,#34d399)}
 
 /* SCROLL TEXT */
-.scroll-sec{padding:112px 48px;background:var(--bg2)}
+.scroll-sec{padding:112px 48px;background:var(--bg2);position:relative;overflow:hidden}
+.scroll-sec::before,.scroll-sec::after{content:'';position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);opacity:.45}
+.scroll-sec::before{width:500px;height:500px;background:radial-gradient(circle,rgba(107,92,231,.25),transparent 70%);top:-100px;left:-80px;animation:orbA 12s ease-in-out infinite}
+.scroll-sec::after{width:400px;height:400px;background:radial-gradient(circle,rgba(34,211,238,.15),transparent 70%);bottom:-80px;right:-60px;animation:orbB 15s ease-in-out infinite}
+@keyframes orbA{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,40px) scale(1.1)}66%{transform:translate(-30px,70px) scale(.95)}}
+@keyframes orbB{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-50px,-40px) scale(1.15)}70%{transform:translate(30px,-60px) scale(.9)}}
 .scroll-hl{font-size:clamp(48px,7vw,96px);font-weight:900;line-height:.98;letter-spacing:-.04em;text-align:center}
 .srow{display:flex;justify-content:center;gap:.13em;overflow:hidden;margin-bottom:.04em}
 .sl{display:inline-block;opacity:.12;transition:opacity .25s,color .25s}
@@ -202,27 +208,32 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .scroll-sub{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:52px;padding-top:52px;border-top:1px solid var(--border)}
 .scroll-desc{font-size:16px;color:var(--ink2);line-height:1.7}
 
-/* PORTFOLIO — purple/green/blue */
-.port-sec{padding:96px 48px;background:var(--bg2)}
-.port-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;gap:24px;flex-wrap:wrap}
-.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:36px}
-.pcard{border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s;display:block;height:320px;position:relative;box-shadow:0 10px 30px -10px rgba(0,0,0,.12)}
-.pcard:hover{transform:translateY(-5px);box-shadow:0 24px 56px -10px rgba(0,0,0,.18)}
-.pthumb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:48px}
-.pthumb.c1{background:radial-gradient(circle at 50% 20%,#7c3aed 0%,#a78bfa 35%,#f4f8f9 70%)}
-.pthumb.c2{background:radial-gradient(circle at 50% 20%,#0891b2 0%,#22d3ee 35%,#f4f8f9 70%)}
-.pthumb.c3{background:radial-gradient(circle at 50% 20%,#059669 0%,#34d399 35%,#f4f8f9 70%)}
-.pthumb.c4{background:radial-gradient(circle at 50% 20%,#2563eb 0%,#60a5fa 35%,#f4f8f9 70%)}
-.pthumb.c5{background:radial-gradient(circle at 50% 20%,#4f46e5 0%,#818cf8 35%,#f4f8f9 70%)}
-.pthumb.c6{background:radial-gradient(circle at 50% 20%,#059669 0%,#6ee7b7 35%,#f4f8f9 70%)}
-.ptbadge{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);border-radius:100px;font-size:10px;font-weight:600;padding:4px 10px;color:#475569;letter-spacing:.04em;border:1px solid rgba(255,255,255,.9);z-index:2}
-.pbody{position:absolute;bottom:0;left:0;right:0;padding:18px 20px 22px;z-index:2}
-.pco{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;opacity:.85}
-.pbody h3{font-size:16px;font-weight:700;color:#1e293b;margin-bottom:5px;letter-spacing:-.01em}
-.pbody p{font-size:12.5px;color:#64748b;line-height:1.55;margin-bottom:10px}
+/* PORTFOLIO — new card design */
+.port-sec{padding:96px 48px;background:#fff}
+.port-hdr{margin-bottom:52px}
+.port-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-bottom:0}
+.pcard{border-radius:24px;overflow:hidden;cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;display:block;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.07);border:1px solid rgba(0,0,0,.06)}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 24px 60px -10px rgba(0,0,0,.15)}
+.pcard-img{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pcard-img.c1{background:linear-gradient(135deg,#7c3aed 0%,#a78bfa 50%,#c4b5fd 100%)}
+.pcard-img.c2{background:linear-gradient(135deg,#0891b2 0%,#22d3ee 50%,#a5f3fc 100%)}
+.pcard-img.c3{background:linear-gradient(135deg,#059669 0%,#34d399 50%,#a7f3d0 100%)}
+.pcard-img.c4{background:linear-gradient(135deg,#2563eb 0%,#60a5fa 50%,#bfdbfe 100%)}
+.pcard-img.c5{background:linear-gradient(135deg,#4f46e5 0%,#818cf8 50%,#c7d2fe 100%)}
+.pcard-img.c6{background:linear-gradient(135deg,#7c3aed 0%,#c084fc 50%,#e9d5ff 100%)}
+.pcard-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pcard-body{padding:22px 24px 24px}
+.pco{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;display:block}
+.pcard-body h3{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em;line-height:1.2}
+.pcard-body p{font-size:14px;color:var(--ink2);line-height:1.65;margin-bottom:14px}
 .pmeta{display:flex;justify-content:space-between;align-items:center}
-.parr{font-size:12px;font-weight:600;color:var(--accent);transition:transform .2s}
+.parr{font-size:13px;font-weight:600;color:var(--accent);transition:transform .2s}
 .pcard:hover .parr{transform:translateX(4px)}
+/* company section header */
+.port-company{margin-bottom:16px;margin-top:48px}
+.port-company:first-child{margin-top:0}
+.port-company-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.port-company-label::after{content:'';flex:1;height:1px;background:var(--border)}
 
 /* CTA DARK */
 .cta-sec{padding:96px 48px;background:#0d0c16;position:relative;overflow:hidden}
@@ -445,7 +456,7 @@ footer{background:#0d0c16;padding:44px 48px}
   .about-grid,.bio-grid{grid-template-columns:1fr;gap:40px}
   .feat-par-wrap{grid-template-columns:1fr;gap:32px}.feat-col-b{transform:none}
   .feat-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .port-grid{grid-template-columns:repeat(2,1fr)}.pcard{height:280px}
+  .port-grid{grid-template-columns:1fr}
   .ep-list{grid-template-columns:repeat(2,1fr)}.epc{height:220px}
   .cs-grid{grid-template-columns:1fr}.csc{height:250px}
   .scroll-sub{grid-template-columns:1fr}
@@ -466,7 +477,7 @@ footer{background:#0d0c16;padding:44px 48px}
 @media(max-width:560px){
   .feat-col{grid-template-columns:1fr}
   .port-grid,.ep-list{grid-template-columns:1fr}
-  .feat{height:240px}.pcard{height:260px}.epc{height:200px}
+  .epc{height:200px}
   .hero-imgs{display:none}
   .cta-btns{flex-direction:column}
   .footer-nav-cols{gap:40px}
@@ -579,32 +590,44 @@ footer{background:#0d0c16;padding:44px 48px}
       </div>
       <!-- Col A -->
       <div class="feat-col feat-col-a" id="featColA">
-        <div class="feat feat-1 fu" style="height:300px">
-          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg></div></div>
-          <div class="feat-body"><h3>User-centric Mindset</h3><p class="feat-desc">User interviews, usability tests, and pilot programs ground every product decision in real behaviour — not assumptions.</p></div>
+        <div class="feat feat-1 fu">
+          <div class="feat-body">
+            <div class="feat-title-row"><div class="feat-ico-lg"><svg width="18" height="18" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg></div><h3>User-centric Mindset</h3></div>
+            <p class="feat-desc">User interviews, usability tests, and pilot programs ground every product decision in real behaviour — not assumptions.</p>
+          </div>
         </div>
-        <div class="feat feat-3 fu" style="height:260px">
-          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div></div>
-          <div class="feat-body"><h3>Agile &amp; Scrum</h3><p class="feat-desc">PSPO I certified. Led 2-week sprint cycles and all Scrum ceremonies for cross-functional squads of 10+ members.</p></div>
+        <div class="feat feat-3 fu">
+          <div class="feat-body">
+            <div class="feat-title-row"><div class="feat-ico-lg"><svg width="18" height="18" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div><h3>Agile &amp; Scrum</h3></div>
+            <p class="feat-desc">PSPO I certified. Led 2-week sprint cycles and all Scrum ceremonies for cross-functional squads of 10+ members.</p>
+          </div>
         </div>
-        <div class="feat feat-5 fu" style="height:300px">
-          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div></div>
-          <div class="feat-body"><h3>International Delivery</h3><p class="feat-desc">Products live in Vietnam, Singapore, and the US — used by Walmart, Target, Tesco, and Crocs at global enterprise scale.</p></div>
+        <div class="feat feat-5 fu">
+          <div class="feat-body">
+            <div class="feat-title-row"><div class="feat-ico-lg"><svg width="18" height="18" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><h3>International Delivery</h3></div>
+            <p class="feat-desc">Products live in Vietnam, Singapore, and the US — used by Walmart, Target, Tesco, and Crocs at global enterprise scale.</p>
+          </div>
         </div>
       </div>
       <!-- Col B -->
       <div class="feat-col feat-col-b" id="featColB">
-        <div class="feat feat-2 fu" style="height:260px">
-          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4M19 17v4M3 5h4M17 19h4"/></svg></div></div>
-          <div class="feat-body"><h3>AI-powered Products</h3><p class="feat-desc">Shipped AI agents for document validation, auto-fill, and compliance at Inspectorio — leveraging AI to accelerate scope and quality.</p></div>
+        <div class="feat feat-2 fu">
+          <div class="feat-body">
+            <div class="feat-title-row"><div class="feat-ico-lg"><svg width="18" height="18" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4M19 17v4M3 5h4M17 19h4"/></svg></div><h3>AI-powered Products</h3></div>
+            <p class="feat-desc">Shipped AI agents for document validation, auto-fill, and compliance at Inspectorio — leveraging AI to accelerate scope and quality.</p>
+          </div>
         </div>
-        <div class="feat feat-4 fu" style="height:300px">
-          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/><path d="m15 5 3 3"/></svg></div></div>
-          <div class="feat-body"><h3>UX / UI in Mind</h3><p class="feat-desc">Collaborate with designers on PRDs that balance user needs, business goals, and technical constraints — from discovery through delivery.</p></div>
+        <div class="feat feat-4 fu">
+          <div class="feat-body">
+            <div class="feat-title-row"><div class="feat-ico-lg"><svg width="18" height="18" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/><path d="m15 5 3 3"/></svg></div><h3>UX / UI in Mind</h3></div>
+            <p class="feat-desc">Collaborate with designers on PRDs that balance user needs, business goals, and technical constraints — from discovery through delivery.</p>
+          </div>
         </div>
-        <div class="feat feat-6 fu" style="height:260px">
-          <div class="feat-visual"><div class="feat-ico-lg"><svg width="26" height="26" fill="none" stroke="rgba(0,0,0,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div></div>
-          <div class="feat-body"><h3>Data-driven Roadmapping</h3><p class="feat-desc">Mixpanel, Microsoft Clarity, and funnel analysis replace gut feel — every roadmap decision tied to measurable product outcomes.</p></div>
+        <div class="feat feat-6 fu">
+          <div class="feat-body">
+            <div class="feat-title-row"><div class="feat-ico-lg"><svg width="18" height="18" fill="none" stroke="rgba(0,0,0,.65)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div><h3>Data-driven Roadmapping</h3></div>
+            <p class="feat-desc">Mixpanel, Microsoft Clarity, and funnel analysis replace gut feel — every roadmap decision tied to measurable product outcomes.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1065,21 +1088,100 @@ footer{background:#0d0c16;padding:44px 48px}
   </div>
 </div>
 <div class="iphero-bridge"></div>
-<section class="inner-sec">
+<section class="inner-sec" style="background:#fff">
   <div class="si">
-    <div class="fbrow">
-      <button class="fbtn active" onclick="filtP(this,'all')">All</button>
-      <button class="fbtn" onclick="filtP(this,'saas')">SaaS B2B</button>
-      <button class="fbtn" onclick="filtP(this,'consumer')">Consumer</button>
-      <button class="fbtn" onclick="filtP(this,'personal')">Personal projects</button>
+
+    <!-- INSPECTORIO -->
+    <div class="port-company">
+      <div class="port-company-label">Inspectorio · Dec 2022 – Present · SaaS B2B</div>
+      <div class="port-grid">
+        <div class="pcard fu" onclick="go('labsync')" style="cursor:pointer">
+          <div class="pcard-img c1"><span class="img-slot">IMG 13</span></div>
+          <div class="pcard-body">
+            <span class="pco">Responsible Sourcing & Compliance</span>
+            <h3>RSC &amp; Traceability</h3>
+            <p>AI-powered supply chain compliance platform used by Walmart, Target, Tesco, and Crocs. Led product development from scratch — including a $300K pilot win using a creative MVP hack and 2× Hackathon championship.</p>
+            <div class="pmeta"><span class="tag">AI · Compliance · Traceability</span><span class="parr">Read more →</span></div>
+          </div>
+        </div>
+        <div class="pcard fu">
+          <div class="pcard-img c2"><span class="img-slot">IMG 14</span></div>
+          <div class="pcard-body">
+            <span class="pco">Digital Assets</span>
+            <h3>Digital Assets &amp; LabSync</h3>
+            <p>Managed two additional product tracks at Inspectorio. On Digital Assets, partnered with engineers to reduce 3rd-party API costs by $40K+/year. LabSync centralises lab testing data across global supply chains.</p>
+            <div class="pmeta"><span class="tag">API Optimization · Lab Testing</span><span class="parr">Read more →</span></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="port-grid" id="pgrid">
-      <div class="pcard fu" data-t="saas" onclick="go('labsync')" style="cursor:pointer"><div class="pthumb c1"><span class="ptbadge">SaaS B2B</span><span class="img-slot">IMG 13</span>🔬</div><div class="pbody"><p class="pco">Inspectorio · Dec 2022 – Present</p><h3>LabSync</h3><p>Quality assurance SaaS for global lab testing, used by Target, Crocs, and major retailers. Built from scratch.</p><div class="pmeta"><span class="tag">QA · Compliance</span><span class="parr">Read more →</span></div></div></div>
-      <div class="pcard fu" data-t="consumer"><div class="pthumb c2"><span class="ptbadge">Social</span><span class="img-slot">IMG 14</span>🤝</div><div class="pbody"><p class="pco">Golden Equator · Mar–Dec 2022</p><h3>Swish</h3><p>Invite-only professional social network for Singapore. Web, iOS, and Android. Grew MAU 20%+ in 3 months.</p><div class="pmeta"><span class="tag">Social · Mobile</span><span class="parr">Read more →</span></div></div></div>
-      <div class="pcard fu" data-t="consumer"><div class="pthumb c3"><span class="ptbadge">Travel OTA</span>✈️</div><div class="pbody"><p class="pco">VeXeRe · Aug 2021–Mar 2022</p><h3>Goyolo</h3><p>Travel platform with flights, hotels, and excursions — leveraging VeXeRe's 2M user base. 130% traffic growth MoM      <div class="pcard fu" data-t="saas"><div class="pthumb c4"><span class="ptbadge">SaaS B2B</span>🚌</div><div class="pbody"><p class="pco">VeXeRe · Mar 2020–Aug 2021</p><h3>GMS</h3><p>Cargo management SaaS for 500+ Vietnamese bus operators. Freemium model drove 15% revenue increase.</p><div class="pmeta"><span class="tag">Logistics · B2B</span><span class="parr">Read more →</span></div></div></div>
-      <div class="pcard fu" data-t="personal"><div class="pthumb c5"><span class="ptbadge">EdTech</span>📚</div><div class="pbody"><p class="pco">Personal Project · Apr 2025–Present</p><h3>Product Buddy</h3><p>PM mentorship course. 16-module curriculum, 5–10 students per cohort. 100+ mentees in their first BA/PO role.</p><div class="pmeta"><span class="tag">EdTech · Mentorship</span><span class="parr">Read more →</span></div></div></div>
-      <div class="pcard fu" data-t="personal"><div class="pthumb c6"><span class="ptbadge">Tool</span>🃏</div><div class="pbody"><p class="pco">Personal Project</p><h3>Refinepoker</h3><p>Planning poker app for agile teams to run estimation sessions smoothly — async-friendly and simple by design.</p><div class="pmeta"><span class="tag">Tool · Agile</span><span class="parr">Read more →</span></div></div></div>
+
+    <!-- GOLDEN EQUATOR -->
+    <div class="port-company">
+      <div class="port-company-label">Golden Equator · Mar – Dec 2022 · Social Platform</div>
+      <div class="port-grid" style="grid-template-columns:1fr 1fr">
+        <div class="pcard fu">
+          <div class="pcard-img c3"><span class="img-slot">IMG 15</span></div>
+          <div class="pcard-body">
+            <span class="pco">Social Network · Singapore</span>
+            <h3>Swish</h3>
+            <p>A Singapore-based invite-only professional social network by the Golden Equator Group — granting access to high-quality interactions, useful tools, insights, and meaningful connections. Web, iOS, and Android. Grew MAU 20%+ in 3 months.</p>
+            <div class="pmeta"><span class="tag">Social · iOS · Android · Web</span><span class="parr">Read more →</span></div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- VEXERE -->
+    <div class="port-company">
+      <div class="port-company-label">VeXeRe · Mar 2020 – Mar 2022 · B2B &amp; B2C</div>
+      <div class="port-grid">
+        <div class="pcard fu">
+          <div class="pcard-img c4"><span class="img-slot">IMG 16</span></div>
+          <div class="pcard-body">
+            <span class="pco">Travel OTA · B2C</span>
+            <h3>Goyolo</h3>
+            <p>Born out of VeXeRe's 2M user base, Goyolo provides seamless access to flights, hotels, and excursions. Led user research across 3 segments, set up Google SEO, and drove 130% traffic growth MoM after MVP launch.</p>
+            <div class="pmeta"><span class="tag">Travel · Flights · Hotels</span><span class="parr">Read more →</span></div>
+          </div>
+        </div>
+        <div class="pcard fu">
+          <div class="pcard-img c5"><span class="img-slot">IMG 17</span></div>
+          <div class="pcard-body">
+            <span class="pco">SaaS B2B · Logistics</span>
+            <h3>GMS — Goods Management System</h3>
+            <p>The leading cargo management SaaS in Vietnam — enabling 500+ bus operators to streamline order management, track key metrics, and give end-users full shipment visibility. Freemium model drove 15% revenue growth.</p>
+            <div class="pmeta"><span class="tag">Logistics · SaaS · Vietnam</span><span class="parr">Read more →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSONAL -->
+    <div class="port-company">
+      <div class="port-company-label">Personal Projects</div>
+      <div class="port-grid">
+        <div class="pcard fu">
+          <div class="pcard-img c6"><span class="img-slot">IMG 18</span></div>
+          <div class="pcard-body">
+            <span class="pco">Tool · Agile</span>
+            <h3>Refine Poker</h3>
+            <p>A free planning poker tool for agile teams. No signup, no friction — just a name and a shareable link to start estimating stories together in real time. Built to remove the overhead from sprint grooming sessions.</p>
+            <div class="pmeta"><span class="tag">Agile · Real-time · Free</span><a href="https://refinepoker.vercel.app/" target="_blank" class="parr" onclick="event.stopPropagation()">Visit →</a></div>
+          </div>
+        </div>
+        <div class="pcard fu">
+          <div class="pcard-img c1"><span class="img-slot">IMG 19</span></div>
+          <div class="pcard-body">
+            <span class="pco">EdTech · Mentorship</span>
+            <h3>Product Buddy</h3>
+            <p>A PM mentorship course helping Vietnamese freshers go from zero to BA/PO. 16 live sessions, small cohorts of 5–10 students, real case studies, and AI workflow modules. 40+ mentees placed in their first roles.</p>
+            <div class="pmeta"><span class="tag">EdTech · PM · Vietnam</span><a href="https://buddy-product.vercel.app/" target="_blank" class="parr" onclick="event.stopPropagation()">Visit →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 <footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
@@ -1252,8 +1354,6 @@ updateNav();
 function initFU(scope){const root=document.getElementById(scope);if(!root)return;const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -28px 0px'});root.querySelectorAll('.fu').forEach(el=>{el.classList.remove('v');obs.observe(el);});}
 window.addEventListener('load',()=>initFU('pg-home'));
 
-/* ── Portfolio filter ── */
-function filtP(btn,type){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('#pgrid .pcard').forEach(c=>{c.style.display=(type==='all'||c.dataset.t===type)?'block':'none';});}
 
 /* ── Mobile nav ── */
 function toggleMob(){document.getElementById('mobnav').classList.toggle('open');}
