@@ -300,6 +300,75 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .footer-watermark text{font-family:'DM Sans',sans-serif;font-weight:700;letter-spacing:-.03em;fill:rgba(0,0,0,.04)}
 
 /* ════════════════════════════════
+   DETAIL PAGE TEMPLATE
+════════════════════════════════ */
+/* Hero */
+.detail-hero{background:#0d0c16;padding:130px 48px 72px;position:relative;overflow:hidden}
+.detail-hero::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.055) 1px,transparent 1px);
+  background-size:36px 36px;pointer-events:none;z-index:0}
+.detail-orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.dho1{width:550px;height:550px;background:rgba(107,92,231,.22);top:-180px;left:-120px;animation:dho1 20s ease-in-out infinite}
+.dho2{width:420px;height:420px;background:rgba(34,211,238,.1);bottom:-100px;right:-100px;animation:dho2 25s ease-in-out infinite}
+.dho3{width:320px;height:320px;background:rgba(139,92,246,.14);top:30%;right:15%;animation:dho3 17s ease-in-out infinite}
+@keyframes dho1{0%,100%{transform:translate(0,0)}40%{transform:translate(70px,50px)}70%{transform:translate(-25px,70px)}}
+@keyframes dho2{0%,100%{transform:translate(0,0)}35%{transform:translate(-55px,-35px)}65%{transform:translate(35px,-55px)}}
+@keyframes dho3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-35px,25px) scale(1.25)}}
+.detail-hi{position:relative;z-index:1;max-width:1200px;margin:0 auto}
+.detail-back{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:13px;font-weight:500;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:var(--ff);margin-bottom:32px;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.detail-back:hover{background:rgba(255,255,255,.14);color:rgba(255,255,255,.8)}
+.detail-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.dtag-acc{font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;letter-spacing:.07em;background:rgba(107,92,231,.2);border:1px solid rgba(107,92,231,.35);color:#b3aaf8}
+.dtag-dim{font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4)}
+.detail-title{font-size:clamp(64px,10vw,130px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:.9;margin-bottom:24px}
+.detail-intro{font-size:18px;color:rgba(255,255,255,.42);max-width:580px;line-height:1.65;margin-bottom:48px}
+.detail-stats{display:flex;gap:48px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}
+.dstat-label{font-size:10px;font-weight:700;color:rgba(107,92,231,.7);letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.dstat-val{font-size:15px;font-weight:600;color:rgba(255,255,255,.65)}
+/* Meta strip */
+.detail-meta{background:#fff;border-bottom:1px solid var(--border)}
+.detail-meta-inner{max-width:1200px;margin:0 auto;display:flex;padding:0 48px;flex-wrap:wrap}
+.dmi{padding:20px 32px 20px 0;margin-right:32px;border-right:1px solid var(--border)}
+.dmi:last-child{border-right:none}
+.dmi-key{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:4px}
+.dmi-val{font-size:14px;font-weight:600;color:var(--ink)}
+/* Sections */
+.detail-sec{padding:64px 48px;background:#fff}
+.detail-sec.alt{background:var(--bg2)}
+.detail-sec .si{max-width:820px}
+.dsh{font-size:clamp(20px,2.5vw,28px);font-weight:800;letter-spacing:-.025em;line-height:1.1;margin-bottom:20px;color:var(--ink)}
+.dbody{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:16px}
+.dbody strong{color:var(--ink);font-weight:600}
+.dbullets{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.dbullets li{font-size:15px;color:var(--ink2);line-height:1.65;padding-left:20px;position:relative}
+.dbullets li::before{content:'→';position:absolute;left:0;color:var(--accent);font-weight:700}
+.d2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.dcard{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:22px 22px 24px}
+.dcard h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.dcard ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.dcard ul li{font-size:13px;color:var(--ink2);line-height:1.55;padding-left:14px;position:relative}
+.dcard ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:11px;font-weight:700;top:1px}
+.dquote{background:linear-gradient(135deg,#0d0c16,#1a1530);border-radius:20px;padding:36px 40px;position:relative;overflow:hidden;margin:28px 0}
+.dquote::before{content:'"';position:absolute;top:-16px;left:24px;font-size:130px;color:rgba(107,92,231,.18);font-family:Georgia,serif;line-height:1;pointer-events:none}
+.dq-text{font-size:17px;color:rgba(255,255,255,.82);line-height:1.75;font-style:italic;margin-bottom:16px;position:relative;z-index:1}
+.dq-author{font-size:13px;font-weight:500;color:rgba(255,255,255,.28)}
+.dnum-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.dnum-item{background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:16px 12px;text-align:center}
+.dnum-item .nn{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.dnum-item .nt{font-size:12px;font-weight:700;color:var(--ink)}
+.dnum-item .nd{font-size:11px;color:var(--ink3);margin-top:3px;line-height:1.4}
+.detail-img-slot{border-radius:16px;overflow:hidden;margin:24px 0;aspect-ratio:16/9;background:var(--bg2);display:flex;align-items:center;justify-content:center;border:1.5px solid var(--border);font-size:13px;color:var(--ink3);font-weight:500}
+.detail-cta{display:flex;gap:12px;flex-wrap:wrap;padding-top:40px;margin-top:40px;border-top:1px solid var(--border)}
+@media(max-width:960px){
+  .detail-hero{padding:100px 20px 56px}
+  .detail-meta-inner{padding:0 20px}
+  .dmi{padding:16px 20px 16px 0;margin-right:20px}
+  .detail-sec{padding:48px 20px}
+  .d2col{grid-template-columns:1fr}
+  .dnum-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ════════════════════════════════
    INNER PAGES — impressive dark hero
 ════════════════════════════════ */
 /* ════ SIMPLE FOOTER (inner pages) ════ */
@@ -825,246 +894,8 @@ footer{background:#0d0c16;padding:44px 48px}
 <footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
-<!-- ═══════════ LABSYNC DETAIL ═══════════ -->
-<div class="page" id="pg-labsync">
-<!-- Editorial hero: dark, big title -->
-<div style="background:#0d0c16;padding:130px 48px 80px;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 800px 400px at 50% 60%,rgba(107,92,231,.18),transparent 70%);pointer-events:none"></div>
-  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1">
-    <button onclick="go('portfolio')" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:13px;font-weight:500;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:var(--ff);margin-bottom:32px;display:inline-flex;align-items:center;gap:6px;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">← Portfolio</button>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
-      <span style="background:rgba(107,92,231,.2);border:1px solid rgba(107,92,231,.35);color:#b3aaf8;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">INSPECTORIO</span>
-      <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">SaaS B2B</span>
-      <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">WEB APP</span>
-      <span style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.06em">POST MVP</span>
-    </div>
-    <h1 style="font-size:clamp(56px,9vw,120px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:.95;margin-bottom:28px">LabSync</h1>
-    <p style="font-size:18px;color:rgba(255,255,255,.45);max-width:560px;line-height:1.65">A laboratory testing management platform connecting brands, retailers, suppliers, and labs — centralizing data and unlocking supply chain analytics never before available in the industry.</p>
-    <!-- Key stat row -->
-    <div style="display:flex;gap:40px;flex-wrap:wrap;margin-top:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08)">
-      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Role</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">Business Analyst</div></div>
-      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Clients</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">Target · DICK'S · Crocs</div></div>
-      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Team</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">6 devs · 2 QA · 1 designer</div></div>
-      <div><div style="font-size:11px;font-weight:600;color:rgba(107,92,231,.7);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Highlight</div><div style="font-size:16px;font-weight:600;color:rgba(255,255,255,.75)">10+ demos · 5,000+ vendors onboarded</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- Meta chips -->
-<section class="inner-sec" style="padding-bottom:32px">
-  <div class="si">
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:0">
-      <div style="background:var(--bg2);border-radius:14px;padding:18px 20px;border:1.5px solid var(--border)">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:5px">Role</div>
-        <div style="font-size:15px;font-weight:700;color:var(--ink)">Business Analyst</div>
-      </div>
-      <div style="background:var(--bg2);border-radius:14px;padding:18px 20px;border:1.5px solid var(--border)">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:5px">Platform</div>
-        <div style="font-size:15px;font-weight:700;color:var(--ink)">Web App</div>
-      </div>
-      <div style="background:var(--bg2);border-radius:14px;padding:18px 20px;border:1.5px solid var(--border)">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:5px">Type</div>
-        <div style="font-size:15px;font-weight:700;color:var(--ink)">SaaS B2B</div>
-      </div>
-      <div style="background:var(--bg2);border-radius:14px;padding:18px 20px;border:1.5px solid var(--border)">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:5px">Stage joined</div>
-        <div style="font-size:15px;font-weight:700;color:var(--ink)">Post MVP</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- About the product -->
-<section class="inner-sec" style="padding-top:32px">
-  <div class="si">
-    <span class="slbl">About the product</span><span class="gbar"></span>
-    <h2 class="stitle" style="margin-bottom:28px">What is LabSync?</h2>
-    <div style="display:grid;grid-template-columns:3fr 2fr;gap:48px;align-items:start;margin-bottom:52px">
-      <div>
-        <p class="bio-p">Inspectorio is a US-based cloud SaaS used by <strong>12,000+ customers</strong> — including top global brands and retailers — to enhance Quality and Compliance operations.</p>
-        <p class="bio-p">LabSync connects brands, retailers, suppliers, and third-party labs across the supply chain. It standardizes lab testing data points (typically stored differently by each lab), centralizes test requests and reports in one place, and unlocks an <strong>analytics module that had never existed in the industry before</strong>.</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:18px 20px">
-          <div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;letter-spacing:.08em;text-transform:uppercase">Customers</div>
-          <div style="font-size:14px;color:var(--ink2);line-height:1.6">Brands, Retailers, Suppliers &amp; Factories — apparel, hard goods, soft goods</div>
-        </div>
-        <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:18px 20px">
-          <div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;letter-spacing:.08em;text-transform:uppercase">Revenue model</div>
-          <div style="font-size:14px;color:var(--ink2);line-height:1.6">Subscription — Standard, Professional, and Enterprise tiers</div>
-        </div>
-        <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:18px 20px">
-          <div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:5px;letter-spacing:.08em;text-transform:uppercase">Key partners</div>
-          <div style="font-size:14px;color:var(--ink2);line-height:1.6">Lab agencies, Target, DICK'S Sporting Goods, Crocs, internal product &amp; sales teams</div>
-        </div>
-      </div>
-    </div>
-    <!-- Value prop dark card -->
-    <div style="background:#0d0c16;border-radius:20px;padding:40px 44px;position:relative;overflow:hidden">
-      <div style="position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(ellipse,rgba(107,92,231,.25),transparent 70%);pointer-events:none"></div>
-      <span style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(107,92,231,.7);margin-bottom:10px;display:block">Value proposition</span>
-      <h3 style="font-size:clamp(18px,3vw,30px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.2;margin-bottom:14px">Standardize &amp; centralize lab testing — across every supplier, every lab, every market.</h3>
-      <p style="font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;max-width:640px;position:relative;z-index:1">The existing process is fragmented — each vendor works with multiple labs storing data differently. LabSync standardizes data points and centralizes test requests, then layers a <strong style="color:rgba(255,255,255,.75)">powerful analytics module</strong> on top — a capability that had not been available to users previously.</p>
-    </div>
-  </div>
-</section>
-
-<!-- My role -->
-<section class="inner-sec alt">
-  <div class="si">
-    <span class="slbl">My contribution</span><span class="gbar"></span>
-    <h2 class="stitle" style="margin-bottom:32px">My role as Business Analyst.</h2>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
-      <div style="background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:28px 26px">
-        <div style="font-size:22px;margin-bottom:12px">🔄</div>
-        <h4 style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:12px">Facilitating the Scrum Team</h4>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:9px">
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Led a squad of 6 devs, 2 QA testers, and 1 designer</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Hosted all Scrum ceremonies: Daily, Review, Retro &amp; Grooming</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Prepared PRDs, validated with customers, collaborated with designers</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Built WSJF prioritization framework to organize client feedback</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Prepared sprint &amp; monthly release notes for new features</li>
-        </ul>
-      </div>
-      <div style="background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:28px 26px">
-        <div style="font-size:22px;margin-bottom:12px">🌍</div>
-        <h4 style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:12px">Working with Global Clients</h4>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:9px">
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Pilot testing &amp; discovery meetings with Target, DICK'S Sporting Goods, Crocs</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Integrated LabSync with Target across 4 lab agencies</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Demoed LabSync to 10+ clients across multiple time zones</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Prepared &amp; analyzed pilot testing surveys for product improvements</li>
-          <li style="font-size:13.5px;color:var(--ink2);line-height:1.6;padding-left:18px;position:relative"><span style="position:absolute;left:0;color:var(--accent);font-weight:700">→</span>Collaborated with marketing, sales &amp; customer support to align efforts</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- How we built it -->
-<section class="inner-sec">
-  <div class="si">
-    <span class="slbl">Process</span><span class="gbar"></span>
-    <h2 class="stitle" style="margin-bottom:10px">How we built LabSync.</h2>
-    <p style="font-size:16px;color:var(--ink2);margin-bottom:40px;line-height:1.7;max-width:680px">Built using Agile &amp; Scrum with 2-week sprint cycles starting on Wednesday — chosen intentionally to avoid Monday sluggishness and long-weekend absences.</p>
-    <!-- Team -->
-    <div style="background:var(--bg2);border-radius:20px;padding:32px 36px;margin-bottom:28px;border:1.5px solid var(--border)">
-      <h3 style="font-size:17px;font-weight:700;color:var(--ink);margin-bottom:20px">Team structure</h3>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-        <div style="text-align:center;background:#fff;border-radius:14px;padding:18px 12px;border:1.5px solid var(--border)">
-          <div style="font-size:26px;margin-bottom:8px">🧭</div>
-          <div style="font-size:13px;font-weight:700;color:var(--ink)">1 Product Manager</div>
-          <div style="font-size:11.5px;color:var(--ink3);margin-top:3px">Vision &amp; roadmap</div>
-        </div>
-        <div style="text-align:center;background:#fff;border-radius:14px;padding:18px 12px;border:1.5px solid var(--border)">
-          <div style="font-size:26px;margin-bottom:8px">📋</div>
-          <div style="font-size:13px;font-weight:700;color:var(--ink)">2 Business Analysts</div>
-          <div style="font-size:11.5px;color:var(--ink3);margin-top:3px">User stories &amp; sprints</div>
-        </div>
-        <div style="text-align:center;background:#fff;border-radius:14px;padding:18px 12px;border:1.5px solid var(--border)">
-          <div style="font-size:26px;margin-bottom:8px">💻</div>
-          <div style="font-size:13px;font-weight:700;color:var(--ink)">2 squads of 4</div>
-          <div style="font-size:11.5px;color:var(--ink3);margin-top:3px">FE + BE + QA each</div>
-        </div>
-        <div style="text-align:center;background:#fff;border-radius:14px;padding:18px 12px;border:1.5px solid var(--border)">
-          <div style="font-size:26px;margin-bottom:8px">🏅</div>
-          <div style="font-size:13px;font-weight:700;color:var(--ink)">1 Scrum Master</div>
-          <div style="font-size:11.5px;color:var(--ink3);margin-top:3px">Coach &amp; enabler</div>
-        </div>
-      </div>
-    </div>
-    <!-- Sprint flow -->
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
-      <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:16px 14px;text-align:center">
-        <div style="font-size:12px;font-weight:800;color:var(--accent);margin-bottom:5px">01</div>
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">Backlog Prep</div>
-        <div style="font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.4">PRDs, user stories, WSJF priority</div>
-      </div>
-      <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:16px 14px;text-align:center">
-        <div style="font-size:12px;font-weight:800;color:var(--accent);margin-bottom:5px">02</div>
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">Grooming</div>
-        <div style="font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.4">Planning Poker estimates</div>
-      </div>
-      <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:16px 14px;text-align:center">
-        <div style="font-size:12px;font-weight:800;color:var(--accent);margin-bottom:5px">03</div>
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">Sprint + Daily</div>
-        <div style="font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.4">2-week cycles, 15-min standups</div>
-      </div>
-      <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:16px 14px;text-align:center">
-        <div style="font-size:12px;font-weight:800;color:var(--accent);margin-bottom:5px">04</div>
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">Sprint Review</div>
-        <div style="font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.4">Velocity, burn-down, demo</div>
-      </div>
-      <div style="background:#f0eeff;border:1.5px solid rgba(107,92,231,.2);border-radius:14px;padding:16px 14px;text-align:center">
-        <div style="font-size:12px;font-weight:800;color:var(--accent);margin-bottom:5px">05</div>
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">Retro + Plan</div>
-        <div style="font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.4">Improve → next sprint goals</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Achievements -->
-<section class="inner-sec alt">
-  <div class="si">
-    <span class="slbl">Impact</span><span class="gbar"></span>
-    <h2 class="stitle" style="margin-bottom:32px">Results in 6 months.</h2>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:40px">
-      <div style="background:#fff;border-radius:18px;padding:26px;border:1.5px solid var(--border);display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start">
-        <div style="width:44px;height:44px;background:#f0eeff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🚀</div>
-        <div><h4 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px">Secured enterprise clients</h4><p style="font-size:13.5px;color:var(--ink2);line-height:1.65">Onboarded <strong>Target (~5,000 vendors)</strong> and <strong>Crocs (~100 vendors)</strong> into Dry run/Pilot Testing phase after launch.</p></div>
-      </div>
-      <div style="background:#fff;border-radius:18px;padding:26px;border:1.5px solid var(--border);display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start">
-        <div style="width:44px;height:44px;background:#f0eeff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📊</div>
-        <div><h4 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px">10+ client demos generated</h4><p style="font-size:13.5px;color:var(--ink2);line-height:1.65">Demoed LabSync for 10+ global brands and retailers, triggering strong interest and adoption pipeline.</p></div>
-      </div>
-      <div style="background:#fff;border-radius:18px;padding:26px;border:1.5px solid var(--border);display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start">
-        <div style="width:44px;height:44px;background:#f0eeff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📝</div>
-        <div><h4 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px">Standardized test request form</h4><p style="font-size:13.5px;color:var(--ink2);line-height:1.65">Defined a harmonized online test request form, saving vendors time &amp; cost vs. traditional offline methods.</p></div>
-      </div>
-      <div style="background:#fff;border-radius:18px;padding:26px;border:1.5px solid var(--border);display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start">
-        <div style="width:44px;height:44px;background:#f0eeff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">⚡</div>
-        <div><h4 style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px">Documented lab API integrations</h4><p style="font-size:13.5px;color:var(--ink2);line-height:1.65">Documented GET, POST &amp; PUT APIs for lab agencies — enabling faster, scalable integrations across LabSync.</p></div>
-      </div>
-    </div>
-    <!-- Quote -->
-    <div style="background:linear-gradient(135deg,#0d0c16,#1a1530);border-radius:20px;padding:36px 40px;position:relative;overflow:hidden">
-      <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(ellipse,rgba(107,92,231,.2),transparent 70%);pointer-events:none"></div>
-      <div style="font-size:40px;color:var(--accent);line-height:1;margin-bottom:12px;opacity:.5">"</div>
-      <p style="font-size:17px;color:rgba(255,255,255,.85);line-height:1.75;font-style:italic;margin-bottom:18px;position:relative;z-index:1">I think you're exceptional at what you do. I can honestly say that with your enthusiasm, proactiveness, and the speed at which you learn and adapt, you have potential far beyond most.</p>
-      <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.35)">— Alex Ryan, Technical Lead · Senior Software Engineer @ Inspectorio</div>
-    </div>
-  </div>
-</section>
-
-<!-- Key Takeaways -->
-<section class="inner-sec">
-  <div class="si">
-    <span class="slbl">Lessons learned</span><span class="gbar"></span>
-    <h2 class="stitle" style="margin-bottom:32px">Key takeaways.</h2>
-    <div style="display:flex;flex-direction:column;gap:14px;max-width:740px;margin-bottom:48px">
-      <div style="display:grid;grid-template-columns:40px 1fr;gap:16px;padding:20px 24px;background:var(--bg2);border-radius:14px;border:1.5px solid var(--border);align-items:start">
-        <div style="width:40px;height:40px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0">01</div>
-        <div><strong style="font-size:14px;color:var(--ink);display:block;margin-bottom:4px">Global clients need tailored communication.</strong><p style="font-size:13.5px;color:var(--ink2);line-height:1.65">Scheduling for multiple time zones, using their terminology, and explaining demos slowly ("like talking to a baby") avoids misunderstandings and builds trust.</p></div>
-      </div>
-      <div style="display:grid;grid-template-columns:40px 1fr;gap:16px;padding:20px 24px;background:var(--bg2);border-radius:14px;border:1.5px solid var(--border);align-items:start">
-        <div style="width:40px;height:40px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0">02</div>
-        <div><strong style="font-size:14px;color:var(--ink);display:block;margin-bottom:4px">Involve developers early — not just in code.</strong><p style="font-size:13.5px;color:var(--ink2);line-height:1.65">Bringing devs into customer interviews and design sessions from day one unlocks their full expertise and reduces costly late-stage changes.</p></div>
-      </div>
-      <div style="display:grid;grid-template-columns:40px 1fr;gap:16px;padding:20px 24px;background:var(--bg2);border-radius:14px;border:1.5px solid var(--border);align-items:start">
-        <div style="width:40px;height:40px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0">03</div>
-        <div><strong style="font-size:14px;color:var(--ink);display:block;margin-bottom:4px">Alignment first — 5W1H before execution.</strong><p style="font-size:13.5px;color:var(--ink2);line-height:1.65">Every cross-functional effort needs Who, What, When, Where, Why and How defined clearly upfront. Ambiguity compounds quickly in large teams.</p></div>
-      </div>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <button class="btn-acc" onclick="go('portfolio')">← Back to Portfolio</button>
-      <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" class="btn-ghost-dk">Connect on LinkedIn</a>
-    </div>
-  </div>
-</section>
-
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
-</div><!-- end labsync -->
+<!-- ═══════════ DETAIL PAGE (JS-driven template) ═══════════ -->
+<div class="page" id="pg-detail"></div>
 
 <!-- ═══════════ PORTFOLIO ═══════════ -->
 <div class="page" id="pg-portfolio">
@@ -1301,23 +1132,91 @@ footer{background:#0d0c16;padding:44px 48px}
 </div>
 
 <script>
-const PAGES=['home','about','portfolio','pm','cases','podcast','labsync'];
+/* ── PROJECT DATA ─────────────────────────── */
+const PROJECTS={
+  labsync:{
+    slug:'labsync',parent:'portfolio',
+    companyTag:'INSPECTORIO',company:'Inspectorio',
+    title:'LabSync',
+    intro:'A laboratory testing management platform connecting brands, retailers, suppliers, and labs — centralising data and unlocking supply chain analytics never before available in the industry.',
+    meta:[{key:'Role',val:'Business Analyst'},{key:'Platform',val:'Web App'},{key:'Type',val:'SaaS B2B'},{key:'Stage',val:'Post MVP'}],
+    stats:[{label:'Clients',val:'Target · DICK\'S · Crocs'},{label:'Team',val:'6 devs · 2 QA · 1 designer'},{label:'Result',val:'10+ demos · 5,000+ vendors onboarded'}],
+    sections:[
+      {type:'text',heading:'About the product',body:`Inspectorio is a US-based cloud SaaS used by <strong>12,000+ customers</strong> — including top global brands and retailers. LabSync standardises lab testing data points (typically stored differently by each lab), centralises test requests in one place, and layers a <strong>first-of-its-kind analytics module</strong> on top — a capability that had not previously been available.`},
+      {type:'two-cards',heading:'My contribution',cards:[
+        {icon:'🔄',title:'Scrum Team Lead',items:['Led a squad of 6 devs, 2 QA testers, and 1 designer','Hosted all Scrum ceremonies: Daily, Review, Retro & Grooming','Prepared PRDs, validated with clients, collaborated with designers','Built WSJF prioritisation framework to organise client feedback','Prepared sprint and monthly release notes']},
+        {icon:'🌍',title:'Global Client Work',items:['Pilot testing & discovery with Target, DICK\'S Sporting Goods, Crocs','Integrated LabSync with Target across 4 lab testing agencies','Demoed to 10+ global brands across multiple time zones','Prepared & analysed pilot surveys to improve the product']},
+      ]},
+      {type:'num-grid',heading:'Sprint process',items:[{n:'01',t:'Backlog Prep',d:'PRDs, user stories, WSJF priority'},{n:'02',t:'Grooming',d:'Planning Poker estimates'},{n:'03',t:'Sprint + Daily',d:'2-week cycles, 15-min standups'},{n:'04',t:'Sprint Review',d:'Velocity, burn-down, demo'},{n:'05',t:'Retro + Plan',d:'Improve → next sprint goals'}]},
+      {type:'bullets',heading:'Results in 6 months',items:['Launched LabSync and onboarded <strong>Target (~5,000 vendors)</strong> and <strong>Crocs (~100 vendors)</strong> into pilot testing','Demoed to <strong>10+ global brands</strong> — generating strong adoption pipeline','Defined a harmonised online test request form — saving vendors time vs. offline methods','Documented GET, POST & PUT APIs for lab agencies — enabling faster integrations']},
+      {type:'quote',text:'I think you\'re exceptional at what you do. I can honestly say that with your enthusiasm, proactiveness, and the speed at which you learn and adapt, you have potential far beyond most.',author:'Alex Ryan, Technical Lead · Senior Software Engineer @ Inspectorio'},
+      {type:'takeaways',heading:'Key takeaways',items:[{n:'01',t:'Global clients need tailored communication.',d:'Schedule across time zones, use their terminology, and demo slowly — never assume shared context.'},{n:'02',t:'Involve developers early.',d:'Bringing devs into customer interviews and design from day one unlocks their expertise and reduces costly late changes.'},{n:'03',t:'Alignment first — 5W1H.',d:'Every cross-functional effort needs Who, What, When, Where, Why and How defined clearly upfront.'}]},
+    ],
+  },
+};
+
+/* ── RENDER DETAIL PAGE ───────────────────── */
+function renderDetailPage(id){
+  const p=PROJECTS[id]; if(!p)return;
+  const FOOTER=`<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran</p></div></footer>`;
+  function sec(s,i){
+    const alt=i%2?' alt':''; let inner='';
+    if(s.type==='text') inner=`<h2 class="dsh">${s.heading}</h2><p class="dbody">${s.body}</p>`;
+    else if(s.type==='bullets') inner=`<h2 class="dsh">${s.heading}</h2><ul class="dbullets">${s.items.map(it=>`<li>${it}</li>`).join('')}</ul>`;
+    else if(s.type==='two-cards'){const cards=s.cards.map(c=>`<div class="dcard"><h4>${c.icon} ${c.title}</h4><ul>${c.items.map(it=>`<li>${it}</li>`).join('')}</ul></div>`).join('');inner=`<h2 class="dsh">${s.heading}</h2><div class="d2col">${cards}</div>`;}
+    else if(s.type==='num-grid'){const it=s.items.map(x=>`<div class="dnum-item"><div class="nn">${x.n}</div><div class="nt">${x.t}</div><div class="nd">${x.d}</div></div>`).join('');inner=`<h2 class="dsh">${s.heading}</h2><div class="dnum-grid">${it}</div>`;}
+    else if(s.type==='takeaways'){const it=s.items.map(x=>`<div style="display:grid;grid-template-columns:40px 1fr;gap:14px;padding:18px 22px;background:var(--bg2);border-radius:12px;border:1.5px solid var(--border);align-items:start"><div style="width:40px;height:40px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0">${x.n}</div><div><strong style="font-size:14px;color:var(--ink);display:block;margin-bottom:3px">${x.t}</strong><p style="font-size:13.5px;color:var(--ink2);line-height:1.6;margin:0">${x.d}</p></div></div>`).join('');inner=`<h2 class="dsh">${s.heading}</h2><div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">${it}</div>`;}
+    else if(s.type==='quote') inner=`<div class="dquote"><p class="dq-text">${s.text}</p><span class="dq-author">— ${s.author}</span></div>`;
+    else if(s.type==='image') inner=s.src?`<img src="${s.src}" alt="${s.alt||''}" style="width:100%;border-radius:16px;display:block;margin:16px 0">`:`<div class="detail-img-slot">${s.label||'Image slot'}</div>`;
+    return `<section class="detail-sec${alt}"><div class="si">${inner}</div></section>`;
+  }
+  document.getElementById('pg-detail').innerHTML=`
+    <div class="detail-hero">
+      <div class="detail-orb dho1"></div><div class="detail-orb dho2"></div><div class="detail-orb dho3"></div>
+      <div class="detail-hi">
+        <button class="detail-back" onclick="go('${p.parent||'home'}')">← ${(p.parent||'home').charAt(0).toUpperCase()+(p.parent||'home').slice(1)}</button>
+        <div class="detail-tags"><span class="dtag-acc">${p.companyTag}</span>${p.meta.map(m=>`<span class="dtag-dim">${m.val.toUpperCase()}</span>`).join('')}</div>
+        <h1 class="detail-title">${p.title}</h1>
+        <p class="detail-intro">${p.intro}</p>
+        <div class="detail-stats">${p.stats.map(s=>`<div><div class="dstat-label">${s.label}</div><div class="dstat-val">${s.val}</div></div>`).join('')}</div>
+      </div>
+    </div>
+    <div class="detail-meta"><div class="detail-meta-inner">${p.meta.map(m=>`<div class="dmi"><div class="dmi-key">${m.key}</div><div class="dmi-val">${m.val}</div></div>`).join('')}</div></div>
+    ${p.sections.map((s,i)=>sec(s,i)).join('')}
+    <section class="detail-sec"><div class="si"><div class="detail-cta">
+      <button class="btn-acc" onclick="go('${p.parent||'portfolio'}')">← Back to Portfolio</button>
+      <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" class="btn-ghost-dk">Connect on LinkedIn</a>
+    </div></div></section>${FOOTER}`;
+}
+
+/* ── ROUTING ──────────────────────────────── */
+const PAGES=['home','about','portfolio','pm','cases','podcast'];
 const NIDS={about:'na-about',portfolio:'na-portfolio',pm:'na-pm',cases:'na-cases',podcast:'na-podcast'};
-const PAGE_URLS={home:'/',about:'/about',portfolio:'/portfolio',pm:'/pm',cases:'/cases',podcast:'/podcast',labsync:'/labsync'};
+const PAGE_URLS={home:'/',about:'/about',portfolio:'/portfolio',pm:'/pm',cases:'/cases',podcast:'/podcast'};
 let currentPage='home';
 
 function go(id,pushState=true){
+  const isProj=!!PROJECTS[id];
+  PAGES.forEach(p=>document.getElementById('pg-'+p).classList.remove('active'));
+  document.getElementById('pg-detail').classList.remove('active');
+  if(isProj){renderDetailPage(id);document.getElementById('pg-detail').classList.add('active');}
+  else document.getElementById('pg-'+id)?.classList.add('active');
+  const navActive=isProj?(PROJECTS[id].parent||id):id;
+  Object.entries(NIDS).forEach(([p,n])=>document.getElementById(n).classList.toggle('active',p===navActive));
   currentPage=id;
-  PAGES.forEach(p=>document.getElementById('pg-'+p).classList.toggle('active',p===id));
-  Object.entries(NIDS).forEach(([p,n])=>document.getElementById(n).classList.toggle('active',p===id));
   window.scrollTo({top:0,behavior:'instant'});
   updateNav();
-  setTimeout(()=>initFU('pg-'+id),60);
-  if(pushState){const url=PAGE_URLS[id]||'/';history.pushState({page:id},'',url);}
+  setTimeout(()=>initFU(isProj?'pg-detail':'pg-'+id),60);
+  if(pushState){const url=isProj?`/${PROJECTS[id].parent}/${id}`:(PAGE_URLS[id]||'/');history.pushState({page:id},'',url);}
 }
-window.addEventListener('popstate',e=>{if(e.state&&e.state.page)go(e.state.page,false);});
-// Detect initial URL on load
-(function(){const path=window.location.pathname.replace(/^\//,'');const id=Object.entries(PAGE_URLS).find(([,u])=>u===window.location.pathname)?.[0]||'home';if(id!=='home')go(id,false);})();
+window.addEventListener('popstate',e=>{if(e.state?.page)go(e.state.page,false);});
+(function(){
+  const path=window.location.pathname;
+  const proj=Object.values(PROJECTS).find(p=>path===`/${p.parent}/${p.slug}`||path===`/${p.slug}`);
+  if(proj){go(proj.slug,false);return;}
+  const pg=Object.entries(PAGE_URLS).find(([,u])=>u===path);
+  if(pg&&pg[0]!=='home')go(pg[0],false);
+})();
 
 /* ── Hero letters ── */
 const words=[{t:'I',acc:false,it:false},{t:'build',acc:false,it:false},{t:'products',acc:true,it:false},{t:'that',acc:false,it:false},{t:'delight.',acc:false,it:true}];
