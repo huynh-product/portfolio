@@ -232,7 +232,7 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .pcard:hover .parr{transform:translateX(4px)}
 /* ── LINOXA-STYLE CARD ── */
 .pcard3{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;cursor:pointer;display:block;background:#0d0c16}
-.pc3-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.pc3-bg{position:absolute;inset:0;background-size:cover;background-position:left top;transition:transform .7s cubic-bezier(.16,1,.3,1)}
 .pcard3:hover .pc3-bg{transform:scale(1.06)}
 /* strong dark gradient so text is always readable on image */
 .pc3-ov{position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -1002,22 +1002,42 @@ footer{background:#0d0c16;padding:44px 48px}
       <div class="ps-line"></div>
     </div>
     <div class="port-grid3c">
-      <div class="pcard3 fu" onclick="go('labsync')">
-        <div class="pc3-bg pbg-ls"><span class="img-slot">IMG 13</span></div>
+
+      <!-- 1. Traceability — top left -->
+      <div class="pcard3 fu">
+        <div class="pc3-bg pbg-tr" style="background-image:url(cover-traceability.png)"></div>
         <div class="pc3-ov"></div>
         <div class="pc3-content">
-          <div class="pc3-pill">Inspectorio · 2022–Present</div>
-          <div class="pc3-title">LabSync</div>
+          <div class="pc3-pill">Inspectorio · 2023–Present</div>
+          <div class="pc3-title">Traceability</div>
         </div>
         <div class="pc3-panel">
-          <span class="pc3-panel-co">Inspectorio · SaaS B2B</span>
-          <div class="pc3-panel-title">LabSync</div>
-          <p class="pc3-panel-desc">Lab testing management connecting brands, retailers, suppliers, and labs. Built a first-of-its-kind analytics module across global supply chains.</p>
+          <span class="pc3-panel-co">Inspectorio · Supply Chain</span>
+          <div class="pc3-panel-title">Traceability</div>
+          <p class="pc3-panel-desc">End-to-end supply chain traceability from raw material to finished product. A creative MVP hack won a $300K pilot — designed to scale into full development.</p>
           <span class="pc3-panel-cta">Read more →</span>
         </div>
       </div>
+
+      <!-- 2. RSC — top right -->
       <div class="pcard3 fu">
-        <div class="pc3-bg pbg-da"><span class="img-slot">IMG 14</span></div>
+        <div class="pc3-bg pbg-rsc" style="background-image:url(cover-rsc.png)"></div>
+        <div class="pc3-ov"></div>
+        <div class="pc3-content">
+          <div class="pc3-pill">Inspectorio · 2022–Present</div>
+          <div class="pc3-title">RSC — Responsible Sourcing &amp; Compliance</div>
+        </div>
+        <div class="pc3-panel">
+          <span class="pc3-panel-co">Inspectorio · Compliance</span>
+          <div class="pc3-panel-title">RSC</div>
+          <p class="pc3-panel-desc">Responsible Sourcing &amp; Compliance platform for EUDR and UFLPA regulations. Used by Walmart, Target, Tesco, and Crocs for global regulatory compliance.</p>
+          <span class="pc3-panel-cta">Read more →</span>
+        </div>
+      </div>
+
+      <!-- 3. Digital Assets — bottom left -->
+      <div class="pcard3 fu">
+        <div class="pc3-bg pbg-da" style="background-image:url(cover-digital-assets.png)"></div>
         <div class="pc3-ov"></div>
         <div class="pc3-content">
           <div class="pc3-pill">Inspectorio · 2023–Present</div>
@@ -1030,34 +1050,23 @@ footer{background:#0d0c16;padding:44px 48px}
           <span class="pc3-panel-cta">Read more →</span>
         </div>
       </div>
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-rsc"><span class="img-slot">IMG 15</span></div>
+
+      <!-- 4. LabSync — bottom right (last) -->
+      <div class="pcard3 fu" onclick="go('labsync')" style="cursor:pointer">
+        <div class="pc3-bg pbg-ls" style="background-image:url(cover-labsync.png)"></div>
         <div class="pc3-ov"></div>
         <div class="pc3-content">
           <div class="pc3-pill">Inspectorio · 2022–Present</div>
-          <div class="pc3-title">RSC</div>
+          <div class="pc3-title">LabSync</div>
         </div>
         <div class="pc3-panel">
-          <span class="pc3-panel-co">Inspectorio · Compliance</span>
-          <div class="pc3-panel-title">RSC</div>
-          <p class="pc3-panel-desc">Responsible Sourcing &amp; Compliance platform for EUDR and UFLPA regulations. Used by Walmart, Target, Tesco, and Crocs for global regulatory compliance.</p>
+          <span class="pc3-panel-co">Inspectorio · SaaS B2B</span>
+          <div class="pc3-panel-title">LabSync</div>
+          <p class="pc3-panel-desc">Lab testing management connecting brands, retailers, suppliers, and labs. Built a first-of-its-kind analytics module across global supply chains.</p>
           <span class="pc3-panel-cta">Read more →</span>
         </div>
       </div>
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-tr"><span class="img-slot">IMG 16</span></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Inspectorio · 2023–Present</div>
-          <div class="pc3-title">Traceability</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Inspectorio · Supply Chain</span>
-          <div class="pc3-panel-title">Traceability</div>
-          <p class="pc3-panel-desc">End-to-end supply chain traceability from raw material to finished product. A creative MVP hack won a $300K pilot — designed from day one to scale into full development.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
+
     </div>
   </div>
 
