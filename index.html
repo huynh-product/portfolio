@@ -229,11 +229,45 @@ nav.nav-solid{background:rgba(15,14,23,.92);backdrop-filter:blur(20px);-webkit-b
 .pmeta{display:flex;justify-content:space-between;align-items:center}
 .parr{font-size:13px;font-weight:600;color:var(--accent);transition:transform .2s}
 .pcard:hover .parr{transform:translateX(4px)}
-/* company section header */
-.port-company{margin-bottom:16px;margin-top:48px}
-.port-company:first-child{margin-top:0}
-.port-company-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.port-company-label::after{content:'';flex:1;height:1px;background:var(--border)}
+/* ── PORTFOLIO PAGE HEADER ── */
+.port-header{background:#0d0c16;padding:120px 48px 72px;position:relative;overflow:hidden}
+.port-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 700px 400px at 25% 60%,rgba(107,92,231,.2),transparent 70%);pointer-events:none}
+.port-header-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto}
+.port-header-title{font-size:clamp(48px,7vw,96px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:.95;margin:12px 0 18px}
+.port-header-sub{font-size:17px;color:rgba(255,255,255,.38);max-width:480px;line-height:1.65}
+/* ── PORTFOLIO CONTENT ── */
+.port-content{padding:64px 48px 96px;background:#fff;max-width:none}
+.port-content-inner{max-width:1200px;margin:0 auto}
+/* company section */
+.port-section{margin-top:56px}
+.port-section:first-child{margin-top:0}
+.port-section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.ps-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ps-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.ps-meta{font-size:12px;color:var(--ink3)}
+.ps-line{flex:1;height:1px;background:var(--border)}
+/* NEW CARD */
+.pcard2{background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,.07);box-shadow:0 2px 16px rgba(0,0,0,.05);overflow:hidden;cursor:pointer;transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s;display:flex;flex-direction:column}
+.pcard2:hover{transform:translateY(-5px);box-shadow:0 20px 52px rgba(0,0,0,.11)}
+.pc2-head{height:80px;display:flex;align-items:center;padding:0 18px;gap:13px;position:relative;overflow:hidden;flex-shrink:0}
+.pc2-logo{width:46px;height:46px;border-radius:11px;background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.38);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;position:relative;z-index:1}
+.pc2-logo img{width:100%;height:100%;object-fit:contain;padding:6px}
+.pc2-logo-n{font-size:9px;font-weight:700;color:rgba(255,255,255,.65);letter-spacing:.04em}
+.pc2-co{font-size:11px;font-weight:600;color:rgba(255,255,255,.68);position:relative;z-index:1;line-height:1.4}
+.pc2-body{padding:15px 18px 18px;flex:1;display:flex;flex-direction:column}
+.pc2-body h3{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:7px;letter-spacing:-.02em;line-height:1.2}
+.pc2-body p{font-size:12.5px;color:var(--ink2);line-height:1.62;flex:1;margin-bottom:12px}
+.pc2-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.pc2-arrow{font-size:12px;font-weight:700;color:var(--accent);white-space:nowrap;transition:transform .2s}
+.pcard2:hover .pc2-arrow{transform:translateX(3px)}
+.port-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.port-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:960px){
+  .port-header{padding:96px 20px 56px}
+  .port-content{padding:48px 20px 72px}
+  .port-grid4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){.port-grid2,.port-grid4{grid-template-columns:1fr}}
 
 /* CTA DARK */
 .cta-sec{padding:96px 48px;background:#0d0c16;position:relative;overflow:hidden}
@@ -899,123 +933,185 @@ footer{background:#0d0c16;padding:44px 48px}
 
 <!-- ═══════════ PORTFOLIO ═══════════ -->
 <div class="page" id="pg-portfolio">
-<div class="iphero">
-  <div class="iphero-inner">
-    <div class="iphero-left">
-      <video class="iphero-vid" autoplay muted loop playsinline>
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
-      </video>
-      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
-      <div class="iphero-left-bottom">
-        <p class="iphero-tagline">6 products shipped across<br><span>SaaS, OTA, Social &amp; EdTech.</span></p>
-        <span class="iphero-social-lbl">Stay in touch!</span>
-      </div>
-    </div>
-    <div class="iphero-right">
-      <div class="iphero-badge">6 products · SaaS, OTA, Social, EdTech</div>
-      <h1>My <span class="acc">Portfolio.</span></h1>
-      <p class="iphero-sub">Products I've built across B2B SaaS, B2C travel, social platforms, and my own projects — each with real business impact.</p>
-    </div>
+
+<!-- Portfolio header — consistent padding with content below -->
+<div class="port-header">
+  <div class="port-header-inner">
+    <span class="slbl" style="color:rgba(107,92,231,.65)">My work</span>
+    <h1 class="port-header-title">Portfolio.</h1>
+    <p class="port-header-sub">Products I've shipped across SaaS, social, travel, and my own projects — each with real business impact.</p>
   </div>
 </div>
-<div class="iphero-bridge"></div>
-<section class="inner-sec" style="background:#fff">
-  <div class="si">
 
-    <!-- INSPECTORIO -->
-    <div class="port-company">
-      <div class="port-company-label">Inspectorio · Dec 2022 – Present · SaaS B2B</div>
-      <div class="port-grid">
-        <div class="pcard fu" onclick="go('labsync')" style="cursor:pointer">
-          <div class="pcard-img c1"><span class="img-slot">IMG 13</span></div>
-          <div class="pcard-body">
-            <span class="pco">Responsible Sourcing & Compliance</span>
-            <h3>RSC &amp; Traceability</h3>
-            <p>AI-powered supply chain compliance platform used by Walmart, Target, Tesco, and Crocs. Led product development from scratch — including a $300K pilot win using a creative MVP hack and 2× Hackathon championship.</p>
-            <div class="pmeta"><span class="tag">AI · Compliance · Traceability</span><span class="parr">Read more →</span></div>
-          </div>
+<!-- Portfolio content — same 48px padding, perfectly aligned -->
+<div class="port-content">
+<div class="port-content-inner">
+
+  <!-- INSPECTORIO -->
+  <div class="port-section">
+    <div class="port-section-hdr">
+      <div class="ps-dot" style="background:#7c3aed"></div>
+      <span class="ps-name">Inspectorio</span>
+      <span class="ps-meta">Dec 2022 – Present · SaaS B2B · Ho Chi Minh City</span>
+      <div class="ps-line"></div>
+    </div>
+    <div class="port-grid4">
+
+      <div class="pcard2 fu" onclick="go('labsync')" style="cursor:pointer">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#5b21b6,#7c3aed)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 13</span></div>
+          <div class="pc2-co">LabSync<br>2022 – Present</div>
         </div>
-        <div class="pcard fu">
-          <div class="pcard-img c2"><span class="img-slot">IMG 14</span></div>
-          <div class="pcard-body">
-            <span class="pco">Digital Assets</span>
-            <h3>Digital Assets &amp; LabSync</h3>
-            <p>Managed two additional product tracks at Inspectorio. On Digital Assets, partnered with engineers to reduce 3rd-party API costs by $40K+/year. LabSync centralises lab testing data across global supply chains.</p>
-            <div class="pmeta"><span class="tag">API Optimization · Lab Testing</span><span class="parr">Read more →</span></div>
-          </div>
+        <div class="pc2-body">
+          <h3>LabSync</h3>
+          <p>Lab testing management platform connecting brands, retailers, suppliers, and labs. Built first-of-its-kind analytics module for supply chain visibility.</p>
+          <div class="pc2-foot"><span class="tag">SaaS · Lab · Analytics</span><span class="pc2-arrow">Read →</span></div>
         </div>
       </div>
-    </div>
 
-    <!-- GOLDEN EQUATOR -->
-    <div class="port-company">
-      <div class="port-company-label">Golden Equator · Mar – Dec 2022 · Social Platform</div>
-      <div class="port-grid" style="grid-template-columns:1fr 1fr">
-        <div class="pcard fu">
-          <div class="pcard-img c3"><span class="img-slot">IMG 15</span></div>
-          <div class="pcard-body">
-            <span class="pco">Social Network · Singapore</span>
-            <h3>Swish</h3>
-            <p>A Singapore-based invite-only professional social network by the Golden Equator Group — granting access to high-quality interactions, useful tools, insights, and meaningful connections. Web, iOS, and Android. Grew MAU 20%+ in 3 months.</p>
-            <div class="pmeta"><span class="tag">Social · iOS · Android · Web</span><span class="parr">Read more →</span></div>
-          </div>
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#6d28d9,#8b5cf6)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 14</span></div>
+          <div class="pc2-co">Digital Assets<br>2023 – Present</div>
+        </div>
+        <div class="pc2-body">
+          <h3>Digital Assets</h3>
+          <p>Digital content management for supply chain compliance. Partnered with engineers to optimise API consumption, saving $40K+/year in 3rd-party costs.</p>
+          <div class="pc2-foot"><span class="tag">API · Cost Optimisation</span><span class="pc2-arrow">Read →</span></div>
         </div>
       </div>
-    </div>
 
-    <!-- VEXERE -->
-    <div class="port-company">
-      <div class="port-company-label">VeXeRe · Mar 2020 – Mar 2022 · B2B &amp; B2C</div>
-      <div class="port-grid">
-        <div class="pcard fu">
-          <div class="pcard-img c4"><span class="img-slot">IMG 16</span></div>
-          <div class="pcard-body">
-            <span class="pco">Travel OTA · B2C</span>
-            <h3>Goyolo</h3>
-            <p>Born out of VeXeRe's 2M user base, Goyolo provides seamless access to flights, hotels, and excursions. Led user research across 3 segments, set up Google SEO, and drove 130% traffic growth MoM after MVP launch.</p>
-            <div class="pmeta"><span class="tag">Travel · Flights · Hotels</span><span class="parr">Read more →</span></div>
-          </div>
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#4c1d95,#6d28d9)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 15</span></div>
+          <div class="pc2-co">RSC<br>2022 – Present</div>
         </div>
-        <div class="pcard fu">
-          <div class="pcard-img c5"><span class="img-slot">IMG 17</span></div>
-          <div class="pcard-body">
-            <span class="pco">SaaS B2B · Logistics</span>
-            <h3>GMS — Goods Management System</h3>
-            <p>The leading cargo management SaaS in Vietnam — enabling 500+ bus operators to streamline order management, track key metrics, and give end-users full shipment visibility. Freemium model drove 15% revenue growth.</p>
-            <div class="pmeta"><span class="tag">Logistics · SaaS · Vietnam</span><span class="parr">Read more →</span></div>
-          </div>
+        <div class="pc2-body">
+          <h3>RSC</h3>
+          <p>Responsible Sourcing &amp; Compliance platform for EUDR and UFLPA. Used by Walmart, Target, Tesco, and Crocs for global regulatory compliance.</p>
+          <div class="pc2-foot"><span class="tag">Compliance · EUDR · UFLPA</span><span class="pc2-arrow">Read →</span></div>
         </div>
       </div>
-    </div>
 
-    <!-- PERSONAL -->
-    <div class="port-company">
-      <div class="port-company-label">Personal Projects</div>
-      <div class="port-grid">
-        <div class="pcard fu">
-          <div class="pcard-img c6"><span class="img-slot">IMG 18</span></div>
-          <div class="pcard-body">
-            <span class="pco">Tool · Agile</span>
-            <h3>Refine Poker</h3>
-            <p>A free planning poker tool for agile teams. No signup, no friction — just a name and a shareable link to start estimating stories together in real time. Built to remove the overhead from sprint grooming sessions.</p>
-            <div class="pmeta"><span class="tag">Agile · Real-time · Free</span><a href="https://refinepoker.vercel.app/" target="_blank" class="parr" onclick="event.stopPropagation()">Visit →</a></div>
-          </div>
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#3b0764,#5b21b6)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 16</span></div>
+          <div class="pc2-co">Traceability<br>2023 – Present</div>
         </div>
-        <div class="pcard fu">
-          <div class="pcard-img c1"><span class="img-slot">IMG 19</span></div>
-          <div class="pcard-body">
-            <span class="pco">EdTech · Mentorship</span>
-            <h3>Product Buddy</h3>
-            <p>A PM mentorship course helping Vietnamese freshers go from zero to BA/PO. 16 live sessions, small cohorts of 5–10 students, real case studies, and AI workflow modules. 40+ mentees placed in their first roles.</p>
-            <div class="pmeta"><span class="tag">EdTech · PM · Vietnam</span><a href="https://buddy-product.vercel.app/" target="_blank" class="parr" onclick="event.stopPropagation()">Visit →</a></div>
-          </div>
+        <div class="pc2-body">
+          <h3>Traceability</h3>
+          <p>End-to-end supply chain traceability from raw material to finished product. Creative MVP hack won a $300K pilot — designed to scale into full development.</p>
+          <div class="pc2-foot"><span class="tag">Traceability · $300K Pilot</span><span class="pc2-arrow">Read →</span></div>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
-</section>
+
+  <!-- PERSONAL PROJECTS (2025–2026) -->
+  <div class="port-section">
+    <div class="port-section-hdr">
+      <div class="ps-dot" style="background:#2563eb"></div>
+      <span class="ps-name">Personal Projects</span>
+      <span class="ps-meta">2025 – 2026 · Side projects</span>
+      <div class="ps-line"></div>
+    </div>
+    <div class="port-grid2">
+
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#1e40af,#3b82f6)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 17</span></div>
+          <div class="pc2-co">Product Buddy<br>2025 – Present</div>
+        </div>
+        <div class="pc2-body">
+          <h3>Product Buddy</h3>
+          <p>PM mentorship course for Vietnamese freshers. 16 live sessions, cohorts of 5–10, real case studies and AI workflow modules. 40+ mentees placed in their first BA/PO roles.</p>
+          <div class="pc2-foot"><span class="tag">EdTech · PM · Mentorship</span><a href="https://buddy-product.vercel.app/" target="_blank" class="pc2-arrow" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+      </div>
+
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#1d4ed8,#60a5fa)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 18</span></div>
+          <div class="pc2-co">Refine Poker<br>2026</div>
+        </div>
+        <div class="pc2-body">
+          <h3>Refine Poker</h3>
+          <p>Free agile estimation tool — no signup, no friction. Just a name and a shareable link to start planning poker in real time. Built to reduce grooming overhead.</p>
+          <div class="pc2-foot"><span class="tag">Agile · Real-time · Free</span><a href="https://refinepoker.vercel.app/" target="_blank" class="pc2-arrow" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GOLDEN EQUATOR -->
+  <div class="port-section">
+    <div class="port-section-hdr">
+      <div class="ps-dot" style="background:#0891b2"></div>
+      <span class="ps-name">Golden Equator</span>
+      <span class="ps-meta">Mar – Dec 2022 · Social Platform · Singapore</span>
+      <div class="ps-line"></div>
+    </div>
+    <div class="port-grid2">
+
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#0e7490,#22d3ee)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 19</span></div>
+          <div class="pc2-co">Swish<br>2022</div>
+        </div>
+        <div class="pc2-body">
+          <h3>Swish</h3>
+          <p>Singapore-based invite-only professional social network — granting access to high-quality interactions, tools, insights, and connections. Web, iOS, Android. Grew MAU 20%+ in 3 months.</p>
+          <div class="pc2-foot"><span class="tag">Social · iOS · Android · Web</span><span class="pc2-arrow">Read →</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VEXERE -->
+  <div class="port-section">
+    <div class="port-section-hdr">
+      <div class="ps-dot" style="background:#059669"></div>
+      <span class="ps-name">VeXeRe</span>
+      <span class="ps-meta">Mar 2020 – Mar 2022 · B2B &amp; B2C · Vietnam</span>
+      <div class="ps-line"></div>
+    </div>
+    <div class="port-grid2">
+
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#047857,#34d399)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 20</span></div>
+          <div class="pc2-co">Goyolo<br>2021 – 2022</div>
+        </div>
+        <div class="pc2-body">
+          <h3>Goyolo</h3>
+          <p>Travel platform built on VeXeRe's 2M user base — flights, hotels, and excursions. Led user research across 3 segments, set up SEO, drove 130% traffic growth MoM after MVP launch.</p>
+          <div class="pc2-foot"><span class="tag">Travel · OTA · B2C</span><span class="pc2-arrow">Read →</span></div>
+        </div>
+      </div>
+
+      <div class="pcard2 fu">
+        <div class="pc2-head" style="background:linear-gradient(135deg,#065f46,#10b981)">
+          <div class="pc2-logo"><span class="pc2-logo-n">IMG 21</span></div>
+          <div class="pc2-co">GMS<br>2020 – 2021</div>
+        </div>
+        <div class="pc2-body">
+          <h3>GMS — Goods Management System</h3>
+          <p>Vietnam's leading cargo management SaaS for 500+ bus operators — order management, key metrics, and end-user shipment visibility. Freemium model drove 15% revenue growth.</p>
+          <div class="pc2-foot"><span class="tag">SaaS · Logistics · Vietnam</span><span class="pc2-arrow">Read →</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end port-content-inner -->
+</div><!-- end port-content -->
+
 <footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+</div><!-- end portfolio -->
 </div><!-- end portfolio -->
 
 <!-- ═══════════ PRODUCT MANAGEMENT ═══════════ -->
