@@ -190,9 +190,6 @@ body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100v
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.ok{border-color:rgba(34,197,94,.4);color:#4ade80}
 #toast.err{border-color:rgba(239,68,68,.4);color:#f87171}
-/* loading overlay */
-#init-overlay{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;
-  justify-content:center;flex-direction:column;gap:16px;z-index:100}
 .init-spinner{width:32px;height:32px;border:3px solid rgba(107,92,231,.2);
   border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -209,12 +206,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100v
 </style>
 </head>
 <body>
-<div id="init-overlay">
-  <div class="init-spinner"></div>
-  <p style="font-size:14px;color:rgba(255,255,255,.45)">Connecting to Supabase…</p>
-</div>
-
-<div id="app" style="display:none">
+<div id="app">
   <nav id="anav">
     <div class="anav-logo">
       <img src="logo.svg" alt="">
@@ -290,47 +282,25 @@ let sb=null;
 let activeTab='experience', items=[], editItem=null, editSections=[];
 
 /* ── INIT ── */
-function hideOverlay(){
-  document.getElementById('init-overlay').style.display='none';
-  document.getElementById('app').style.display='flex';
-}
-
 async function init(){
-  // Safety net: always show the app after 8s even if something hangs
-  const timer=setTimeout(()=>{
-    hideOverlay();
-    document.getElementById('items-list').innerHTML=`<div class="empty-state">
-      <p style="margin-bottom:8px">⚠️ Could not connect to Supabase.</p>
-      <p style="font-size:12px;line-height:1.8;max-width:360px;margin:0 auto">
-        Make sure you ran <code>supabase-setup.sql</code> in the Supabase Dashboard → SQL Editor, then refresh this page.
-      </p>
-    </div>`;
-  },8000);
+  document.getElementById('items-list').innerHTML=
+    '<div class="empty-state"><div class="init-spinner" style="margin:0 auto 12px"></div><p>Connecting…</p></div>';
 
   try{
-    // Create Supabase client here so any SDK error is caught
-    if(!window.supabase) throw new Error('Supabase SDK not loaded — check your internet connection.');
-    sb=window.supabase.createClient(SB_URL,SB_KEY);
-
-    // Try to create the storage bucket (silently ignore if it already exists)
-    sb.storage.createBucket('covers',{public:true}).catch(()=>{});
-    // Test connection with a simple query
-    const {error}=await sb.from('projects').select('id').limit(1);
-    clearTimeout(timer);
-    hideOverlay();
-    if(error){
-      toast('DB not ready: '+error.message+' — run supabase-setup.sql first','err');
-      document.getElementById('items-list').innerHTML=`<div class="empty-state">
-        <p style="margin-bottom:12px">⚠️ Tables not found.</p>
-        <p style="font-size:12px;line-height:1.7">Go to <strong>Supabase Dashboard → SQL Editor</strong> and run the <code>supabase-setup.sql</code> file, then refresh this page.</p>
-      </div>`;
-      return;
+    if(typeof window.supabase==='undefined'){
+      throw new Error('Supabase SDK failed to load. Check your internet connection and refresh.');
     }
+    sb=window.supabase.createClient(SB_URL,SB_KEY);
+    // fire-and-forget bucket creation
+    sb.storage.createBucket('covers',{public:true}).catch(()=>{});
     await loadTab('experience');
   }catch(e){
-    clearTimeout(timer);
-    hideOverlay();
-    toast('Init error: '+e.message,'err');
+    document.getElementById('items-list').innerHTML=`<div class="empty-state">
+      <p style="margin-bottom:8px;font-size:16px">⚠️ Connection failed</p>
+      <p style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.8;max-width:380px;margin:0 auto">${e.message}</p>
+      <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,.3)">Check the browser console (F12) for details.</p>
+    </div>`;
+    console.error('[Admin init error]', e);
   }
 }
 
