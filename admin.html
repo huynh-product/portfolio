@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin · HuynhProduct</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0c16;--bg2:#13121f;--bg3:#1a1930;--border:rgba(255,255,255,.08);
+  --acc:#6B5CE7;--acc2:#8b7ff0;--ink:#fff;--ink2:rgba(255,255,255,.65);
+  --ink3:rgba(255,255,255,.35);--red:#ef4444;--green:#22c55e;
+  --ff:'Inter',system-ui,sans-serif;
+}
+body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+/* ── LAYOUT ── */
+#app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+/* nav */
+#anav{height:56px;background:var(--bg2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0}
+.anav-logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--ink)}
+.anav-logo img{height:26px;width:auto;filter:brightness(0) invert(1)}
+.anav-badge{font-size:10px;font-weight:600;background:rgba(107,92,231,.25);color:var(--acc2);
+  border:1px solid rgba(107,92,231,.35);padding:3px 10px;border-radius:100px;letter-spacing:.06em}
+.anav-right{display:flex;align-items:center;gap:10px}
+.anav-visit{font-size:13px;color:var(--ink3);text-decoration:none;transition:color .15s}
+.anav-visit:hover{color:var(--ink)}
+/* main area */
+#alayout{display:flex;flex:1;overflow:hidden}
+/* sidebar */
+#aside{width:210px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;padding:16px 10px}
+.atab{width:100%;text-align:left;background:none;border:none;color:var(--ink2);
+  font-family:var(--ff);font-size:13.5px;font-weight:500;padding:10px 14px;border-radius:8px;
+  cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:9px;margin-bottom:3px}
+.atab svg{opacity:.55;flex-shrink:0}
+.atab:hover{background:rgba(255,255,255,.06);color:var(--ink)}
+.atab.active{background:rgba(107,92,231,.2);color:#fff;font-weight:600}
+.atab.active svg{opacity:1}
+.aside-gap{flex:1}
+#seed-btn{width:100%;padding:9px;background:rgba(255,255,255,.05);border:1px solid var(--border);
+  border-radius:8px;color:var(--ink3);font-size:12px;font-family:var(--ff);cursor:pointer;
+  transition:all .15s;margin-top:8px}
+#seed-btn:hover{background:rgba(255,255,255,.1);color:var(--ink)}
+/* main */
+#amain{flex:1;overflow:hidden;display:flex;position:relative}
+#list-view{flex:1;overflow-y:auto;padding:24px 28px}
+.list-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.list-hdr h2{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.btn-add{background:var(--acc);color:#fff;border:none;padding:9px 18px;border-radius:8px;
+  font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff);display:flex;align-items:center;gap:6px;transition:opacity .15s}
+.btn-add:hover{opacity:.85}
+/* item cards */
+.item-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;
+  transition:border-color .15s,box-shadow .15s}
+.item-card:hover{border-color:rgba(107,92,231,.4);box-shadow:0 0 0 1px rgba(107,92,231,.15)}
+.item-thumb{width:52px;height:40px;border-radius:7px;background:var(--bg2);flex-shrink:0;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:18px}
+.item-thumb img{width:100%;height:100%;object-fit:cover}
+.item-info{flex:1;min-width:0}
+.item-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-sub{font-size:12px;color:var(--ink3)}
+.item-badge{font-size:10px;padding:2px 8px;border-radius:100px;font-weight:600;flex-shrink:0}
+.badge-detail{background:rgba(107,92,231,.2);color:var(--acc2)}
+.badge-link{background:rgba(34,197,94,.15);color:#4ade80}
+.badge-soon{background:rgba(255,255,255,.07);color:var(--ink3)}
+.item-actions{display:flex;gap:6px;flex-shrink:0}
+.btn-edit{background:rgba(255,255,255,.08);border:none;color:var(--ink2);padding:6px 12px;
+  border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.btn-edit:hover{background:rgba(107,92,231,.25);color:#fff}
+.btn-del{background:rgba(239,68,68,.1);border:none;color:#f87171;padding:6px 10px;
+  border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.btn-del:hover{background:rgba(239,68,68,.2)}
+.drag-handle{color:var(--ink3);cursor:grab;font-size:14px;flex-shrink:0;user-select:none;padding:0 4px}
+/* ── EDIT PANEL ── */
+#edit-panel{position:absolute;top:0;right:0;bottom:0;width:560px;background:var(--bg2);
+  border-left:1px solid var(--border);display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.16,1,.3,1);z-index:10}
+#edit-panel.open{transform:translateX(0)}
+.ep-hdr{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.ep-hdr h3{font-size:16px;font-weight:700}
+.ep-close{background:none;border:none;color:var(--ink3);font-size:20px;cursor:pointer;padding:4px;
+  line-height:1;transition:color .15s}
+.ep-close:hover{color:var(--ink)}
+.ep-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);flex-shrink:0}
+.ep-tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--ink3);
+  font-family:var(--ff);font-size:13px;font-weight:500;padding:10px 18px;cursor:pointer;
+  margin-bottom:-1px;transition:all .15s}
+.ep-tab:hover{color:var(--ink)}
+.ep-tab.active{color:var(--acc2);border-bottom-color:var(--acc)}
+.ep-body{flex:1;overflow-y:auto;padding:20px}
+.ep-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;
+  justify-content:space-between;flex-shrink:0;gap:10px}
+/* ── FORM ELEMENTS ── */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--ink3);margin-bottom:6px}
+.field input,.field textarea,.field select{
+  width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;
+  color:var(--ink);font-family:var(--ff);font-size:13.5px;padding:9px 12px;
+  outline:none;transition:border-color .15s;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(107,92,231,.6)}
+.field select option{background:var(--bg3)}
+.field textarea{min-height:80px;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.hint{font-size:11px;color:var(--ink3);margin-top:4px}
+/* radio group */
+.radio-grp{display:flex;gap:8px;flex-wrap:wrap}
+.radio-opt{position:relative}
+.radio-opt input{position:absolute;opacity:0;pointer-events:none}
+.radio-opt label{display:flex;align-items:center;gap:6px;background:var(--bg3);
+  border:1.5px solid var(--border);border-radius:8px;padding:7px 13px;font-size:13px;
+  font-weight:500;cursor:pointer;transition:all .15s;color:var(--ink2)}
+.radio-opt input:checked + label{border-color:var(--acc);background:rgba(107,92,231,.15);color:#fff}
+/* toggle */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px}
+.toggle-row span{font-size:13px;color:var(--ink2)}
+.toggle{position:relative;width:38px;height:22px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:rgba(255,255,255,.15);border-radius:100px;
+  cursor:pointer;transition:background .2s}
+.toggle-slider::before{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;
+  background:#fff;border-radius:50%;transition:transform .2s}
+.toggle input:checked + .toggle-slider{background:var(--acc)}
+.toggle input:checked + .toggle-slider::before{transform:translateX(16px)}
+/* image upload */
+.img-upload-area{border:1.5px dashed var(--border);border-radius:10px;padding:20px;
+  text-align:center;cursor:pointer;transition:border-color .15s;position:relative}
+.img-upload-area:hover,.img-upload-area.drag{border-color:var(--acc)}
+.img-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.img-preview{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;display:block;margin-top:10px}
+/* kv repeater */
+.kv-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.kv-row{display:grid;grid-template-columns:1fr 1.5fr auto;gap:6px;align-items:center}
+.kv-row input{padding:7px 10px;font-size:13px}
+.btn-rm{background:rgba(239,68,68,.1);border:none;color:#f87171;width:28px;height:28px;
+  border-radius:6px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.btn-rm:hover{background:rgba(239,68,68,.25)}
+.btn-add-row{background:rgba(255,255,255,.06);border:1px dashed var(--border);color:var(--ink3);
+  font-size:12px;font-family:var(--ff);padding:6px 12px;border-radius:6px;cursor:pointer;
+  width:100%;transition:all .15s}
+.btn-add-row:hover{border-color:var(--acc);color:var(--acc2)}
+/* sections builder */
+.sec-list{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+.sec-block{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sec-block-hdr{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.2);cursor:pointer}
+.sec-block-hdr .sec-type-badge{font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;background:rgba(107,92,231,.2);color:var(--acc2);padding:2px 8px;border-radius:4px}
+.sec-block-hdr .sec-heading-preview{font-size:12px;color:var(--ink2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sec-block-body{padding:12px}
+.sec-block-body .field{margin-bottom:10px}
+.sec-block-body .field:last-child{margin-bottom:0}
+.sec-btns{display:flex;gap:6px;margin-left:auto;flex-shrink:0}
+.sec-btn{background:rgba(255,255,255,.07);border:none;color:var(--ink3);width:26px;height:26px;
+  border-radius:5px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s}
+.sec-btn:hover{background:rgba(255,255,255,.15);color:var(--ink)}
+.sec-btn.del:hover{background:rgba(239,68,68,.2);color:#f87171}
+.sec-collapsed .sec-block-body{display:none}
+.add-sec-row{display:flex;gap:6px;flex-wrap:wrap}
+.add-sec-btn{background:rgba(107,92,231,.12);border:1px solid rgba(107,92,231,.25);
+  color:var(--acc2);font-size:11.5px;font-weight:600;padding:6px 12px;border-radius:6px;
+  cursor:pointer;font-family:var(--ff);transition:all .15s}
+.add-sec-btn:hover{background:rgba(107,92,231,.25)}
+/* buttons */
+.btn-save{background:var(--acc);color:#fff;border:none;padding:10px 22px;border-radius:8px;
+  font-size:14px;font-weight:600;cursor:pointer;font-family:var(--ff);transition:opacity .15s}
+.btn-save:hover{opacity:.85}
+.btn-save:disabled{opacity:.45;cursor:default}
+.btn-cancel{background:rgba(255,255,255,.07);color:var(--ink2);border:none;padding:10px 18px;
+  border-radius:8px;font-size:13px;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.btn-cancel:hover{background:rgba(255,255,255,.12)}
+.btn-danger{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2);
+  padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.btn-danger:hover{background:rgba(239,68,68,.22)}
+/* color swatch */
+.color-row{display:flex;align-items:center;gap:10px}
+.color-row input[type=color]{width:36px;height:36px;border:1px solid var(--border);
+  border-radius:6px;padding:2px;background:var(--bg3);cursor:pointer}
+.color-row input[type=text]{flex:1}
+/* toast */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 20px;
+  font-size:13px;opacity:0;transition:all .3s;pointer-events:none;z-index:999;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.ok{border-color:rgba(34,197,94,.4);color:#4ade80}
+#toast.err{border-color:rgba(239,68,68,.4);color:#f87171}
+/* loading overlay */
+#init-overlay{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;
+  justify-content:center;flex-direction:column;gap:16px;z-index:100}
+.init-spinner{width:32px;height:32px;border:3px solid rgba(107,92,231,.2);
+  border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-state{text-align:center;padding:60px 20px;color:var(--ink3);font-size:14px}
+.items-group-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--ink3);margin:20px 0 8px;padding-left:4px}
+.items-group-label:first-child{margin-top:0}
+.subfield{background:rgba(0,0,0,.2);border-radius:8px;padding:12px;margin-bottom:10px}
+.subfield-hdr{font-size:11px;font-weight:700;color:var(--acc2);text-transform:uppercase;
+  letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.items-list-edit{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
+.items-list-edit input{padding:6px 10px;font-size:13px}
+.color-preview{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+<div id="init-overlay">
+  <div class="init-spinner"></div>
+  <p style="font-size:14px;color:rgba(255,255,255,.45)">Connecting to Supabase…</p>
+</div>
+
+<div id="app" style="display:none">
+  <nav id="anav">
+    <div class="anav-logo">
+      <img src="logo.svg" alt="">
+      <span>HuynhProduct</span>
+      <span class="anav-badge">ADMIN</span>
+    </div>
+    <div class="anav-right">
+      <a href="/" target="_blank" class="anav-visit">Visit site ↗</a>
+    </div>
+  </nav>
+
+  <div id="alayout">
+    <aside id="aside">
+      <button class="atab active" data-tab="experience" onclick="switchTab('experience')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Experience
+      </button>
+      <button class="atab" data-tab="products" onclick="switchTab('products')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg>
+        My Products
+      </button>
+      <button class="atab" data-tab="cases" onclick="switchTab('cases')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        Case Studies
+      </button>
+      <button class="atab" data-tab="pm" onclick="switchTab('pm')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        PM Topics
+      </button>
+      <div class="aside-gap"></div>
+      <button id="seed-btn" onclick="seedData()">⚡ Seed initial data</button>
+    </aside>
+
+    <main id="amain">
+      <div id="list-view">
+        <div class="list-hdr">
+          <h2 id="list-title">Experience</h2>
+          <button class="btn-add" onclick="openNew()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            Add New
+          </button>
+        </div>
+        <div id="items-list"></div>
+      </div>
+
+      <div id="edit-panel">
+        <div class="ep-hdr">
+          <h3 id="ep-title">New Project</h3>
+          <button class="ep-close" onclick="closePanel()">✕</button>
+        </div>
+        <div class="ep-tabs" id="ep-tabs"></div>
+        <div class="ep-body" id="ep-body"></div>
+        <div class="ep-foot">
+          <button class="btn-cancel" onclick="closePanel()">Cancel</button>
+          <div style="display:flex;gap:8px;margin-left:auto">
+            <button class="btn-danger" id="del-btn" onclick="deleteItem()" style="display:none">Delete</button>
+            <button class="btn-save" id="save-btn" onclick="saveItem()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const SB_URL='https://crqnnarnlyartkihfnld.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNycW5uYXJubHlhcnRraWhmbmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NDQ1NTIsImV4cCI6MjA5NjQyMDU1Mn0.0pSW1tijtqXWRkOK-dwYiB-SFAz2GMRGgkmGD0ZOOzk';
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+
+let activeTab='experience', items=[], editItem=null, editSections=[];
+
+/* ── INIT ── */
+async function init(){
+  try{
+    await sb.storage.createBucket('covers',{public:true});
+  }catch(e){}
+  await loadTab('experience');
+  document.getElementById('init-overlay').style.display='none';
+  document.getElementById('app').style.display='flex';
+}
+
+/* ── TAB SWITCHING ── */
+async function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.atab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  const titles={experience:'Experience',products:'My Products',cases:'Case Studies',pm:'PM Topics'};
+  document.getElementById('list-title').textContent=titles[tab];
+  closePanel();
+  await loadTab(tab);
+}
+
+async function loadTab(tab){
+  document.getElementById('items-list').innerHTML='<div class="empty-state"><div class="init-spinner" style="margin:0 auto 12px"></div></div>';
+  const table=tab==='cases'?'case_studies':tab==='pm'?'pm_topics':'projects';
+  let q=sb.from(table).select('*');
+  if(tab==='experience'||tab==='products') q=q.eq('page',tab);
+  q=q.order(tab==='experience'||tab==='products'?'group_order':'sort_order').order('sort_order');
+  const {data,error}=await q;
+  if(error){toast('Failed to load: '+error.message,'err');return;}
+  items=data||[];
+  renderList();
+}
+
+/* ── LIST RENDER ── */
+function renderList(){
+  const container=document.getElementById('items-list');
+  if(!items.length){container.innerHTML='<div class="empty-state">No items yet. Click "Add New" to get started.</div>';return;}
+
+  if(activeTab==='experience'||activeTab==='products'){
+    const groups=new Map();
+    items.forEach(p=>{
+      if(!groups.has(p.company_group))groups.set(p.company_group,[]);
+      groups.get(p.company_group).push(p);
+    });
+    let html='';
+    groups.forEach((ps,name)=>{
+      html+=`<div class="items-group-label">${esc(name)}</div>`;
+      ps.forEach(p=>{ html+=projectCard(p); });
+    });
+    container.innerHTML=html;
+  } else if(activeTab==='cases'){
+    container.innerHTML=items.map(c=>caseCard(c)).join('');
+  } else if(activeTab==='pm'){
+    container.innerHTML=items.map(t=>pmCard(t)).join('');
+  }
+}
+
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function projectCard(p){
+  const thumb=p.cover_url?`<img src="${p.cover_url}" alt="">`:'📦';
+  const badge=p.has_detail?`<span class="item-badge badge-detail">Detail page</span>`:
+    p.ext_link?`<span class="item-badge badge-link">External link</span>`:
+    `<span class="item-badge badge-soon">Coming soon</span>`;
+  return `<div class="item-card">
+    <div class="drag-handle">⠿</div>
+    <div class="item-thumb">${thumb}</div>
+    <div class="item-info">
+      <div class="item-title">${esc(p.title)}</div>
+      <div class="item-sub">${esc(p.company_group)} · ${esc(p.pill_text)}</div>
+    </div>
+    ${badge}
+    <div class="item-actions">
+      <button class="btn-edit" onclick="openEdit('${p.id}')">Edit</button>
+      <button class="btn-del" onclick="confirmDelete('${p.id}')">✕</button>
+    </div>
+  </div>`;
+}
+
+function caseCard(c){
+  const colors={f:'#7c3aed',e:'#059669',s:'#2563eb',t:'#0891b2'};
+  const dot=`<div style="width:100%;height:100%;background:radial-gradient(circle at 50% 0%,${colors[c.color_cls]||'#7c3aed'} 0%,transparent 70%)"></div>`;
+  return `<div class="item-card">
+    <div class="drag-handle">⠿</div>
+    <div class="item-thumb">${dot}</div>
+    <div class="item-info">
+      <div class="item-title">${esc(c.title)}</div>
+      <div class="item-sub">${esc(c.tag)}</div>
+    </div>
+    <div class="item-actions">
+      <button class="btn-edit" onclick="openEdit('${c.id}')">Edit</button>
+      <button class="btn-del" onclick="confirmDelete('${c.id}')">✕</button>
+    </div>
+  </div>`;
+}
+
+function pmCard(t){
+  return `<div class="item-card">
+    <div class="drag-handle">⠿</div>
+    <div class="item-thumb" style="font-size:14px">${t.icon_svg?'<svg-ico>':'📋'}</div>
+    <div class="item-info">
+      <div class="item-title">${esc(t.title)}</div>
+      <div class="item-sub">${(t.items||[]).slice(0,3).map(esc).join(' · ')}</div>
+    </div>
+    <div class="item-actions">
+      <button class="btn-edit" onclick="openEdit('${t.id}')">Edit</button>
+      <button class="btn-del" onclick="confirmDelete('${t.id}')">✕</button>
+    </div>
+  </div>`;
+}
+
+/* ── OPEN / CLOSE PANEL ── */
+function openNew(){
+  editItem=null;
+  editSections=[];
+  document.getElementById('ep-title').textContent='New '+(activeTab==='experience'?'Project':activeTab==='products'?'Product':activeTab==='cases'?'Case Study':'PM Topic');
+  document.getElementById('del-btn').style.display='none';
+  document.getElementById('save-btn').textContent='Create';
+  renderForm(null);
+  document.getElementById('edit-panel').classList.add('open');
+}
+
+function openEdit(id){
+  editItem=items.find(i=>i.id===id);
+  if(!editItem)return;
+  editSections=JSON.parse(JSON.stringify(editItem.d_sections||[]));
+  document.getElementById('ep-title').textContent='Edit: '+editItem.title;
+  document.getElementById('del-btn').style.display='block';
+  document.getElementById('save-btn').textContent='Save changes';
+  renderForm(editItem);
+  document.getElementById('edit-panel').classList.add('open');
+}
+
+function closePanel(){
+  document.getElementById('edit-panel').classList.remove('open');
+  editItem=null;editSections=[];
+}
+
+/* ── FORM RENDERING ── */
+function renderForm(item){
+  const tabs=document.getElementById('ep-tabs');
+  const body=document.getElementById('ep-body');
+
+  if(activeTab==='experience'||activeTab==='products'){
+    tabs.innerHTML=`
+      <button class="ep-tab active" onclick="showFormTab('card',this)">Card Info</button>
+      <button class="ep-tab" onclick="showFormTab('detail',this)">Detail Page</button>`;
+    body.innerHTML=`
+      <div id="ftab-card">${projectCardForm(item)}</div>
+      <div id="ftab-detail" style="display:none">${projectDetailForm(item)}</div>`;
+    setupImageUpload(item);
+  } else if(activeTab==='cases'){
+    tabs.innerHTML='';
+    body.innerHTML=caseForm(item);
+  } else if(activeTab==='pm'){
+    tabs.innerHTML='';
+    body.innerHTML=pmForm(item);
+  }
+}
+
+function showFormTab(tab,btn){
+  document.querySelectorAll('#ep-tabs .ep-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('ftab-card').style.display=tab==='card'?'':'none';
+  document.getElementById('ftab-detail').style.display=tab==='detail'?'':'none';
+}
+
+function v(item,key,def=''){return item?item[key]??def:def;}
+
+function projectCardForm(item){
+  const pageOpts=['experience','products'].map(p=>`<option value="${p}"${v(item,'page',activeTab)===p?' selected':''}>${p}</option>`).join('');
+  const navType=v(item,'has_detail')?'detail':v(item,'ext_link')?'link':'soon';
+  return `
+    <div class="field-row">
+      <div class="field">
+        <label>Slug (URL key)</label>
+        <input id="f-slug" value="${esc(v(item,'slug'))}" placeholder="e.g. labsync" ${item?'readonly':''}>
+      </div>
+      <div class="field">
+        <label>Page</label>
+        <select id="f-page">${pageOpts}</select>
+      </div>
+    </div>
+    <div class="field"><label>Title</label><input id="f-title" value="${esc(v(item,'title'))}" placeholder="Project title"></div>
+    <div class="field-row">
+      <div class="field">
+        <label>Company group</label>
+        <input id="f-group" value="${esc(v(item,'company_group'))}" placeholder="Inspectorio">
+      </div>
+      <div class="field">
+        <label>Group order (0=first)</label>
+        <input id="f-gorder" type="number" value="${v(item,'group_order',0)}">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Group color</label>
+        <div class="color-row">
+          <input type="color" id="f-gcolor-pick" value="${v(item,'group_color','#7c3aed')}" oninput="document.getElementById('f-gcolor').value=this.value">
+          <input id="f-gcolor" value="${esc(v(item,'group_color','#7c3aed'))}" oninput="try{document.getElementById('f-gcolor-pick').value=this.value}catch(e){}">
+        </div>
+      </div>
+      <div class="field">
+        <label>Sort order</label>
+        <input id="f-sort" type="number" value="${v(item,'sort_order',0)}">
+      </div>
+    </div>
+    <div class="field"><label>Group meta (period/location)</label><input id="f-gmeta" value="${esc(v(item,'group_meta'))}" placeholder="Dec 2022 – Present · SaaS B2B"></div>
+    <div class="field"><label>Pill text (card label)</label><input id="f-pill" value="${esc(v(item,'pill_text'))}" placeholder="Inspectorio · 2022–Present"></div>
+    <div class="field"><label>Panel company</label><input id="f-panelco" value="${esc(v(item,'panel_co'))}" placeholder="Inspectorio · SaaS B2B"></div>
+    <div class="field"><label>Panel description</label><textarea id="f-paneldesc" rows="3">${esc(v(item,'panel_desc'))}</textarea></div>
+    <div class="field">
+      <label>Cover image</label>
+      <div class="img-upload-area" id="img-drop" onclick="document.getElementById('f-img').click()">
+        <input type="file" id="f-img" accept="image/*" style="display:none" onchange="handleImgSelect(event)">
+        <div id="img-upload-inner">
+          <svg width="22" height="22" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 8px;display:block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p style="font-size:12px;color:rgba(255,255,255,.35)">Click to upload or drag an image</p>
+          ${v(item,'cover_url')?`<p style="font-size:11px;color:var(--acc2);margin-top:4px">Current: ${esc(v(item,'cover_url').split('/').pop())}</p>`:''}
+        </div>
+        ${v(item,'cover_url')?`<img src="${esc(v(item,'cover_url'))}" class="img-preview" id="img-preview-el">`:'<img class="img-preview" id="img-preview-el" style="display:none">'}
+      </div>
+      <div class="field" style="margin-top:8px;margin-bottom:0">
+        <label>Or enter image URL directly</label>
+        <input id="f-cover" value="${esc(v(item,'cover_url'))}" placeholder="cover-labsync.png or https://..." oninput="updateImgPreview(this.value)">
+      </div>
+    </div>
+    <div class="field">
+      <label>Card style (CSS class for gradient bg)</label>
+      <input id="f-bgclass" value="${esc(v(item,'bg_class'))}" placeholder="pbg-ls">
+      <p class="hint">Used when no cover image. Leave blank if using an image.</p>
+    </div>
+    <div class="field">
+      <label>Navigation type</label>
+      <div class="radio-grp">
+        <div class="radio-opt"><input type="radio" name="nav" id="nav-detail" value="detail" ${navType==='detail'?'checked':''} onchange="toggleNavFields()"><label for="nav-detail">Detail page</label></div>
+        <div class="radio-opt"><input type="radio" name="nav" id="nav-link" value="link" ${navType==='link'?'checked':''} onchange="toggleNavFields()"><label for="nav-link">External link</label></div>
+        <div class="radio-opt"><input type="radio" name="nav" id="nav-soon" value="soon" ${navType==='soon'?'checked':''} onchange="toggleNavFields()"><label for="nav-soon">Coming soon</label></div>
+      </div>
+    </div>
+    <div id="nav-link-field" class="field" style="${navType==='link'?'':'display:none'}">
+      <label>External URL</label>
+      <input id="f-extlink" value="${esc(v(item,'ext_link'))}" placeholder="https://...">
+    </div>
+    <div class="field">
+      <div class="toggle-row">
+        <span>Full width card (spans both columns)</span>
+        <label class="toggle"><input type="checkbox" id="f-fullwidth" ${v(item,'full_width')?'checked':''}><span class="toggle-slider"></span></label>
+      </div>
+    </div>`;
+}
+
+function toggleNavFields(){
+  const val=document.querySelector('input[name=nav]:checked')?.value;
+  document.getElementById('nav-link-field').style.display=val==='link'?'':'none';
+}
+
+function projectDetailForm(item){
+  const metaRows=(item?.d_meta||[]).map((m,i)=>`
+    <div class="kv-row">
+      <input id="dm-key-${i}" value="${esc(m.key)}" placeholder="Key (e.g. Role)">
+      <input id="dm-val-${i}" value="${esc(m.val)}" placeholder="Value (e.g. Product Owner)">
+      <button class="btn-rm" onclick="removeKV('dm',${i})">✕</button>
+    </div>`).join('');
+  const statsRows=(item?.d_stats||[]).map((s,i)=>`
+    <div class="kv-row">
+      <input id="ds-key-${i}" value="${esc(s.label)}" placeholder="Label">
+      <input id="ds-val-${i}" value="${esc(s.val)}" placeholder="Value">
+      <button class="btn-rm" onclick="removeKV('ds',${i})">✕</button>
+    </div>`).join('');
+  return `
+    <div class="field"><label>Company tag (badge, uppercase)</label><input id="f-cotag" value="${esc(v(item,'co_tag'))}" placeholder="INSPECTORIO"></div>
+    <div class="field"><label>Intro paragraph</label><textarea id="f-intro" rows="3">${esc(v(item,'d_intro'))}</textarea></div>
+    <div class="field">
+      <label>Meta fields (Role, Platform, Type…)</label>
+      <div class="kv-list" id="dm-list">${metaRows}</div>
+      <button class="btn-add-row" onclick="addKV('dm')">+ Add meta field</button>
+    </div>
+    <div class="field">
+      <label>Stats (shown in hero)</label>
+      <div class="kv-list" id="ds-list">${statsRows}</div>
+      <button class="btn-add-row" onclick="addKV('ds')">+ Add stat</button>
+    </div>
+    <div class="field">
+      <label>Sections</label>
+      <div class="sec-list" id="sec-list"></div>
+      <div class="add-sec-row">
+        ${['text','bullets','two-cards','num-grid','quote','takeaways'].map(t=>`<button class="add-sec-btn" onclick="addSection('${t}')">+ ${t}</button>`).join('')}
+      </div>
+    </div>`;
+  // render sections after DOM is ready
+}
+
+function caseForm(item){
+  const colorOpts=[['f','Purple'],['e','Green'],['s','Blue'],['t','Cyan']].map(([v,l])=>`<option value="${v}"${item?.color_cls===v?' selected':''}>${l}</option>`).join('');
+  return `
+    <div class="field"><label>Title</label><textarea id="f-title" rows="2">${esc(v(item,'title'))}</textarea></div>
+    <div class="field-row">
+      <div class="field"><label>Tag (badge)</label><input id="f-tag" value="${esc(v(item,'tag'))}" placeholder="Fintech"></div>
+      <div class="field"><label>Color style</label><select id="f-color">${colorOpts}</select></div>
+    </div>
+    <div class="field"><label>Link (# for no link)</label><input id="f-link" value="${esc(v(item,'link','#'))}" placeholder="https://..."></div>
+    <div class="field"><label>Sort order</label><input id="f-sort" type="number" value="${v(item,'sort_order',0)}"></div>`;
+}
+
+function pmForm(item){
+  const itemsList=(item?.items||[]).map((it,i)=>`
+    <div class="kv-row" style="grid-template-columns:1fr auto">
+      <input id="pm-item-${i}" value="${esc(it)}" placeholder="e.g. Sprint planning">
+      <button class="btn-rm" onclick="removePMItem(${i})">✕</button>
+    </div>`).join('');
+  return `
+    <div class="field"><label>Title</label><input id="f-title" value="${esc(v(item,'title'))}"></div>
+    <div class="field"><label>Description</label><textarea id="f-desc" rows="3">${esc(v(item,'description'))}</textarea></div>
+    <div class="field">
+      <label>Icon SVG (paste SVG code)</label>
+      <textarea id="f-icon" rows="3" placeholder="<svg ...>...</svg>">${esc(v(item,'icon_svg'))}</textarea>
+      <p class="hint">Paste any 28×28 SVG. Use stroke="var(--accent)" for brand color.</p>
+    </div>
+    <div class="field">
+      <label>Tag items</label>
+      <div class="kv-list" id="pm-items-list">${itemsList}</div>
+      <button class="btn-add-row" onclick="addPMItem()">+ Add item</button>
+    </div>
+    <div class="field"><label>CTA label</label><input id="f-cta" value="${esc(v(item,'cta_label','Read articles →'))}"></div>
+    <div class="field"><label>Sort order</label><input id="f-sort" type="number" value="${v(item,'sort_order',0)}"></div>
+    <div class="field">
+      <div class="toggle-row">
+        <span>Full width (spans both columns)</span>
+        <label class="toggle"><input type="checkbox" id="f-fullwidth" ${v(item,'full_width')?'checked':''}><span class="toggle-slider"></span></label>
+      </div>
+    </div>`;
+}
+
+/* ── SECTIONS BUILDER ── */
+function initSections(){
+  renderSections();
+}
+
+function renderSections(){
+  const list=document.getElementById('sec-list');
+  if(!list)return;
+  list.innerHTML=editSections.map((s,i)=>sectionBlock(s,i)).join('');
+}
+
+function sectionBlock(s,i){
+  const types={text:'Text',bullets:'Bullets',quote:'Quote','two-cards':'Two Cards','num-grid:'Number Grid','num-grid':'Number Grid',takeaways:'Takeaways'};
+  const heading=s.heading||s.text||'(untitled)';
+  const fieldsHtml=sectionFields(s,i);
+  return `<div class="sec-block" id="sec-${i}">
+    <div class="sec-block-hdr" onclick="toggleSec(${i})">
+      <span class="sec-type-badge">${types[s.type]||s.type}</span>
+      <span class="sec-heading-preview">${esc(heading.substring(0,40))}</span>
+      <div class="sec-btns">
+        ${i>0?`<button class="sec-btn" onclick="event.stopPropagation();moveSec(${i},-1)">↑</button>`:''}
+        ${i<editSections.length-1?`<button class="sec-btn" onclick="event.stopPropagation();moveSec(${i},1)">↓</button>`:''}
+        <button class="sec-btn del" onclick="event.stopPropagation();removeSec(${i})">✕</button>
+      </div>
+    </div>
+    <div class="sec-block-body" id="sec-body-${i}">${fieldsHtml}</div>
+  </div>`;
+}
+
+function sectionFields(s,i){
+  if(s.type==='text') return `
+    <div class="field"><label>Heading</label><input oninput="editSections[${i}].heading=this.value;updateSecPreview(${i})" value="${esc(s.heading||'')}"></div>
+    <div class="field"><label>Body (HTML allowed)</label><textarea rows="5" oninput="editSections[${i}].body=this.value">${esc(s.body||'')}</textarea></div>`;
+  if(s.type==='quote') return `
+    <div class="field"><label>Quote text</label><textarea rows="3" oninput="editSections[${i}].text=this.value;updateSecPreview(${i})">${esc(s.text||'')}</textarea></div>
+    <div class="field"><label>Author</label><input oninput="editSections[${i}].author=this.value" value="${esc(s.author||'')}"></div>`;
+  if(s.type==='bullets') return `
+    <div class="field"><label>Heading</label><input oninput="editSections[${i}].heading=this.value;updateSecPreview(${i})" value="${esc(s.heading||'')}"></div>
+    <div class="field"><label>Items (one per line)</label>
+      <textarea rows="5" oninput="editSections[${i}].items=this.value.split('\\n').filter(l=>l.trim())">${esc((s.items||[]).join('\n'))}</textarea>
+    </div>`;
+  if(s.type==='two-cards'){
+    const c1=s.cards?.[0]||{icon:'',title:'',items:[]},c2=s.cards?.[1]||{icon:'',title:'',items:[]};
+    return `
+      <div class="field"><label>Heading</label><input oninput="editSections[${i}].heading=this.value;updateSecPreview(${i})" value="${esc(s.heading||'')}"></div>
+      <div class="subfield">
+        <div class="subfield-hdr">Card 1</div>
+        <div class="field-row">
+          <div class="field"><label>Icon (emoji)</label><input oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{};];editSections[${i}].cards[0].icon=this.value" value="${esc(c1.icon)}"></div>
+          <div class="field"><label>Title</label><input oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{}];editSections[${i}].cards[0].title=this.value" value="${esc(c1.title)}"></div>
+        </div>
+        <div class="field"><label>Items (one per line)</label>
+          <textarea rows="4" oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{}];editSections[${i}].cards[0].items=this.value.split('\\n').filter(l=>l.trim())">${esc((c1.items||[]).join('\n'))}</textarea>
+        </div>
+      </div>
+      <div class="subfield">
+        <div class="subfield-hdr">Card 2</div>
+        <div class="field-row">
+          <div class="field"><label>Icon (emoji)</label><input oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{}];editSections[${i}].cards[1].icon=this.value" value="${esc(c2.icon)}"></div>
+          <div class="field"><label>Title</label><input oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{}];editSections[${i}].cards[1].title=this.value" value="${esc(c2.title)}"></div>
+        </div>
+        <div class="field"><label>Items (one per line)</label>
+          <textarea rows="4" oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{}];editSections[${i}].cards[1].items=this.value.split('\\n').filter(l=>l.trim())">${esc((c2.items||[]).join('\n'))}</textarea>
+        </div>
+      </div>`;
+  }
+  if(s.type==='num-grid'||s.type==='takeaways') return `
+    <div class="field"><label>Heading</label><input oninput="editSections[${i}].heading=this.value;updateSecPreview(${i})" value="${esc(s.heading||'')}"></div>
+    <div class="field"><label>Items (format: number | title | description — one per line)</label>
+      <textarea rows="6" oninput="editSections[${i}].items=this.value.split('\\n').filter(l=>l.trim()).map(l=>{const p=l.split('|');return{n:(p[0]||'').trim(),t:(p[1]||'').trim(),d:(p[2]||'').trim()}})">${esc((s.items||[]).map(x=>`${x.n}|${x.t}|${x.d}`).join('\n'))}</textarea>
+      <p class="hint">Format each line as: <code>01 | Title text | Description text</code></p>
+    </div>`;
+  return `<div class="field"><label>Raw JSON</label><textarea rows="4" oninput="try{Object.assign(editSections[${i}],JSON.parse(this.value))}catch(e){}">${esc(JSON.stringify(s,null,2))}</textarea></div>`;
+}
+
+function toggleSec(i){document.getElementById('sec-'+i).classList.toggle('sec-collapsed');}
+function updateSecPreview(i){const h=document.querySelector(`#sec-${i} .sec-heading-preview`);if(h)h.textContent=(editSections[i].heading||editSections[i].text||'').substring(0,40);}
+function moveSec(i,dir){const j=i+dir;if(j<0||j>=editSections.length)return;[editSections[i],editSections[j]]=[editSections[j],editSections[i]];collectSectionValues();renderSections();}
+function removeSec(i){if(!confirm('Remove this section?'))return;editSections.splice(i,1);renderSections();}
+function addSection(type){
+  const defaults={text:{type:'text',heading:'',body:''},bullets:{type:'bullets',heading:'',items:[]},quote:{type:'quote',text:'',author:''},'two-cards':{type:'two-cards',heading:'',cards:[{icon:'',title:'',items:[]},{icon:'',title:'',items:[]}]},'num-grid':{type:'num-grid',heading:'',items:[]},'takeaways':{type:'takeaways',heading:'',items:[]}};
+  editSections.push(defaults[type]||{type,heading:''});
+  renderSections();
+  setTimeout(()=>{const last=document.getElementById('sec-'+(editSections.length-1));if(last)last.scrollIntoView({behavior:'smooth',block:'start'});},50);
+}
+
+/* Collect values from DOM into editSections before save */
+function collectSectionValues(){
+  // sections are updated via oninput handlers directly, no extra collection needed
+}
+
+/* ── KV REPEATER ── */
+function addKV(prefix){
+  const list=document.getElementById(prefix+'-list');
+  const i=list.querySelectorAll('.kv-row').length;
+  const row=document.createElement('div');row.className='kv-row';row.id=prefix+'-row-'+i;
+  row.innerHTML=`<input id="${prefix}-key-${i}" placeholder="${prefix==='dm'?'Key':'Label'}"><input id="${prefix}-val-${i}" placeholder="Value"><button class="btn-rm" onclick="removeKV('${prefix}',${i})">✕</button>`;
+  list.appendChild(row);
+}
+
+function removeKV(prefix,i){const row=document.getElementById(prefix+'-row-'+i)||document.querySelector(`#${prefix}-list .kv-row:nth-child(${i+1})`);if(row)row.remove();}
+
+function getKVList(prefix){
+  const rows=document.querySelectorAll(`#${prefix}-list .kv-row`);
+  return Array.from(rows).map((r,i)=>({
+    [prefix==='ds'?'label':'key']:(r.querySelector(`[id^="${prefix}-key-"]`)||r.querySelector('input:nth-child(1)'))?.value||'',
+    val:(r.querySelector(`[id^="${prefix}-val-"]`)||r.querySelector('input:nth-child(2)'))?.value||''
+  })).filter(x=>x[prefix==='ds'?'label':'key']);
+}
+
+/* ── PM ITEMS ── */
+function addPMItem(){
+  const list=document.getElementById('pm-items-list');
+  const i=list.querySelectorAll('.kv-row').length;
+  const row=document.createElement('div');row.className='kv-row';row.style.gridTemplateColumns='1fr auto';
+  row.innerHTML=`<input id="pm-item-${i}" placeholder="Tag item"><button class="btn-rm" onclick="removePMItem(${i})">✕</button>`;
+  list.appendChild(row);
+}
+function removePMItem(i){const el=document.querySelector(`#pm-items-list .kv-row:nth-child(${i+1})`);if(el)el.remove();}
+function getPMItems(){return Array.from(document.querySelectorAll('#pm-items-list input')).map(i=>i.value).filter(Boolean);}
+
+/* ── IMAGE UPLOAD ── */
+function setupImageUpload(item){
+  const drop=document.getElementById('img-drop');
+  if(!drop)return;
+  drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('drag');});
+  drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));
+  drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)uploadImage(f);});
+}
+
+async function handleImgSelect(e){
+  const f=e.target.files[0];if(!f)return;
+  await uploadImage(f);
+}
+
+async function uploadImage(file){
+  const btn=document.getElementById('save-btn');
+  btn.disabled=true;btn.textContent='Uploading…';
+  const ext=file.name.split('.').pop();
+  const slug=document.getElementById('f-slug')?.value||'upload';
+  const path=`${slug}-${Date.now()}.${ext}`;
+  const {error}=await sb.storage.from('covers').upload(path,file,{upsert:true});
+  btn.disabled=false;btn.textContent=editItem?'Save changes':'Create';
+  if(error){toast('Upload failed: '+error.message,'err');return;}
+  const {data:{publicUrl}}=sb.storage.from('covers').getPublicUrl(path);
+  document.getElementById('f-cover').value=publicUrl;
+  updateImgPreview(publicUrl);
+  toast('Image uploaded ✓','ok');
+}
+
+function updateImgPreview(url){
+  const img=document.getElementById('img-preview-el');
+  if(!img)return;
+  if(url){img.src=url;img.style.display='block';}
+  else img.style.display='none';
+}
+
+/* ── SAVE ── */
+async function saveItem(){
+  const btn=document.getElementById('save-btn');
+  btn.disabled=true;btn.textContent='Saving…';
+
+  try{
+    let result;
+    if(activeTab==='experience'||activeTab==='products'){
+      const navType=document.querySelector('input[name=nav]:checked')?.value||'soon';
+      const data={
+        slug:document.getElementById('f-slug').value.trim(),
+        page:document.getElementById('f-page').value,
+        title:document.getElementById('f-title').value.trim(),
+        company_group:document.getElementById('f-group').value.trim(),
+        group_color:document.getElementById('f-gcolor').value.trim(),
+        group_meta:document.getElementById('f-gmeta').value.trim(),
+        group_order:parseInt(document.getElementById('f-gorder').value)||0,
+        sort_order:parseInt(document.getElementById('f-sort').value)||0,
+        pill_text:document.getElementById('f-pill').value.trim(),
+        panel_co:document.getElementById('f-panelco').value.trim(),
+        panel_desc:document.getElementById('f-paneldesc').value.trim(),
+        cover_url:document.getElementById('f-cover').value.trim(),
+        bg_class:document.getElementById('f-bgclass').value.trim(),
+        full_width:document.getElementById('f-fullwidth').checked,
+        has_detail:navType==='detail',
+        ext_link:navType==='link'?(document.getElementById('f-extlink').value.trim()):'',
+        co_tag:document.getElementById('f-cotag')?.value.trim()||'',
+        d_intro:document.getElementById('f-intro')?.value.trim()||'',
+        d_meta:getKVList('dm'),
+        d_stats:getKVList('ds').map(x=>({label:x.key,val:x.val})),
+        d_sections:editSections,
+      };
+      if(editItem){result=await sb.from('projects').update(data).eq('id',editItem.id);}
+      else{result=await sb.from('projects').insert(data);}
+    } else if(activeTab==='cases'){
+      const data={
+        title:document.getElementById('f-title').value.trim(),
+        tag:document.getElementById('f-tag').value.trim(),
+        color_cls:document.getElementById('f-color').value,
+        link:document.getElementById('f-link').value.trim(),
+        sort_order:parseInt(document.getElementById('f-sort').value)||0,
+      };
+      if(editItem){result=await sb.from('case_studies').update(data).eq('id',editItem.id);}
+      else{result=await sb.from('case_studies').insert(data);}
+    } else if(activeTab==='pm'){
+      const data={
+        title:document.getElementById('f-title').value.trim(),
+        description:document.getElementById('f-desc').value.trim(),
+        icon_svg:document.getElementById('f-icon').value.trim(),
+        items:getPMItems(),
+        cta_label:document.getElementById('f-cta').value.trim(),
+        full_width:document.getElementById('f-fullwidth').checked,
+        sort_order:parseInt(document.getElementById('f-sort').value)||0,
+      };
+      if(editItem){result=await sb.from('pm_topics').update(data).eq('id',editItem.id);}
+      else{result=await sb.from('pm_topics').insert(data);}
+    }
+
+    if(result?.error)throw result.error;
+    toast('Saved successfully ✓','ok');
+    closePanel();
+    await loadTab(activeTab);
+  }catch(e){
+    toast('Error: '+e.message,'err');
+  }
+  btn.disabled=false;btn.textContent=editItem?'Save changes':'Create';
+}
+
+/* ── DELETE ── */
+let pendingDeleteId=null;
+function confirmDelete(id){
+  pendingDeleteId=id;
+  openEdit(id);
+  setTimeout(()=>deleteItem(),0);
+}
+
+async function deleteItem(){
+  if(!editItem)return;
+  if(!confirm(`Delete "${editItem.title||editItem.slug||'this item'}"? This cannot be undone.`))return;
+  const table=activeTab==='cases'?'case_studies':activeTab==='pm'?'pm_topics':'projects';
+  const {error}=await sb.from(table).delete().eq('id',editItem.id);
+  if(error){toast('Delete failed: '+error.message,'err');return;}
+  toast('Deleted ✓','ok');
+  closePanel();
+  await loadTab(activeTab);
+}
+
+/* ── SEED DATA ── */
+async function seedData(){
+  if(!confirm('This will insert your existing 9 projects, 4 case studies, and 5 PM topics into the database. Duplicate slugs will be skipped. Continue?'))return;
+
+  document.getElementById('seed-btn').textContent='Seeding…';
+
+  const projects=[
+    {slug:'traceability',page:'experience',company_group:'Inspectorio',group_color:'#7c3aed',group_meta:'Dec 2022 – Present · SaaS B2B · Ho Chi Minh City',group_order:0,title:'Traceability',pill_text:'Inspectorio · 2023–Present',panel_co:'Inspectorio · Supply Chain',panel_desc:'End-to-end supply chain traceability from raw material to finished product. A creative MVP hack won a $300K pilot — designed to scale into full development.',bg_class:'pbg-tr',cover_url:'cover-traceability.png',has_detail:false,sort_order:0},
+    {slug:'rsc',page:'experience',company_group:'Inspectorio',group_color:'#7c3aed',group_meta:'Dec 2022 – Present · SaaS B2B · Ho Chi Minh City',group_order:0,title:'RSC — Responsible Sourcing & Compliance',pill_text:'Inspectorio · 2022–Present',panel_co:'Inspectorio · Compliance',panel_desc:'Responsible Sourcing & Compliance platform for EUDR and UFLPA regulations. Used by Walmart, Target, Tesco, and Crocs for global regulatory compliance.',bg_class:'pbg-rsc',cover_url:'cover-rsc.png',has_detail:false,sort_order:1},
+    {slug:'digital-assets',page:'experience',company_group:'Inspectorio',group_color:'#7c3aed',group_meta:'Dec 2022 – Present · SaaS B2B · Ho Chi Minh City',group_order:0,title:'Digital Assets',pill_text:'Inspectorio · 2023–Present',panel_co:'Inspectorio · SaaS B2B',panel_desc:'Digital content management for supply chain compliance. Partnered with engineers to optimise API consumption — saving the company $40K+/year in third-party costs.',bg_class:'pbg-da',cover_url:'cover-digital-assets.png',has_detail:false,sort_order:2},
+    {slug:'labsync',page:'experience',company_group:'Inspectorio',group_color:'#7c3aed',group_meta:'Dec 2022 – Present · SaaS B2B · Ho Chi Minh City',group_order:0,title:'LabSync',pill_text:'Inspectorio · 2022–Present',panel_co:'Inspectorio · SaaS B2B',panel_desc:'Lab testing management connecting brands, retailers, suppliers, and labs. Built a first-of-its-kind analytics module across global supply chains.',bg_class:'pbg-ls',cover_url:'cover-labsync.png',has_detail:true,co_tag:'INSPECTORIO',d_intro:'A laboratory testing management platform connecting brands, retailers, suppliers, and labs — centralising data and unlocking supply chain analytics never before available in the industry.',d_meta:[{key:'Role',val:'Business Analyst'},{key:'Platform',val:'Web App'},{key:'Type',val:'SaaS B2B'},{key:'Stage',val:'Post MVP'}],d_stats:[{label:'Clients',val:"Target · DICK'S · Crocs"},{label:'Team',val:'6 devs · 2 QA · 1 designer'},{label:'Result',val:'10+ demos · 5,000+ vendors onboarded'}],d_sections:[{type:'text',heading:'About the product',body:'Inspectorio is a US-based cloud SaaS used by <strong>12,000+ customers</strong> — including top global brands and retailers. LabSync standardises lab testing data points, centralises test requests in one place, and layers a <strong>first-of-its-kind analytics module</strong> on top.'},{type:'two-cards',heading:'My contribution',cards:[{icon:'🔄',title:'Scrum Team Lead',items:['Led a squad of 6 devs, 2 QA testers, and 1 designer','Hosted all Scrum ceremonies: Daily, Review, Retro & Grooming','Prepared PRDs, validated with clients, collaborated with designers','Built WSJF prioritisation framework to organise client feedback']},{icon:'🌍',title:'Global Client Work',items:["Pilot testing & discovery with Target, DICK'S Sporting Goods, Crocs","Integrated LabSync with Target across 4 lab testing agencies","Demoed to 10+ global brands across multiple time zones"]}]},{type:'num-grid',heading:'Sprint process',items:[{n:'01',t:'Backlog Prep',d:'PRDs, user stories, WSJF priority'},{n:'02',t:'Grooming',d:'Planning Poker estimates'},{n:'03',t:'Sprint + Daily',d:'2-week cycles, 15-min standups'},{n:'04',t:'Sprint Review',d:'Velocity, burn-down, demo'},{n:'05',t:'Retro + Plan',d:'Improve → next sprint goals'}]},{type:'bullets',heading:'Results in 6 months',items:['Launched LabSync and onboarded <strong>Target (~5,000 vendors)</strong> and <strong>Crocs (~100 vendors)</strong> into pilot testing','Demoed to <strong>10+ global brands</strong> — generating strong adoption pipeline','Defined a harmonised online test request form — saving vendors time vs. offline methods']},{type:'quote',text:"I think you're exceptional at what you do. I can honestly say that with your enthusiasm, proactiveness, and the speed at which you learn and adapt, you have potential far beyond most.",author:'Alex Ryan, Technical Lead · Senior Software Engineer @ Inspectorio'},{type:'takeaways',heading:'Key takeaways',items:[{n:'01',t:'Global clients need tailored communication.',d:'Schedule across time zones, use their terminology, and demo slowly — never assume shared context.'},{n:'02',t:'Involve developers early.',d:'Bringing devs into customer interviews and design from day one unlocks their expertise and reduces costly late changes.'},{n:'03',t:'Alignment first — 5W1H.',d:'Every cross-functional effort needs Who, What, When, Where, Why and How defined clearly upfront.'}]}],sort_order:3},
+    {slug:'swish',page:'experience',company_group:'Golden Equator',group_color:'#0891b2',group_meta:'Mar – Dec 2022 · Social Platform · Singapore',group_order:1,title:'Swish',pill_text:'Golden Equator · 2022',panel_co:'Golden Equator · Social Network',panel_desc:'Invite-only professional social network for Singapore — granting access to high-quality interactions, tools, insights, and meaningful connections. Web, iOS, Android. Grew MAU 20%+ in 3 months.',bg_class:'pbg-sw',cover_url:'cover-swish.png',has_detail:false,sort_order:0},
+    {slug:'goyolo',page:'experience',company_group:'VeXeRe',group_color:'#059669',group_meta:'Mar 2020 – Mar 2022 · B2B & B2C · Vietnam',group_order:2,title:'Goyolo',pill_text:'VeXeRe · 2021–2022',panel_co:'VeXeRe · Travel OTA',panel_desc:"Travel platform built on VeXeRe's 2M user base — flights, hotels, and excursions. Led user research across 3 segments, set up SEO, and drove 130% traffic growth MoM after MVP launch.",bg_class:'pbg-gy',cover_url:'cover-goyolo.png',has_detail:false,sort_order:0},
+    {slug:'gms',page:'experience',company_group:'VeXeRe',group_color:'#059669',group_meta:'Mar 2020 – Mar 2022 · B2B & B2C · Vietnam',group_order:2,title:'GMS — Goods Management System',pill_text:'VeXeRe · 2020–2021',panel_co:'VeXeRe · SaaS B2B',panel_desc:"Vietnam's leading cargo management SaaS for 500+ bus operators — streamlining order management, tracking metrics, and giving end-users full shipment visibility. Freemium model drove 15% revenue growth.",bg_class:'pbg-gms',cover_url:'cover-gms.png',has_detail:false,sort_order:1},
+    {slug:'product-buddy',page:'products',company_group:'EdTech & Tools',group_color:'#7c3aed',group_meta:'2025 – Present · Side projects',group_order:0,title:'Product Buddy',pill_text:'EdTech · 2025–Present',panel_co:'My Product · EdTech',panel_desc:'PM mentorship course for Vietnamese freshers. 16 live sessions, cohorts of 5–10 students, real case studies, AI workflow modules. 40+ mentees placed in their first BA/PO roles.',bg_class:'pbg-pb',cover_url:'cover-productbuddy.png',has_detail:false,ext_link:'https://buddy-product.vercel.app/',sort_order:0},
+    {slug:'refine-poker',page:'products',company_group:'EdTech & Tools',group_color:'#7c3aed',group_meta:'2025 – Present · Side projects',group_order:0,title:'Refine Poker',pill_text:'Tool · 2026',panel_co:'My Product · Agile Tool',panel_desc:'Free agile estimation tool — no signup, no friction. Just a name and a shareable link to start planning poker with your team in real time.',bg_class:'pbg-rp',cover_url:'cover-refinepoker.png',has_detail:false,ext_link:'https://refinepoker.vercel.app/',sort_order:1},
+    {slug:'babynote',page:'products',company_group:'EdTech & Tools',group_color:'#7c3aed',group_meta:'2025 – Present · Side projects',group_order:0,title:'Babynote — Smart Health Notes for Moms',pill_text:'AI · 2026 · Coming soon',panel_co:'My Product · AI · Parenting',panel_desc:"An AI-powered note-taking app for moms to effortlessly track their baby's health journey. Features include AI-assisted logging, JSON data importer, growth charts, feeding & sleep patterns, vaccine tracking, and shareable health summaries for doctors.",bg_style:'background:radial-gradient(ellipse at 40% 45%,#be185d 0%,#6b21a8 50%,#0f0520 100%)',full_width:true,has_detail:false,sort_order:2},
+  ];
+
+  const cases=[
+    {title:'How would you improve the onboarding flow for a digital banking app?',tag:'Fintech',color_cls:'f',link:'#',sort_order:0},
+    {title:'Design a feature to reduce cart abandonment on a Southeast Asian marketplace.',tag:'E-commerce',color_cls:'e',link:'#',sort_order:1},
+    {title:'How would you define the MVP for a B2B project management tool?',tag:'SaaS',color_cls:'s',link:'#',sort_order:2},
+    {title:'How do you prioritize a backlog when business and user needs conflict?',tag:'Travel',color_cls:'t',link:'#',sort_order:3},
+  ];
+
+  const SCRUM_ICON=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>`;
+  const TARGET_ICON=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`;
+  const FLASK_ICON=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v7l-4 8a1 1 0 0 0 .9 1.5h10.2a1 1 0 0 0 .9-1.5l-4-8V3"/><path d="M7.5 14h9"/></svg>`;
+  const CHART_ICON=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>`;
+  const BOOK_ICON=`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
+
+  const pmTopics=[
+    {title:'Scrum & Agile',description:'Deep dives into Agile methodology, sprint ceremonies, roles, and artifacts — with real examples from my squads at Inspectorio and VeXeRe.',icon_svg:SCRUM_ICON,items:['Scrum ceremonies','Backlog refinement','Sprint planning','Retrospectives','PSPO I prep'],cta_label:'Read articles →',full_width:false,sort_order:0},
+    {title:'PM Interview Prep',description:'How I prepared for and passed interviews at global companies. Questions, frameworks, take-home assignments, and sample answers.',icon_svg:TARGET_ICON,items:['Common questions','Answer frameworks','Take-home tips','Product sense'],cta_label:'Read articles →',full_width:false,sort_order:1},
+    {title:'Quality Assurance',description:'QA concepts every PM/PO needs to know — how to work with QA teams, what to test, and how to prevent quality issues before release.',icon_svg:FLASK_ICON,items:['UAT process','Bug triaging','Test cases basics'],cta_label:'Read articles →',full_width:false,sort_order:2},
+    {title:'Data Analytics',description:'Being data-driven as a PM — which metrics matter, how to set up tracking, and how to use data to make better decisions.',icon_svg:CHART_ICON,items:['KPI frameworks','Funnel analysis','A/B testing'],cta_label:'Read articles →',full_width:false,sort_order:3},
+    {title:'Materials & Resources',description:'My curated list of books, courses, templates, and tools that have genuinely made me a better product person.',icon_svg:BOOK_ICON,items:['Books I recommend','Courses worth taking','Free templates','Useful tools'],cta_label:'Browse resources →',full_width:true,sort_order:4},
+  ];
+
+  let ok=0,skip=0;
+  for(const p of projects){
+    const{error}=await sb.from('projects').upsert(p,{onConflict:'slug',ignoreDuplicates:true});
+    if(error&&error.code==='23505')skip++;
+    else if(!error)ok++;
+    else{toast('Seed error: '+error.message,'err');break;}
+  }
+  for(const c of cases){
+    const{error}=await sb.from('case_studies').insert(c).select();
+    if(!error)ok++;
+  }
+  for(const t of pmTopics){
+    const{error}=await sb.from('pm_topics').insert(t).select();
+    if(!error)ok++;
+  }
+
+  document.getElementById('seed-btn').textContent='⚡ Seed initial data';
+  toast(`Seeded ${ok} items${skip?' ('+skip+' skipped)':''}  ✓`,'ok');
+  await loadTab(activeTab);
+}
+
+/* ── TOAST ── */
+function toast(msg,type='ok'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='show '+(type||'');
+  setTimeout(()=>t.className='',3000);
+}
+
+/* ── START ── */
+init().then(()=>{
+  // After list loads, set up section builder if on a project tab
+}).catch(e=>toast('Init failed: '+e.message,'err'));
+
+// Re-render sections after detail tab is shown
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('ep-tab')&&e.target.textContent.trim()==='Detail Page'){
+    setTimeout(()=>renderSections(),50);
+  }
+});
+</script>
+</body>
+</html>

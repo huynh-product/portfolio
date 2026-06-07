@@ -7,7 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
+/* ── Supabase loading state ── */
+.sb-loading{display:flex;align-items:center;justify-content:center;gap:12px;padding:80px 0;color:var(--ink3);font-size:14px}
+.sb-spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a1a;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -998,147 +1003,11 @@ footer{background:#0d0c16;padding:44px 48px}
 <div class="iphero-bridge"></div>
 
 <section class="inner-sec">
-<div class="si" style="max-width:1150px">
+<div id="exp-container" class="si" style="max-width:1150px">
+  <div class="sb-loading"><div class="sb-spinner"></div><span>Loading experience…</span></div>
+</div>
+</section>
 
-  <div class="port-section">
-    <div class="port-section-hdr">
-      <div class="ps-dot" style="background:#7c3aed"></div>
-      <span class="ps-name">Inspectorio</span>
-      <span class="ps-meta">Dec 2022 – Present · SaaS B2B · Ho Chi Minh City</span>
-      <div class="ps-line"></div>
-    </div>
-    <div class="port-grid3c">
-
-      <!-- 1. Traceability — top left -->
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-tr" style="background-image:url(cover-traceability.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Inspectorio · 2023–Present</div>
-          <div class="pc3-title">Traceability</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Inspectorio · Supply Chain</span>
-          <div class="pc3-panel-title">Traceability</div>
-          <p class="pc3-panel-desc">End-to-end supply chain traceability from raw material to finished product. A creative MVP hack won a $300K pilot — designed to scale into full development.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
-
-      <!-- 2. RSC — top right -->
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-rsc" style="background-image:url(cover-rsc.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Inspectorio · 2022–Present</div>
-          <div class="pc3-title">RSC — Responsible Sourcing &amp; Compliance</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Inspectorio · Compliance</span>
-          <div class="pc3-panel-title">RSC</div>
-          <p class="pc3-panel-desc">Responsible Sourcing &amp; Compliance platform for EUDR and UFLPA regulations. Used by Walmart, Target, Tesco, and Crocs for global regulatory compliance.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
-
-      <!-- 3. Digital Assets — bottom left -->
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-da" style="background-image:url(cover-digital-assets.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Inspectorio · 2023–Present</div>
-          <div class="pc3-title">Digital Assets</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Inspectorio · SaaS B2B</span>
-          <div class="pc3-panel-title">Digital Assets</div>
-          <p class="pc3-panel-desc">Digital content management for supply chain compliance. Partnered with engineers to optimise API consumption — saving the company $40K+/year in third-party costs.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
-
-      <!-- 4. LabSync — bottom right (last) -->
-      <div class="pcard3 fu" onclick="go('labsync')" style="cursor:pointer">
-        <div class="pc3-bg pbg-ls" style="background-image:url(cover-labsync.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Inspectorio · 2022–Present</div>
-          <div class="pc3-title">LabSync</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Inspectorio · SaaS B2B</span>
-          <div class="pc3-panel-title">LabSync</div>
-          <p class="pc3-panel-desc">Lab testing management connecting brands, retailers, suppliers, and labs. Built a first-of-its-kind analytics module across global supply chains.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="port-section">
-    <div class="port-section-hdr">
-      <div class="ps-dot" style="background:#0891b2"></div>
-      <span class="ps-name">Golden Equator</span>
-      <span class="ps-meta">Mar – Dec 2022 · Social Platform · Singapore</span>
-      <div class="ps-line"></div>
-    </div>
-    <div class="port-grid3c">
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-sw" style="background-image:url(cover-swish.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Golden Equator · 2022</div>
-          <div class="pc3-title">Swish</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Golden Equator · Social Network</span>
-          <div class="pc3-panel-title">Swish</div>
-          <p class="pc3-panel-desc">Invite-only professional social network for Singapore — granting access to high-quality interactions, tools, insights, and meaningful connections. Web, iOS, Android. Grew MAU 20%+ in 3 months.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="port-section">
-    <div class="port-section-hdr">
-      <div class="ps-dot" style="background:#059669"></div>
-      <span class="ps-name">VeXeRe</span>
-      <span class="ps-meta">Mar 2020 – Mar 2022 · B2B &amp; B2C · Vietnam</span>
-      <div class="ps-line"></div>
-    </div>
-    <div class="port-grid3c">
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-gy" style="background-image:url(cover-goyolo.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">VeXeRe · 2021–2022</div>
-          <div class="pc3-title">Goyolo</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">VeXeRe · Travel OTA</span>
-          <div class="pc3-panel-title">Goyolo</div>
-          <p class="pc3-panel-desc">Travel platform built on VeXeRe's 2M user base — flights, hotels, and excursions. Led user research across 3 segments, set up SEO, and drove 130% traffic growth MoM after MVP launch.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-gms" style="background-image:url(cover-gms.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">VeXeRe · 2020–2021</div>
-          <div class="pc3-title">GMS — Goods Management System</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">VeXeRe · SaaS B2B</span>
-          <div class="pc3-panel-title">GMS — Goods Management System</div>
-          <p class="pc3-panel-desc">Vietnam's leading cargo management SaaS for 500+ bus operators — streamlining order management, tracking metrics, and giving end-users full shipment visibility. Freemium model drove 15% revenue growth.</p>
-          <span class="pc3-panel-cta">Read more →</span>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 </section>
 
@@ -1170,67 +1039,10 @@ footer{background:#0d0c16;padding:44px 48px}
 <div class="iphero-bridge"></div>
 
 <section class="inner-sec">
-<div class="si" style="max-width:1150px">
-
-  <div class="port-section">
-    <div class="port-section-hdr">
-      <div class="ps-dot" style="background:#7c3aed"></div>
-      <span class="ps-name">EdTech &amp; Tools</span>
-      <span class="ps-meta">2025 – Present · Side projects</span>
-      <div class="ps-line"></div>
-    </div>
-    <div class="port-grid3c">
-
-      <!-- Product Buddy -->
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-pb" style="background-image:url(cover-productbuddy.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">EdTech · 2025–Present</div>
-          <div class="pc3-title">Product Buddy</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">My Product · EdTech</span>
-          <div class="pc3-panel-title">Product Buddy</div>
-          <p class="pc3-panel-desc">PM mentorship course for Vietnamese freshers. 16 live sessions, cohorts of 5–10 students, real case studies, AI workflow modules. 40+ mentees placed in their first BA/PO roles.</p>
-          <a href="https://buddy-product.vercel.app/" target="_blank" class="pc3-panel-cta" onclick="event.stopPropagation()">Visit site →</a>
-        </div>
-      </div>
-
-      <!-- Refine Poker -->
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-rp" style="background-image:url(cover-refinepoker.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Tool · 2026</div>
-          <div class="pc3-title">Refine Poker</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">My Product · Agile Tool</span>
-          <div class="pc3-panel-title">Refine Poker</div>
-          <p class="pc3-panel-desc">Free agile estimation tool — no signup, no friction. Just a name and a shareable link to start planning poker with your team in real time.</p>
-          <a href="https://refinepoker.vercel.app/" target="_blank" class="pc3-panel-cta" onclick="event.stopPropagation()">Visit site →</a>
-        </div>
-      </div>
-
-      <!-- Babynote -->
-      <div class="pcard3 fu" style="grid-column:1/-1">
-        <div class="pc3-bg" style="background:radial-gradient(ellipse at 40% 45%,#be185d 0%,#6b21a8 50%,#0f0520 100%)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">AI · 2026 · Coming soon</div>
-          <div class="pc3-title">Babynote — Smart Health Notes for Moms</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">My Product · AI · Parenting</span>
-          <div class="pc3-panel-title">Babynote</div>
-          <p class="pc3-panel-desc">An AI-powered note-taking app for moms to effortlessly track their baby's health journey. Features include AI-assisted logging, JSON data importer, growth charts, feeding &amp; sleep patterns, vaccine tracking, and shareable health summaries for doctors.</p>
-          <span class="pc3-panel-cta" style="opacity:.55;cursor:default">Coming soon</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
+<div id="prod-container" class="si" style="max-width:1150px">
+  <div class="sb-loading"><div class="sb-spinner"></div><span>Loading products…</span></div>
+</div>
+</section>
 
 </div>
 </section>
@@ -1263,12 +1075,8 @@ footer{background:#0d0c16;padding:44px 48px}
 <section class="inner-sec"><div class="si">
   <span class="slbl">Browse by topic</span><span class="gbar"></span>
   <h2 class="stitle" style="margin-bottom:36px">Pick a topic to explore.</h2>
-  <div class="sub-grid">
-    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></span><h3>Scrum &amp; Agile</h3><p>Deep dives into Agile methodology, sprint ceremonies, roles, and artifacts — with real examples from my squads at Inspectorio and VeXeRe.</p><ul><li>Scrum ceremonies</li><li>Backlog refinement</li><li>Sprint planning</li><li>Retrospectives</li><li>PSPO I prep</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h3>PM Interview Prep</h3><p>How I prepared for and passed interviews at global companies. Questions, frameworks, take-home assignments, and sample answers.</p><ul><li>Common questions</li><li>Answer frameworks</li><li>Take-home tips</li><li>Product sense</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v7l-4 8a1 1 0 0 0 .9 1.5h10.2a1 1 0 0 0 .9-1.5l-4-8V3"/><path d="M7.5 14h9"/></svg></span><h3>Quality Assurance</h3><p>QA concepts every PM/PO needs to know — how to work with QA teams, what to test, and how to prevent quality issues before release.</p><ul><li>UAT process</li><li>Bug triaging</li><li>Test cases basics</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span><h3>Data Analytics</h3><p>Being data-driven as a PM — which metrics matter, how to set up tracking, and how to use data to make better decisions.</p><ul><li>KPI frameworks</li><li>Funnel analysis</li><li>A/B testing</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu" style="grid-column:1/-1"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><h3>Materials &amp; Resources</h3><p>My curated list of books, courses, templates, and tools that have genuinely made me a better product person.</p><ul><li>Books I recommend</li><li>Courses worth taking</li><li>Free templates</li><li>Useful tools</li></ul><span class="sarr">Browse resources →</span></a>
+  <div id="pm-container" class="sub-grid">
+    <div class="sb-loading" style="grid-column:1/-1"><div class="sb-spinner"></div><span>Loading topics…</span></div>
   </div>
 </div></section>
 <footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
@@ -1298,11 +1106,8 @@ footer{background:#0d0c16;padding:44px 48px}
 <div class="iphero-bridge"></div>
 <section class="inner-sec"><div class="si">
   <div class="ibox"><div class="iico">💡</div><div><h3>Why read these?</h3><p>These are real take-home and whiteboard exercises from my interview rounds at companies like Katalon, Employment Hero, and others. Reading them will show you how I think through product problems.</p></div></div>
-  <div class="cs-grid">
-    <a href="#" class="csc fu"><div class="csc-bg f"></div><div class="csh"><span class="cstag">Fintech</span><h3>How would you improve the onboarding flow for a digital banking app?</h3></div></a>
-    <a href="#" class="csc fu"><div class="csc-bg e"></div><div class="csh"><span class="cstag">E-commerce</span><h3>Design a feature to reduce cart abandonment on a Southeast Asian marketplace.</h3></div></a>
-    <a href="#" class="csc fu"><div class="csc-bg s"></div><div class="csh"><span class="cstag">SaaS</span><h3>How would you define the MVP for a B2B project management tool?</h3></div></a>
-    <a href="#" class="csc fu"><div class="csc-bg t"></div><div class="csh"><span class="cstag">Travel</span><h3>How do you prioritize a backlog when business and user needs conflict?</h3></div></a>
+  <div id="cases-container">
+    <div class="sb-loading"><div class="sb-spinner"></div><span>Loading case studies…</span></div>
   </div>
 </div></section>
 <footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
@@ -1422,14 +1227,128 @@ function go(id,pushState=true){
   updateNav();
   setTimeout(()=>initFU(isProj?'pg-detail':'pg-'+id),60);
   if(pushState){const url=isProj?`/${PROJECTS[id].parent}/${id}`:(PAGE_URLS[id]||'/');history.pushState({page:id},'',url);}
+  /* trigger data-driven renders */
+  if(id==='experience')_sbRender('experience');
+  else if(id==='products')_sbRender('products');
+  else if(id==='cases')_sbRender('cases');
+  else if(id==='pm')_sbRender('pm');
 }
 window.addEventListener('popstate',e=>{if(e.state?.page)go(e.state.page,false);});
-(function(){
+
+/* ── SUPABASE DATA LAYER ─────────────────────── */
+const _SB_URL='https://crqnnarnlyartkihfnld.supabase.co';
+const _SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNycW5uYXJubHlhcnRraWhmbmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NDQ1NTIsImV4cCI6MjA5NjQyMDU1Mn0.0pSW1tijtqXWRkOK-dwYiB-SFAz2GMRGgkmGD0ZOOzk';
+const _sb=window.supabase.createClient(_SB_URL,_SB_KEY);
+let _sbProjects=[],_sbCases=[],_sbPM=[];
+const _rendered={experience:false,products:false,cases:false,pm:false};
+
+function _esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function _buildCard(p){
+  let bgAttr='';
+  if(p.cover_url)bgAttr=`style="background-image:url(${p.cover_url})"`;
+  else if(p.bg_style)bgAttr=`style="${p.bg_style}"`;
+  const bgClass=p.bg_class||'';
+  let onClickAttr='',ctaHtml='';
+  if(p.has_detail){onClickAttr=`onclick="go('${p.slug}')"`;ctaHtml=`<span class="pc3-panel-cta">Read more →</span>`;}
+  else if(p.ext_link){onClickAttr=`onclick="window.open('${p.ext_link}','_blank')"`;ctaHtml=`<a href="${p.ext_link}" target="_blank" class="pc3-panel-cta" onclick="event.stopPropagation()">Visit site →</a>`;}
+  else{ctaHtml=`<span class="pc3-panel-cta" style="opacity:.55;cursor:default">Coming soon</span>`;}
+  const colStyle=p.full_width?' style="grid-column:1/-1"':'';
+  return `<div class="pcard3 fu"${colStyle} ${onClickAttr}>
+    <div class="pc3-bg ${bgClass}" ${bgAttr}></div>
+    <div class="pc3-ov"></div>
+    <div class="pc3-content">
+      <div class="pc3-pill">${_esc(p.pill_text)}</div>
+      <div class="pc3-title">${_esc(p.title)}</div>
+    </div>
+    <div class="pc3-panel">
+      <span class="pc3-panel-co">${_esc(p.panel_co)}</span>
+      <div class="pc3-panel-title">${_esc(p.title)}</div>
+      <p class="pc3-panel-desc">${_esc(p.panel_desc)}</p>
+      ${ctaHtml}
+    </div>
+  </div>`;
+}
+
+function _buildProjectSections(page){
+  const items=_sbProjects.filter(p=>p.page===page);
+  const groups=new Map();
+  items.forEach(p=>{
+    if(!groups.has(p.company_group))groups.set(p.company_group,{color:p.group_color,meta:p.group_meta,items:[]});
+    groups.get(p.company_group).items.push(p);
+  });
+  let html='';
+  groups.forEach((g,name)=>{
+    html+=`<div class="port-section">
+      <div class="port-section-hdr">
+        <div class="ps-dot" style="background:${g.color}"></div>
+        <span class="ps-name">${_esc(name)}</span>
+        <span class="ps-meta">${_esc(g.meta)}</span>
+        <div class="ps-line"></div>
+      </div>
+      <div class="port-grid3c">${g.items.map(_buildCard).join('')}</div>
+    </div>`;
+  });
+  return html;
+}
+
+function _sbRender(page){
+  if(_rendered[page])return;
+  if(page==='experience'){
+    const c=document.getElementById('exp-container');
+    if(c){c.innerHTML=_buildProjectSections('experience');_rendered.experience=true;setTimeout(()=>initFU('pg-experience'),60);}
+  } else if(page==='products'){
+    const c=document.getElementById('prod-container');
+    if(c){c.innerHTML=_buildProjectSections('products');_rendered.products=true;setTimeout(()=>initFU('pg-products'),60);}
+  } else if(page==='cases'){
+    const c=document.getElementById('cases-container');
+    if(c){
+      const grid=_sbCases.map(cs=>`<a href="${cs.link||'#'}" class="csc fu"${cs.link&&cs.link!=='#'?' target="_blank"':''}>
+        <div class="csc-bg ${cs.color_cls||'f'}"></div>
+        <div class="csh"><span class="cstag">${_esc(cs.tag)}</span><h3>${_esc(cs.title)}</h3></div>
+      </a>`).join('');
+      c.innerHTML=`<div class="cs-grid">${grid}</div>`;
+      _rendered.cases=true;setTimeout(()=>initFU('pg-cases'),60);
+    }
+  } else if(page==='pm'){
+    const c=document.getElementById('pm-container');
+    if(c){
+      c.innerHTML=_sbPM.map(t=>`<a href="#" class="scard fu"${t.full_width?' style="grid-column:1/-1"':''}>
+        <span class="sico">${t.icon_svg||''}</span>
+        <h3>${_esc(t.title)}</h3>
+        <p>${_esc(t.description)}</p>
+        <ul>${(t.items||[]).map(i=>`<li>${_esc(i)}</li>`).join('')}</ul>
+        <span class="sarr">${_esc(t.cta_label||'Read articles →')}</span>
+      </a>`).join('');
+      _rendered.pm=true;setTimeout(()=>initFU('pg-pm'),60);
+    }
+  }
+}
+
+/* Fetch all data, then handle initial route */
+(async()=>{
+  try{
+    const [pr,cr,pmr]=await Promise.all([
+      _sb.from('projects').select('*').order('group_order').order('sort_order'),
+      _sb.from('case_studies').select('*').order('sort_order'),
+      _sb.from('pm_topics').select('*').order('sort_order'),
+    ]);
+    _sbProjects=pr.data||[];_sbCases=cr.data||[];_sbPM=pmr.data||[];
+    /* Rebuild PROJECTS detail lookup from DB */
+    PROJECTS={};
+    _sbProjects.filter(p=>p.has_detail).forEach(p=>{
+      PROJECTS[p.slug]={slug:p.slug,parent:p.page,companyTag:p.co_tag,
+        company:p.company_group,title:p.title,intro:p.d_intro,
+        meta:p.d_meta||[],stats:p.d_stats||[],sections:p.d_sections||[]};
+    });
+  }catch(e){console.warn('Supabase fetch failed',e);}
+  /* Initial route */
   const path=window.location.pathname;
   const proj=Object.values(PROJECTS).find(p=>path===`/${p.parent}/${p.slug}`||path===`/${p.slug}`);
   if(proj){go(proj.slug,false);return;}
   const pg=Object.entries(PAGE_URLS).find(([,u])=>u===path);
   if(pg&&pg[0]!=='home')go(pg[0],false);
+  else _sbRender('experience'); /* pre-render experience tab */
 })();
 
 /* ── Hero letters ── */
