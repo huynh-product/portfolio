@@ -632,9 +632,10 @@ footer{background:#0d0c16;padding:44px 48px}
   <span class="nlogo" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct"></span>
   <ul class="nlinks">
     <li><a onclick="go('about')" id="na-about">About</a></li>
-    <li><a onclick="go('portfolio')" id="na-portfolio">Portfolio</a></li>
-    <li><a onclick="go('pm')" id="na-pm">Product Management</a></li>
+    <li><a onclick="go('experience')" id="na-experience">Experience</a></li>
+    <li><a onclick="go('products')" id="na-products">My Products</a></li>
     <li><a onclick="go('cases')" id="na-cases">Case Studies</a></li>
+    <li><a onclick="go('pm')" id="na-pm">Product Management</a></li>
     <li><a onclick="go('podcast')" id="na-podcast">Podcast</a></li>
     <li><a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" class="ncta">Let's connect →</a></li>
   </ul>
@@ -642,9 +643,10 @@ footer{background:#0d0c16;padding:44px 48px}
 </nav>
 <div class="mobnav" id="mobnav">
   <a onclick="go('about');closeMob()">About</a>
-  <a onclick="go('portfolio');closeMob()">Portfolio</a>
-  <a onclick="go('pm');closeMob()">Product Management</a>
+  <a onclick="go('experience');closeMob()">Experience</a>
+  <a onclick="go('products');closeMob()">My Products</a>
   <a onclick="go('cases');closeMob()">Case Studies</a>
+  <a onclick="go('pm');closeMob()">Product Management</a>
   <a onclick="go('podcast');closeMob()">Podcast</a>
   <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:#b3aaf8;font-weight:700;">Let's connect →</a>
 </div>
@@ -783,27 +785,11 @@ footer{background:#0d0c16;padding:44px 48px}
     </div>
     <div class="scroll-sub fu">
       <p class="scroll-desc">I'm a Product Owner who leads with user empathy, thinks in long-term outcomes, and uses AI to extend my reach into design and engineering — building faster, scaling smarter, and shipping products that actually last.</p>
-      <div style="text-align:right"><button class="btn-acc" onclick="go('portfolio')">See my work →</button></div>
+      <div style="text-align:right"><button class="btn-acc" onclick="go('experience')">See my work →</button></div>
     </div>
   </div>
 </section>
 
-
-<!-- CTA DARK -->
-<section class="cta-sec">
-  <div class="cta-glow"></div>
-  <div class="cta-inner">
-    <div>
-      <span class="cta-ey">Career support</span>
-      <h2 class="cta-h">Need help landing<br>a PM job?</h2>
-      <p class="cta-p">I've interviewed at Employment Hero, Nakivo, Katalon, Inspectorio and landed offers. I can help you prepare, build your portfolio, and ace your interviews.</p>
-    </div>
-    <div class="cta-btns">
-      <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" class="btn-w">Connect on LinkedIn →</a>
-      <a href="mailto:huynh.product@gmail.com" class="btn-ow">Send an email</a>
-    </div>
-  </div>
-</section>
 
 <!-- KRESNA FOOTER -->
 <section class="footer-section">
@@ -845,7 +831,8 @@ footer{background:#0d0c16;padding:44px 48px}
             <span class="footer-col-title">Navigation</span>
             <a onclick="go('home')">Home</a>
             <a onclick="go('about')">About</a>
-            <a onclick="go('portfolio')">Portfolio</a>
+            <a onclick="go('experience')">Experience</a>
+            <a onclick="go('products')">My Products</a>
             <a onclick="go('cases')">Case Studies</a>
             <a onclick="go('podcast')">Podcast</a>
           </div>
@@ -870,6 +857,23 @@ footer{background:#0d0c16;padding:44px 48px}
     </svg>
   </div>
 </section>
+
+<!-- CTA DARK -->
+<section class="cta-sec">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div>
+      <span class="cta-ey">Career support</span>
+      <h2 class="cta-h">Need help landing<br>a PM job?</h2>
+      <p class="cta-p">I've interviewed at Employment Hero, Nakivo, Katalon, Inspectorio and landed offers. I can help you prepare, build your portfolio, and ace your interviews.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" class="btn-w">Connect on LinkedIn →</a>
+      <a href="mailto:huynh.product@gmail.com" class="btn-ow">Send an email</a>
+    </div>
+  </div>
+</section>
+
 </div><!-- end home -->
 
 <!-- ═══════════ ABOUT ═══════════ -->
@@ -934,7 +938,7 @@ footer{background:#0d0c16;padding:44px 48px}
         <div class="exp-co">Hackathon Champion</div>
         <div class="exp-role">Company-wide innovation competition</div>
         <span class="exp-mode hybrid">2× Winner</span>
-        <div class="exp-desc">Won Inspectorio's hackathon twice — competing to identify real problems, ideate solutions, and ship fast in front of the whole company.<br><br><strong style="color:rgba(255,255,255,.7)">Win 1:</strong> Spotlight Search — improved platform navigation for all users.<br><strong style="color:rgba(255,255,255,.7)">Win 2:</strong> AI Assistant Agent — automated manual processes using AI.</div>
+        <div class="exp-desc">Won Inspectorio's hackathon twice — competing to identify real problems, ideate solutions, and ship fast in front of the whole company.<br><br><strong style="color:var(--ink)">Win 1:</strong> Spotlight Search — improved platform navigation for all users.<br><strong style="color:var(--ink)">Win 2:</strong> AI Assistant Agent — automated manual processes using AI.</div>
         <div class="exp-badge-row">
           <a href="https://huynhproduct.webflow.io/case-studies/inspectorio-hackathon-championship" target="_blank" class="exp-badge" style="text-decoration:none;cursor:pointer">Read case study →</a>
         </div>
@@ -962,14 +966,14 @@ footer{background:#0d0c16;padding:44px 48px}
     </div>
   </div>
 </section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <!-- ═══════════ DETAIL PAGE (JS-driven template) ═══════════ -->
 <div class="page" id="pg-detail"></div>
 
 <!-- ═══════════ PORTFOLIO ═══════════ -->
-<div class="page" id="pg-portfolio">
+<div class="page" id="pg-experience">
 
 <!-- iphero header — consistent with About, PM, Cases, Podcast pages -->
 <div class="iphero">
@@ -986,7 +990,7 @@ footer{background:#0d0c16;padding:44px 48px}
     </div>
     <div class="iphero-right">
       <div class="iphero-badge">9 products · 4 companies</div>
-      <h1>My <span class="acc">Portfolio.</span></h1>
+      <h1>My <span class="acc">Experience.</span></h1>
       <p class="iphero-sub">Products I've shipped across B2B SaaS, B2C travel, social platforms, and my own projects — each with real business impact.</p>
     </div>
   </div>
@@ -1074,45 +1078,6 @@ footer{background:#0d0c16;padding:44px 48px}
 
   <div class="port-section">
     <div class="port-section-hdr">
-      <div class="ps-dot" style="background:#2563eb"></div>
-      <span class="ps-name">Personal Projects</span>
-      <span class="ps-meta">2025 – 2026 · Side projects</span>
-      <div class="ps-line"></div>
-    </div>
-    <div class="port-grid3c">
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-pb" style="background-image:url(cover-productbuddy.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">EdTech · 2025–Present</div>
-          <div class="pc3-title">Product Buddy</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Personal Project · EdTech</span>
-          <div class="pc3-panel-title">Product Buddy</div>
-          <p class="pc3-panel-desc">PM mentorship course for Vietnamese freshers. 16 live sessions, cohorts of 5–10 students, real case studies, AI workflow modules. 40+ mentees placed in their first BA/PO roles.</p>
-          <a href="https://buddy-product.vercel.app/" target="_blank" class="pc3-panel-cta" onclick="event.stopPropagation()">Visit site →</a>
-        </div>
-      </div>
-      <div class="pcard3 fu">
-        <div class="pc3-bg pbg-rp" style="background-image:url(cover-refinepoker.png)"></div>
-        <div class="pc3-ov"></div>
-        <div class="pc3-content">
-          <div class="pc3-pill">Tool · 2026</div>
-          <div class="pc3-title">Refine Poker</div>
-        </div>
-        <div class="pc3-panel">
-          <span class="pc3-panel-co">Personal Project · Agile Tool</span>
-          <div class="pc3-panel-title">Refine Poker</div>
-          <p class="pc3-panel-desc">Free agile estimation tool — no signup, no friction. Just a name and a shareable link to start planning poker with your team in real time.</p>
-          <a href="https://refinepoker.vercel.app/" target="_blank" class="pc3-panel-cta" onclick="event.stopPropagation()">Visit site →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="port-section">
-    <div class="port-section-hdr">
       <div class="ps-dot" style="background:#0891b2"></div>
       <span class="ps-name">Golden Equator</span>
       <span class="ps-meta">Mar – Dec 2022 · Social Platform · Singapore</span>
@@ -1177,9 +1142,101 @@ footer{background:#0d0c16;padding:44px 48px}
 </div>
 </section>
 
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
-</div><!-- end portfolio -->
-</div><!-- end portfolio -->
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+</div><!-- end experience -->
+</div><!-- end experience -->
+
+<!-- ═══════════ MY PRODUCTS ═══════════ -->
+<div class="page" id="pg-products">
+<div class="iphero">
+  <div class="iphero-inner">
+    <div class="iphero-left">
+      <video class="iphero-vid" autoplay muted loop playsinline>
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_104800_bc43ae09-f494-43e3-97d7-2f8c1692cfd7.mp4" type="video/mp4"/>
+      </video>
+      <div class="iphero-logo"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto"></div>
+      <div class="iphero-left-bottom">
+        <p class="iphero-tagline">Products I built,<br><span>beyond my day job.</span></p>
+        <span class="iphero-social-lbl">Stay in touch!</span>
+      </div>
+    </div>
+    <div class="iphero-right">
+      <div class="iphero-badge">3 products · built by me</div>
+      <h1>My <span class="acc">Products.</span></h1>
+      <p class="iphero-sub">Side projects and indie products I've designed and built — from agile tools to AI-powered apps for parents.</p>
+    </div>
+  </div>
+</div>
+<div class="iphero-bridge"></div>
+
+<section class="inner-sec">
+<div class="si" style="max-width:1150px">
+
+  <div class="port-section">
+    <div class="port-section-hdr">
+      <div class="ps-dot" style="background:#7c3aed"></div>
+      <span class="ps-name">EdTech &amp; Tools</span>
+      <span class="ps-meta">2025 – Present · Side projects</span>
+      <div class="ps-line"></div>
+    </div>
+    <div class="port-grid3c">
+
+      <!-- Product Buddy -->
+      <div class="pcard3 fu">
+        <div class="pc3-bg pbg-pb" style="background-image:url(cover-productbuddy.png)"></div>
+        <div class="pc3-ov"></div>
+        <div class="pc3-content">
+          <div class="pc3-pill">EdTech · 2025–Present</div>
+          <div class="pc3-title">Product Buddy</div>
+        </div>
+        <div class="pc3-panel">
+          <span class="pc3-panel-co">My Product · EdTech</span>
+          <div class="pc3-panel-title">Product Buddy</div>
+          <p class="pc3-panel-desc">PM mentorship course for Vietnamese freshers. 16 live sessions, cohorts of 5–10 students, real case studies, AI workflow modules. 40+ mentees placed in their first BA/PO roles.</p>
+          <a href="https://buddy-product.vercel.app/" target="_blank" class="pc3-panel-cta" onclick="event.stopPropagation()">Visit site →</a>
+        </div>
+      </div>
+
+      <!-- Refine Poker -->
+      <div class="pcard3 fu">
+        <div class="pc3-bg pbg-rp" style="background-image:url(cover-refinepoker.png)"></div>
+        <div class="pc3-ov"></div>
+        <div class="pc3-content">
+          <div class="pc3-pill">Tool · 2026</div>
+          <div class="pc3-title">Refine Poker</div>
+        </div>
+        <div class="pc3-panel">
+          <span class="pc3-panel-co">My Product · Agile Tool</span>
+          <div class="pc3-panel-title">Refine Poker</div>
+          <p class="pc3-panel-desc">Free agile estimation tool — no signup, no friction. Just a name and a shareable link to start planning poker with your team in real time.</p>
+          <a href="https://refinepoker.vercel.app/" target="_blank" class="pc3-panel-cta" onclick="event.stopPropagation()">Visit site →</a>
+        </div>
+      </div>
+
+      <!-- Babynote -->
+      <div class="pcard3 fu" style="grid-column:1/-1">
+        <div class="pc3-bg" style="background:radial-gradient(ellipse at 40% 45%,#be185d 0%,#6b21a8 50%,#0f0520 100%)"></div>
+        <div class="pc3-ov"></div>
+        <div class="pc3-content">
+          <div class="pc3-pill">AI · 2026 · Coming soon</div>
+          <div class="pc3-title">Babynote — Smart Health Notes for Moms</div>
+        </div>
+        <div class="pc3-panel">
+          <span class="pc3-panel-co">My Product · AI · Parenting</span>
+          <div class="pc3-panel-title">Babynote</div>
+          <p class="pc3-panel-desc">An AI-powered note-taking app for moms to effortlessly track their baby's health journey. Features include AI-assisted logging, JSON data importer, growth charts, feeding &amp; sleep patterns, vaccine tracking, and shareable health summaries for doctors.</p>
+          <span class="pc3-panel-cta" style="opacity:.55;cursor:default">Coming soon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+</div><!-- end products -->
 
 <!-- ═══════════ PRODUCT MANAGEMENT ═══════════ -->
 <div class="page" id="pg-pm">
@@ -1207,20 +1264,14 @@ footer{background:#0d0c16;padding:44px 48px}
   <span class="slbl">Browse by topic</span><span class="gbar"></span>
   <h2 class="stitle" style="margin-bottom:36px">Pick a topic to explore.</h2>
   <div class="sub-grid">
-    <a href="#" class="scard fu"><span class="sico">🔄</span><h3>Scrum &amp; Agile</h3><p>Deep dives into Agile methodology, sprint ceremonies, roles, and artifacts — with real examples from my squads at Inspectorio and VeXeRe.</p><ul><li>Scrum ceremonies</li><li>Backlog refinement</li><li>Sprint planning</li><li>Retrospectives</li><li>PSPO I prep</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu"><span class="sico">🎯</span><h3>PM Interview Prep</h3><p>How I prepared for and passed interviews at global companies. Questions, frameworks, take-home assignments, and sample answers.</p><ul><li>Common questions</li><li>Answer frameworks</li><li>Take-home tips</li><li>Product sense</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu"><span class="sico">🧪</span><h3>Quality Assurance</h3><p>QA concepts every PM/PO needs to know — how to work with QA teams, what to test, and how to prevent quality issues before release.</p><ul><li>UAT process</li><li>Bug triaging</li><li>Test cases basics</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu"><span class="sico">📊</span><h3>Data Analytics</h3><p>Being data-driven as a PM — which metrics matter, how to set up tracking, and how to use data to make better decisions.</p><ul><li>KPI frameworks</li><li>Funnel analysis</li><li>A/B testing</li></ul><span class="sarr">Read articles →</span></a>
-    <a href="#" class="scard fu" style="grid-column:1/-1"><span class="sico">📚</span><h3>Materials &amp; Resources</h3><p>My curated list of books, courses, templates, and tools that have genuinely made me a better product person.</p><ul><li>Books I recommend</li><li>Courses worth taking</li><li>Free templates</li><li>Useful tools</li></ul><span class="sarr">Browse resources →</span></a>
+    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></span><h3>Scrum &amp; Agile</h3><p>Deep dives into Agile methodology, sprint ceremonies, roles, and artifacts — with real examples from my squads at Inspectorio and VeXeRe.</p><ul><li>Scrum ceremonies</li><li>Backlog refinement</li><li>Sprint planning</li><li>Retrospectives</li><li>PSPO I prep</li></ul><span class="sarr">Read articles →</span></a>
+    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h3>PM Interview Prep</h3><p>How I prepared for and passed interviews at global companies. Questions, frameworks, take-home assignments, and sample answers.</p><ul><li>Common questions</li><li>Answer frameworks</li><li>Take-home tips</li><li>Product sense</li></ul><span class="sarr">Read articles →</span></a>
+    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v7l-4 8a1 1 0 0 0 .9 1.5h10.2a1 1 0 0 0 .9-1.5l-4-8V3"/><path d="M7.5 14h9"/></svg></span><h3>Quality Assurance</h3><p>QA concepts every PM/PO needs to know — how to work with QA teams, what to test, and how to prevent quality issues before release.</p><ul><li>UAT process</li><li>Bug triaging</li><li>Test cases basics</li></ul><span class="sarr">Read articles →</span></a>
+    <a href="#" class="scard fu"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></span><h3>Data Analytics</h3><p>Being data-driven as a PM — which metrics matter, how to set up tracking, and how to use data to make better decisions.</p><ul><li>KPI frameworks</li><li>Funnel analysis</li><li>A/B testing</li></ul><span class="sarr">Read articles →</span></a>
+    <a href="#" class="scard fu" style="grid-column:1/-1"><span class="sico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><h3>Materials &amp; Resources</h3><p>My curated list of books, courses, templates, and tools that have genuinely made me a better product person.</p><ul><li>Books I recommend</li><li>Courses worth taking</li><li>Free templates</li><li>Useful tools</li></ul><span class="sarr">Browse resources →</span></a>
   </div>
-  <span class="slbl">Featured articles</span><span class="gbar"></span>
-  <h2 class="stitle" style="margin-bottom:24px">Recent reads.</h2>
-  <a href="#" class="art fu"><div><span class="atag">Scrum &amp; Agile</span><div class="atitle">How I run backlog refinement sessions that engineers actually enjoy</div><div class="adesc">A practical walkthrough of how to prepare, facilitate, and follow up on grooming — based on running squads at Inspectorio.</div></div><div class="aarr">→</div></a>
-  <a href="#" class="art fu"><div><span class="atag">PM Interview</span><div class="atitle">The take-home assignment frameworks that helped me land 5 offers</div><div class="adesc">How I approach product design and strategy exercises — with real examples from my interview rounds.</div></div><div class="aarr">→</div></a>
-  <a href="#" class="art fu"><div><span class="atag">Data Analytics</span><div class="atitle">The 5 metrics I always define before any MVP launch</div><div class="adesc">Lessons learned from launching Goyolo and GMS — what to measure, when, and how to use the data.</div></div><div class="aarr">→</div></a>
-  <a href="#" class="art fu"><div><span class="atag">Quality Assurance</span><div class="atitle">How to run UAT when you have 10 stakeholders and 2 weeks</div><div class="adesc">From my experience running pre-release testing at Golden Equator and Inspectorio. Practical, not theoretical.</div></div><div class="aarr">→</div></a>
 </div></section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <!-- ═══════════ CASE STUDIES ═══════════ -->
@@ -1254,7 +1305,7 @@ footer{background:#0d0c16;padding:44px 48px}
     <a href="#" class="csc fu"><div class="csc-bg t"></div><div class="csh"><span class="cstag">Travel</span><h3>How do you prioritize a backlog when business and user needs conflict?</h3></div></a>
   </div>
 </div></section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <!-- ═══════════ PODCAST ═══════════ -->
@@ -1291,14 +1342,14 @@ footer{background:#0d0c16;padding:44px 48px}
     <a href="https://www.facebook.com/productbuddy.official" target="_blank" class="epc fu"><div class="epth c6">🎓</div><div class="epbody"><span class="epnum">Episode 01</span><span class="eptitle">Tại sao tôi bắt đầu Product Buddy — và điều tôi muốn bạn biết</span></div></a>
   </div>
 </div></section>
-<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
+<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
 </div>
 
 <script>
 /* ── PROJECT DATA ─────────────────────────── */
 const PROJECTS={
   labsync:{
-    slug:'labsync',parent:'portfolio',
+    slug:'labsync',parent:'experience',
     companyTag:'INSPECTORIO',company:'Inspectorio',
     title:'LabSync',
     intro:'A laboratory testing management platform connecting brands, retailers, suppliers, and labs — centralising data and unlocking supply chain analytics never before available in the industry.',
@@ -1321,7 +1372,7 @@ const PROJECTS={
 /* ── RENDER DETAIL PAGE ───────────────────── */
 function renderDetailPage(id){
   const p=PROJECTS[id]; if(!p)return;
-  const FOOTER=`<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('portfolio')">Portfolio</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran</p></div></footer>`;
+  const FOOTER=`<footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran</p></div></footer>`;
   function sec(s,i){
     const alt=i%2?' alt':''; let inner='';
     if(s.type==='text') inner=`<h2 class="dsh">${s.heading}</h2><p class="dbody">${s.body}</p>`;
@@ -1347,15 +1398,15 @@ function renderDetailPage(id){
     <div class="detail-meta"><div class="detail-meta-inner">${p.meta.map(m=>`<div class="dmi"><div class="dmi-key">${m.key}</div><div class="dmi-val">${m.val}</div></div>`).join('')}</div></div>
     ${p.sections.map((s,i)=>sec(s,i)).join('')}
     <section class="detail-sec"><div class="si"><div class="detail-cta">
-      <button class="btn-acc" onclick="go('${p.parent||'portfolio'}')">← Back to Portfolio</button>
+      <button class="btn-acc" onclick="go('${p.parent||'experience'}')">← Back to Experience</button>
       <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" class="btn-ghost-dk">Connect on LinkedIn</a>
     </div></div></section>${FOOTER}`;
 }
 
 /* ── ROUTING ──────────────────────────────── */
-const PAGES=['home','about','portfolio','pm','cases','podcast'];
-const NIDS={about:'na-about',portfolio:'na-portfolio',pm:'na-pm',cases:'na-cases',podcast:'na-podcast'};
-const PAGE_URLS={home:'/',about:'/about',portfolio:'/portfolio',pm:'/pm',cases:'/cases',podcast:'/podcast'};
+const PAGES=['home','about','experience','products','cases','pm','podcast'];
+const NIDS={about:'na-about',experience:'na-experience',products:'na-products',cases:'na-cases',pm:'na-pm',podcast:'na-podcast'};
+const PAGE_URLS={home:'/',about:'/about',experience:'/experience',products:'/products',cases:'/cases',pm:'/pm',podcast:'/podcast'};
 let currentPage='home';
 
 function go(id,pushState=true){
