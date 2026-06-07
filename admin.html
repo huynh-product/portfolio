@@ -284,7 +284,8 @@ body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100v
 <script>
 const SB_URL='https://crqnnarnlyartkihfnld.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNycW5uYXJubHlhcnRraWhmbmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NDQ1NTIsImV4cCI6MjA5NjQyMDU1Mn0.0pSW1tijtqXWRkOK-dwYiB-SFAz2GMRGgkmGD0ZOOzk';
-const sb=window.supabase.createClient(SB_URL,SB_KEY);
+// sb is initialised inside init() so crashes here don't freeze the page
+let sb=null;
 
 let activeTab='experience', items=[], editItem=null, editSections=[];
 
@@ -295,13 +296,22 @@ function hideOverlay(){
 }
 
 async function init(){
-  // Safety net: always show the app after 6s even if something hangs
+  // Safety net: always show the app after 8s even if something hangs
   const timer=setTimeout(()=>{
     hideOverlay();
-    toast('Could not reach Supabase. Check that you ran supabase-setup.sql first.','err');
-  },6000);
+    document.getElementById('items-list').innerHTML=`<div class="empty-state">
+      <p style="margin-bottom:8px">⚠️ Could not connect to Supabase.</p>
+      <p style="font-size:12px;line-height:1.8;max-width:360px;margin:0 auto">
+        Make sure you ran <code>supabase-setup.sql</code> in the Supabase Dashboard → SQL Editor, then refresh this page.
+      </p>
+    </div>`;
+  },8000);
 
   try{
+    // Create Supabase client here so any SDK error is caught
+    if(!window.supabase) throw new Error('Supabase SDK not loaded — check your internet connection.');
+    sb=window.supabase.createClient(SB_URL,SB_KEY);
+
     // Try to create the storage bucket (silently ignore if it already exists)
     sb.storage.createBucket('covers',{public:true}).catch(()=>{});
     // Test connection with a simple query
