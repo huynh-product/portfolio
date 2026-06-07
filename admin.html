@@ -639,7 +639,7 @@ function renderSections(){
 }
 
 function sectionBlock(s,i){
-  const types={text:'Text',bullets:'Bullets',quote:'Quote','two-cards':'Two Cards','num-grid:'Number Grid','num-grid':'Number Grid',takeaways:'Takeaways'};
+  const types={text:'Text',bullets:'Bullets',quote:'Quote','two-cards':'Two Cards','num-grid':'Number Grid',takeaways:'Takeaways'};
   const heading=s.heading||s.text||'(untitled)';
   const fieldsHtml=sectionFields(s,i);
   return `<div class="sec-block" id="sec-${i}">
@@ -675,7 +675,7 @@ function sectionFields(s,i){
       <div class="subfield">
         <div class="subfield-hdr">Card 1</div>
         <div class="field-row">
-          <div class="field"><label>Icon (emoji)</label><input oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{};];editSections[${i}].cards[0].icon=this.value" value="${esc(c1.icon)}"></div>
+          <div class="field"><label>Icon (emoji)</label><input oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{}];editSections[${i}].cards[0].icon=this.value" value="${esc(c1.icon)}"></div>
           <div class="field"><label>Title</label><input oninput="if(!editSections[${i}].cards)editSections[${i}].cards=[{},{}];editSections[${i}].cards[0].title=this.value" value="${esc(c1.title)}"></div>
         </div>
         <div class="field"><label>Items (one per line)</label>
@@ -911,20 +911,21 @@ async function seedData(){
     {title:'Materials & Resources',description:'My curated list of books, courses, templates, and tools that have genuinely made me a better product person.',icon_svg:BOOK_ICON,items:['Books I recommend','Courses worth taking','Free templates','Useful tools'],cta_label:'Browse resources →',full_width:true,sort_order:4},
   ];
 
+  if(!sb){toast('Not connected to Supabase','err');document.getElementById('seed-btn').textContent='⚡ Seed initial data';return;}
   let ok=0,skip=0;
   for(const p of projects){
-    const{error}=await sb.from('projects').upsert(p,{onConflict:'slug',ignoreDuplicates:true});
-    if(error&&error.code==='23505')skip++;
+    const{error}=await sb.from('projects').upsert(p,{onConflict:'slug'});
+    if(error&&(error.code==='23505'||error.message?.includes('duplicate')))skip++;
     else if(!error)ok++;
-    else{toast('Seed error: '+error.message,'err');break;}
+    else{toast('Seed error: '+error.message,'err');document.getElementById('seed-btn').textContent='⚡ Seed initial data';return;}
   }
   for(const c of cases){
-    const{error}=await sb.from('case_studies').insert(c).select();
-    if(!error)ok++;
+    const{error}=await sb.from('case_studies').insert(c);
+    if(!error)ok++; else if(error.code==='23505')skip++;
   }
   for(const t of pmTopics){
-    const{error}=await sb.from('pm_topics').insert(t).select();
-    if(!error)ok++;
+    const{error}=await sb.from('pm_topics').insert(t);
+    if(!error)ok++; else if(error.code==='23505')skip++;
   }
 
   document.getElementById('seed-btn').textContent='⚡ Seed initial data';
