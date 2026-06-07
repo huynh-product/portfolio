@@ -289,13 +289,39 @@ const sb=window.supabase.createClient(SB_URL,SB_KEY);
 let activeTab='experience', items=[], editItem=null, editSections=[];
 
 /* ── INIT ── */
-async function init(){
-  try{
-    await sb.storage.createBucket('covers',{public:true});
-  }catch(e){}
-  await loadTab('experience');
+function hideOverlay(){
   document.getElementById('init-overlay').style.display='none';
   document.getElementById('app').style.display='flex';
+}
+
+async function init(){
+  // Safety net: always show the app after 6s even if something hangs
+  const timer=setTimeout(()=>{
+    hideOverlay();
+    toast('Could not reach Supabase. Check that you ran supabase-setup.sql first.','err');
+  },6000);
+
+  try{
+    // Try to create the storage bucket (silently ignore if it already exists)
+    sb.storage.createBucket('covers',{public:true}).catch(()=>{});
+    // Test connection with a simple query
+    const {error}=await sb.from('projects').select('id').limit(1);
+    clearTimeout(timer);
+    hideOverlay();
+    if(error){
+      toast('DB not ready: '+error.message+' — run supabase-setup.sql first','err');
+      document.getElementById('items-list').innerHTML=`<div class="empty-state">
+        <p style="margin-bottom:12px">⚠️ Tables not found.</p>
+        <p style="font-size:12px;line-height:1.7">Go to <strong>Supabase Dashboard → SQL Editor</strong> and run the <code>supabase-setup.sql</code> file, then refresh this page.</p>
+      </div>`;
+      return;
+    }
+    await loadTab('experience');
+  }catch(e){
+    clearTimeout(timer);
+    hideOverlay();
+    toast('Init error: '+e.message,'err');
+  }
 }
 
 /* ── TAB SWITCHING ── */
@@ -934,9 +960,7 @@ function toast(msg,type='ok'){
 }
 
 /* ── START ── */
-init().then(()=>{
-  // After list loads, set up section builder if on a project tab
-}).catch(e=>toast('Init failed: '+e.message,'err'));
+init();
 
 // Re-render sections after detail tab is shown
 document.addEventListener('click',e=>{
