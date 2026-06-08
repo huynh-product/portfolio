@@ -1017,12 +1017,7 @@ footer{background:#0d0c16;padding:44px 48px}
   <div class="sb-loading"><div class="sb-spinner"></div><span>Loading experience…</span></div>
 </div>
 </section>
-
-</div>
-</section>
-
 <footer><div class="footer-inner"><span class="footer-logo-txt" onclick="go('home')"><img src="logo.svg" alt="HuynhProduct" style="height:28px;width:auto;filter:brightness(0) invert(1)"></span><ul class="footer-links"><li><a onclick="go('home')">Home</a></li><li><a onclick="go('about')">About</a></li><li><a onclick="go('experience')">Experience</a></li><li><a onclick="go('products')">My Products</a></li><li><a onclick="go('cases')">Case Studies</a></li><li><a onclick="go('pm')">Product Management</a></li><li><a onclick="go('podcast')">Podcast</a></li></ul><p class="footer-copy">© 2025 Huynh Tran · <a href="mailto:huynh.product@gmail.com" style="color:inherit">huynh.product@gmail.com</a> · <a href="https://www.linkedin.com/in/huynhproduct/" target="_blank" style="color:inherit">LinkedIn</a></p></div></footer>
-</div><!-- end experience -->
 </div><!-- end experience -->
 
 <!-- ═══════════ MY PRODUCTS ═══════════ -->
@@ -1051,9 +1046,6 @@ footer{background:#0d0c16;padding:44px 48px}
 <section class="inner-sec">
 <div id="prod-container" class="si" style="max-width:1150px">
   <div class="sb-loading"><div class="sb-spinner"></div><span>Loading products…</span></div>
-</div>
-</section>
-
 </div>
 </section>
 
@@ -1323,51 +1315,73 @@ function _rebuildProjects(){
   });
 }
 
+/* Render page content from current cache — no network, no spinner */
+function _renderPageContent(page){
+  if(page==='experience'||page==='products'){
+    const items=_sbProjects.filter(p=>p.page===page);
+    if(!items.length)return false; /* keep spinner if truly no data */
+    const cid=page==='experience'?'exp-container':'prod-container';
+    const c=document.getElementById(cid);
+    if(c){c.innerHTML=_buildProjectSections(page);setTimeout(()=>initFU('pg-'+page),60);}
+    return true;
+  } else if(page==='cases'){
+    if(!_sbCases.length)return false;
+    const c=document.getElementById('cases-container');
+    if(c){
+      const grid=_sbCases.map(cs=>`<a href="${cs.link||'#'}" class="csc fu"${cs.link&&cs.link!=='#'?' target="_blank"':''}>
+        <div class="csc-bg ${cs.color_cls||'f'}"></div>
+        <div class="csh"><span class="cstag">${_esc(cs.tag)}</span><h3>${_esc(cs.title)}</h3></div>
+      </a>`).join('');
+      c.innerHTML=`<div class="cs-grid">${grid}</div>`;
+      setTimeout(()=>initFU('pg-cases'),60);
+    }
+    return true;
+  } else if(page==='pm'){
+    if(!_sbPM.length)return false;
+    const c=document.getElementById('pm-container');
+    if(c){
+      c.innerHTML=_sbPM.map(t=>`<a href="#" class="scard fu"${t.full_width?' style="grid-column:1/-1"':''}>
+        <span class="sico">${t.icon_svg||''}</span>
+        <h3>${_esc(t.title)}</h3>
+        <p>${_esc(t.description)}</p>
+        <ul>${(t.items||[]).map(i=>`<li>${_esc(i)}</li>`).join('')}</ul>
+        <span class="sarr">${_esc(t.cta_label||'Read articles →')}</span>
+      </a>`).join('');
+      setTimeout(()=>initFU('pg-pm'),60);
+    }
+    return true;
+  }
+  return false;
+}
+
 async function _sbRender(page){
-  /* Always fetch fresh so admin changes appear without full page reload */
+  /* 1) Show cached content immediately — no spinner delay */
+  const hadCache=_renderPageContent(page);
+  /* 2) Fetch fresh in background; silently update if new data arrives */
   try{
     if(page==='experience'||page==='products'){
       const {data}=await _sb.from('projects').select('*').eq('page',page).order('group_order').order('sort_order');
       if(data){
-        /* Merge into _sbProjects (replace this page's entries) */
         _sbProjects=[..._sbProjects.filter(p=>p.page!==page),...data];
         _rebuildProjects();
-        const cid=page==='experience'?'exp-container':'prod-container';
-        const c=document.getElementById(cid);
-        if(c){c.innerHTML=_buildProjectSections(page);setTimeout(()=>initFU('pg-'+page),60);}
+        _renderPageContent(page);
       }
     } else if(page==='cases'){
       const {data}=await _sb.from('case_studies').select('*').order('sort_order');
-      if(data){
-        _sbCases=data;
-        const c=document.getElementById('cases-container');
-        if(c){
-          const grid=_sbCases.map(cs=>`<a href="${cs.link||'#'}" class="csc fu"${cs.link&&cs.link!=='#'?' target="_blank"':''}>
-            <div class="csc-bg ${cs.color_cls||'f'}"></div>
-            <div class="csh"><span class="cstag">${_esc(cs.tag)}</span><h3>${_esc(cs.title)}</h3></div>
-          </a>`).join('');
-          c.innerHTML=`<div class="cs-grid">${grid}</div>`;
-          setTimeout(()=>initFU('pg-cases'),60);
-        }
-      }
+      if(data){_sbCases=data;_renderPageContent(page);}
     } else if(page==='pm'){
       const {data}=await _sb.from('pm_topics').select('*').order('sort_order');
-      if(data){
-        _sbPM=data;
-        const c=document.getElementById('pm-container');
-        if(c){
-          c.innerHTML=_sbPM.map(t=>`<a href="#" class="scard fu"${t.full_width?' style="grid-column:1/-1"':''}>
-            <span class="sico">${t.icon_svg||''}</span>
-            <h3>${_esc(t.title)}</h3>
-            <p>${_esc(t.description)}</p>
-            <ul>${(t.items||[]).map(i=>`<li>${_esc(i)}</li>`).join('')}</ul>
-            <span class="sarr">${_esc(t.cta_label||'Read articles →')}</span>
-          </a>`).join('');
-          setTimeout(()=>initFU('pg-pm'),60);
-        }
-      }
+      if(data){_sbPM=data;_renderPageContent(page);}
     }
-  }catch(e){console.warn('_sbRender error',page,e);}
+  }catch(e){
+    console.warn('_sbRender bg-fetch error',page,e);
+    /* If no cached data was shown, display a friendly message instead of infinite spinner */
+    if(!hadCache){
+      const cid={experience:'exp-container',products:'prod-container',cases:'cases-container',pm:'pm-container'}[page];
+      const c=cid&&document.getElementById(cid);
+      if(c)c.innerHTML='<p style="padding:40px;text-align:center;color:var(--ink3)">Could not load content — please refresh.</p>';
+    }
+  }
 }
 
 /* Fetch all data on load, then handle initial route */
