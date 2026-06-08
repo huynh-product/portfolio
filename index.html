@@ -4,6 +4,16 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Huynh Tran — Product Owner</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<!-- Prevent home-page flash on direct URL load: runs before first paint -->
+<script>
+(function(){
+  var p=location.pathname;
+  if(p==='/'||p==='')return;
+  // Any non-home URL: hide pg-home immediately via a class on <html>
+  document.documentElement.classList.add('not-home');
+})();
+</script>
+<style>html.not-home #pg-home{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1227,11 +1237,24 @@ function go(id,pushState=true){
   updateNav();
   setTimeout(()=>initFU(isProj?'pg-detail':'pg-'+id),60);
   if(pushState){const url=isProj?`/${PROJECTS[id].parent}/${id}`:(PAGE_URLS[id]||'/');history.pushState({page:id},'',url);}
-  /* trigger data-driven renders */
+  /* trigger data-driven renders (always fresh — no cache) */
   if(id==='experience')_sbRender('experience');
   else if(id==='products')_sbRender('products');
   else if(id==='cases')_sbRender('cases');
   else if(id==='pm')_sbRender('pm');
+  /* For detail pages: re-fetch fresh data then re-render */
+  else if(isProj){
+    (async()=>{
+      try{
+        const {data}=await _sb.from('projects').select('*').eq('slug',id).single();
+        if(data){
+          _sbProjects=[..._sbProjects.filter(p=>p.slug!==id),data];
+          _rebuildProjects();
+          renderDetailPage(id); /* re-render with fresh data */
+        }
+      }catch(e){console.warn('detail refresh failed',e);}
+    })();
+  }
 }
 window.addEventListener('popstate',e=>{if(e.state?.page)go(e.state.page,false);});
 
@@ -1240,7 +1263,6 @@ const _SB_URL='https://crqnnarnlyartkihfnld.supabase.co';
 const _SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNycW5uYXJubHlhcnRraWhmbmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NDQ1NTIsImV4cCI6MjA5NjQyMDU1Mn0.0pSW1tijtqXWRkOK-dwYiB-SFAz2GMRGgkmGD0ZOOzk';
 const _sb=window.supabase.createClient(_SB_URL,_SB_KEY);
 let _sbProjects=[],_sbCases=[],_sbPM=[];
-const _rendered={experience:false,products:false,cases:false,pm:false};
 
 function _esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
@@ -1292,40 +1314,63 @@ function _buildProjectSections(page){
   return html;
 }
 
-function _sbRender(page){
-  if(_rendered[page])return;
-  if(page==='experience'){
-    const c=document.getElementById('exp-container');
-    if(c){c.innerHTML=_buildProjectSections('experience');_rendered.experience=true;setTimeout(()=>initFU('pg-experience'),60);}
-  } else if(page==='products'){
-    const c=document.getElementById('prod-container');
-    if(c){c.innerHTML=_buildProjectSections('products');_rendered.products=true;setTimeout(()=>initFU('pg-products'),60);}
-  } else if(page==='cases'){
-    const c=document.getElementById('cases-container');
-    if(c){
-      const grid=_sbCases.map(cs=>`<a href="${cs.link||'#'}" class="csc fu"${cs.link&&cs.link!=='#'?' target="_blank"':''}>
-        <div class="csc-bg ${cs.color_cls||'f'}"></div>
-        <div class="csh"><span class="cstag">${_esc(cs.tag)}</span><h3>${_esc(cs.title)}</h3></div>
-      </a>`).join('');
-      c.innerHTML=`<div class="cs-grid">${grid}</div>`;
-      _rendered.cases=true;setTimeout(()=>initFU('pg-cases'),60);
-    }
-  } else if(page==='pm'){
-    const c=document.getElementById('pm-container');
-    if(c){
-      c.innerHTML=_sbPM.map(t=>`<a href="#" class="scard fu"${t.full_width?' style="grid-column:1/-1"':''}>
-        <span class="sico">${t.icon_svg||''}</span>
-        <h3>${_esc(t.title)}</h3>
-        <p>${_esc(t.description)}</p>
-        <ul>${(t.items||[]).map(i=>`<li>${_esc(i)}</li>`).join('')}</ul>
-        <span class="sarr">${_esc(t.cta_label||'Read articles →')}</span>
-      </a>`).join('');
-      _rendered.pm=true;setTimeout(()=>initFU('pg-pm'),60);
-    }
-  }
+function _rebuildProjects(){
+  PROJECTS={};
+  _sbProjects.filter(p=>p.has_detail).forEach(p=>{
+    PROJECTS[p.slug]={slug:p.slug,parent:p.page,companyTag:p.co_tag,
+      company:p.company_group,title:p.title,intro:p.d_intro,
+      meta:p.d_meta||[],stats:p.d_stats||[],sections:p.d_sections||[]};
+  });
 }
 
-/* Fetch all data, then handle initial route */
+async function _sbRender(page){
+  /* Always fetch fresh so admin changes appear without full page reload */
+  try{
+    if(page==='experience'||page==='products'){
+      const {data}=await _sb.from('projects').select('*').eq('page',page).order('group_order').order('sort_order');
+      if(data){
+        /* Merge into _sbProjects (replace this page's entries) */
+        _sbProjects=[..._sbProjects.filter(p=>p.page!==page),...data];
+        _rebuildProjects();
+        const cid=page==='experience'?'exp-container':'prod-container';
+        const c=document.getElementById(cid);
+        if(c){c.innerHTML=_buildProjectSections(page);setTimeout(()=>initFU('pg-'+page),60);}
+      }
+    } else if(page==='cases'){
+      const {data}=await _sb.from('case_studies').select('*').order('sort_order');
+      if(data){
+        _sbCases=data;
+        const c=document.getElementById('cases-container');
+        if(c){
+          const grid=_sbCases.map(cs=>`<a href="${cs.link||'#'}" class="csc fu"${cs.link&&cs.link!=='#'?' target="_blank"':''}>
+            <div class="csc-bg ${cs.color_cls||'f'}"></div>
+            <div class="csh"><span class="cstag">${_esc(cs.tag)}</span><h3>${_esc(cs.title)}</h3></div>
+          </a>`).join('');
+          c.innerHTML=`<div class="cs-grid">${grid}</div>`;
+          setTimeout(()=>initFU('pg-cases'),60);
+        }
+      }
+    } else if(page==='pm'){
+      const {data}=await _sb.from('pm_topics').select('*').order('sort_order');
+      if(data){
+        _sbPM=data;
+        const c=document.getElementById('pm-container');
+        if(c){
+          c.innerHTML=_sbPM.map(t=>`<a href="#" class="scard fu"${t.full_width?' style="grid-column:1/-1"':''}>
+            <span class="sico">${t.icon_svg||''}</span>
+            <h3>${_esc(t.title)}</h3>
+            <p>${_esc(t.description)}</p>
+            <ul>${(t.items||[]).map(i=>`<li>${_esc(i)}</li>`).join('')}</ul>
+            <span class="sarr">${_esc(t.cta_label||'Read articles →')}</span>
+          </a>`).join('');
+          setTimeout(()=>initFU('pg-pm'),60);
+        }
+      }
+    }
+  }catch(e){console.warn('_sbRender error',page,e);}
+}
+
+/* Fetch all data on load, then handle initial route */
 (async()=>{
   try{
     const [pr,cr,pmr]=await Promise.all([
@@ -1334,21 +1379,15 @@ function _sbRender(page){
       _sb.from('pm_topics').select('*').order('sort_order'),
     ]);
     _sbProjects=pr.data||[];_sbCases=cr.data||[];_sbPM=pmr.data||[];
-    /* Rebuild PROJECTS detail lookup from DB */
-    PROJECTS={};
-    _sbProjects.filter(p=>p.has_detail).forEach(p=>{
-      PROJECTS[p.slug]={slug:p.slug,parent:p.page,companyTag:p.co_tag,
-        company:p.company_group,title:p.title,intro:p.d_intro,
-        meta:p.d_meta||[],stats:p.d_stats||[],sections:p.d_sections||[]};
-    });
+    _rebuildProjects();
   }catch(e){console.warn('Supabase fetch failed',e);}
-  /* Initial route */
+  /* Initial route — now that PROJECTS is populated */
   const path=window.location.pathname;
   const proj=Object.values(PROJECTS).find(p=>path===`/${p.parent}/${p.slug}`||path===`/${p.slug}`);
   if(proj){go(proj.slug,false);return;}
   const pg=Object.entries(PAGE_URLS).find(([,u])=>u===path);
   if(pg&&pg[0]!=='home')go(pg[0],false);
-  else _sbRender('experience'); /* pre-render experience tab */
+  else _sbRender('experience');
 })();
 
 /* ── Hero letters ── */
