@@ -1154,27 +1154,8 @@ footer{background:#0d0c16;padding:44px 48px}
 
 <script>
 /* ── PROJECT DATA ─────────────────────────── */
-const PROJECTS={
-  labsync:{
-    slug:'labsync',parent:'experience',
-    companyTag:'INSPECTORIO',company:'Inspectorio',
-    title:'LabSync',
-    intro:'A laboratory testing management platform connecting brands, retailers, suppliers, and labs — centralising data and unlocking supply chain analytics never before available in the industry.',
-    meta:[{key:'Role',val:'Business Analyst'},{key:'Platform',val:'Web App'},{key:'Type',val:'SaaS B2B'},{key:'Stage',val:'Post MVP'}],
-    stats:[{label:'Clients',val:'Target · DICK\'S · Crocs'},{label:'Team',val:'6 devs · 2 QA · 1 designer'},{label:'Result',val:'10+ demos · 5,000+ vendors onboarded'}],
-    sections:[
-      {type:'text',heading:'About the product',body:`Inspectorio is a US-based cloud SaaS used by <strong>12,000+ customers</strong> — including top global brands and retailers. LabSync standardises lab testing data points (typically stored differently by each lab), centralises test requests in one place, and layers a <strong>first-of-its-kind analytics module</strong> on top — a capability that had not previously been available.`},
-      {type:'two-cards',heading:'My contribution',cards:[
-        {icon:'🔄',title:'Scrum Team Lead',items:['Led a squad of 6 devs, 2 QA testers, and 1 designer','Hosted all Scrum ceremonies: Daily, Review, Retro & Grooming','Prepared PRDs, validated with clients, collaborated with designers','Built WSJF prioritisation framework to organise client feedback','Prepared sprint and monthly release notes']},
-        {icon:'🌍',title:'Global Client Work',items:['Pilot testing & discovery with Target, DICK\'S Sporting Goods, Crocs','Integrated LabSync with Target across 4 lab testing agencies','Demoed to 10+ global brands across multiple time zones','Prepared & analysed pilot surveys to improve the product']},
-      ]},
-      {type:'num-grid',heading:'Sprint process',items:[{n:'01',t:'Backlog Prep',d:'PRDs, user stories, WSJF priority'},{n:'02',t:'Grooming',d:'Planning Poker estimates'},{n:'03',t:'Sprint + Daily',d:'2-week cycles, 15-min standups'},{n:'04',t:'Sprint Review',d:'Velocity, burn-down, demo'},{n:'05',t:'Retro + Plan',d:'Improve → next sprint goals'}]},
-      {type:'bullets',heading:'Results in 6 months',items:['Launched LabSync and onboarded <strong>Target (~5,000 vendors)</strong> and <strong>Crocs (~100 vendors)</strong> into pilot testing','Demoed to <strong>10+ global brands</strong> — generating strong adoption pipeline','Defined a harmonised online test request form — saving vendors time vs. offline methods','Documented GET, POST & PUT APIs for lab agencies — enabling faster integrations']},
-      {type:'quote',text:'I think you\'re exceptional at what you do. I can honestly say that with your enthusiasm, proactiveness, and the speed at which you learn and adapt, you have potential far beyond most.',author:'Alex Ryan, Technical Lead · Senior Software Engineer @ Inspectorio'},
-      {type:'takeaways',heading:'Key takeaways',items:[{n:'01',t:'Global clients need tailored communication.',d:'Schedule across time zones, use their terminology, and demo slowly — never assume shared context.'},{n:'02',t:'Involve developers early.',d:'Bringing devs into customer interviews and design from day one unlocks their expertise and reduces costly late changes.'},{n:'03',t:'Alignment first — 5W1H.',d:'Every cross-functional effort needs Who, What, When, Where, Why and How defined clearly upfront.'}]},
-    ],
-  },
-};
+/* PROJECTS is populated entirely from Supabase via _rebuildProjects() — no hardcoded data */
+let PROJECTS={};
 
 /* ── RENDER DETAIL PAGE ───────────────────── */
 function renderDetailPage(id){
