@@ -80,3 +80,20 @@ create trigger trg_touch_projects
 -- ── Storage bucket for cover images ──────────────────────────
 -- Run this separately if the bucket doesn't exist:
 -- insert into storage.buckets (id, name, public) values ('covers', 'covers', true);
+
+-- ── Page Content (Home, About, Podcast) ──────────────────────
+-- Run this block to add CMS control for static pages
+create table if not exists page_content (
+  id         uuid        primary key default gen_random_uuid(),
+  page       text        unique not null,  -- 'home' | 'about' | 'podcast'
+  content    jsonb       not null default '{}',
+  updated_at timestamptz default now()
+);
+
+alter table page_content enable row level security;
+create policy "public_read"  on page_content for select using (true);
+create policy "admin_write"  on page_content for all    using (true) with check (true);
+
+create trigger trg_touch_page_content
+  before update on page_content
+  for each row execute function _touch_updated_at();

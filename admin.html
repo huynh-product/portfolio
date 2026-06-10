@@ -206,6 +206,21 @@ body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100v
 .items-list-edit{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
 .items-list-edit input{padding:6px 10px;font-size:13px}
 .color-preview{width:12px;height:12px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.2)}
+/* ── PAGE CONTENT EDITOR ── */
+.pc-form{padding:0 0 40px}
+.pc-section{margin-bottom:28px}
+.pc-section-hdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);padding:8px 0;border-bottom:1px solid var(--border);margin-bottom:14px}
+.rpt-item{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:grid;gap:7px;position:relative}
+.rpt-item .rpt-rm{position:absolute;top:8px;right:8px;background:none;border:1px solid var(--border);border-radius:5px;color:var(--ink3);font-size:11px;padding:2px 7px;cursor:pointer;line-height:1.5}
+.rpt-item .rpt-rm:hover{background:rgba(220,38,38,.08);color:var(--red);border-color:rgba(220,38,38,.3)}
+.btn-add-rpt{width:100%;padding:8px;background:none;border:1.5px dashed var(--border);border-radius:8px;color:var(--ink3);font-size:12.5px;font-family:var(--ff);cursor:pointer;transition:all .15s;margin-top:2px}
+.btn-add-rpt:hover{border-color:var(--acc);color:var(--acc);background:rgba(107,92,231,.04)}
+.btn-save-pc{padding:11px 28px;background:var(--acc);color:#fff;border:none;border-radius:8px;font-family:var(--ff);font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;margin-top:8px}
+.btn-save-pc:hover{background:var(--acc2)}
+.btn-save-pc:disabled{opacity:.5;cursor:not-allowed}
+.pc-feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.pc-feat-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:grid;gap:6px}
+.pc-feat-card label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);display:block;margin-bottom:1px}
 </style>
 </head>
 <body>
@@ -239,6 +254,20 @@ body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100v
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         PM Topics
       </button>
+      <div style="height:1px;background:var(--border);margin:10px 4px"></div>
+      <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);padding:4px 14px 6px">Page Content</p>
+      <button class="atab" data-tab="home" onclick="switchTab('home')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </button>
+      <button class="atab" data-tab="about" onclick="switchTab('about')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        About
+      </button>
+      <button class="atab" data-tab="podcast" onclick="switchTab('podcast')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="11" r="3"/><path d="M12 20c-5 0-9-4-9-9s4-9 9-9 9 4 9 9"/><path d="M12 14v8M8 22h8"/></svg>
+        Podcast
+      </button>
       <div class="aside-gap"></div>
       <button id="seed-btn" onclick="seedData()">⚡ Seed initial data</button>
     </aside>
@@ -247,7 +276,7 @@ body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100v
       <div id="list-view">
         <div class="list-hdr">
           <h2 id="list-title">Experience</h2>
-          <button class="btn-add" onclick="openNew()">
+          <button class="btn-add" id="add-btn" onclick="openNew()">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
             Add New
           </button>
@@ -308,14 +337,294 @@ async function init(){
 }
 
 /* ── TAB SWITCHING ── */
+const PAGE_CONTENT_TABS=['home','about','podcast'];
+
 async function switchTab(tab){
   activeTab=tab;
   document.querySelectorAll('.atab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  const titles={experience:'Experience',products:'My Products',cases:'Case Studies',pm:'PM Topics'};
-  document.getElementById('list-title').textContent=titles[tab];
+  const titles={experience:'Experience',products:'My Products',cases:'Case Studies',pm:'PM Topics',home:'Home Page',about:'About Page',podcast:'Podcast Page'};
+  document.getElementById('list-title').textContent=titles[tab]||tab;
+  const isPageTab=PAGE_CONTENT_TABS.includes(tab);
+  document.getElementById('add-btn').style.display=isPageTab?'none':'';
   closePanel();
-  await loadTab(tab);
+  if(isPageTab){await loadPageContentTab(tab);}
+  else{await loadTab(tab);}
 }
+
+/* ═══════════ PAGE CONTENT EDITOR ═══════════ */
+let _pcItem=null; // current page_content row from Supabase
+
+async function loadPageContentTab(tab){
+  document.getElementById('items-list').innerHTML='<div class="empty-state"><div class="init-spinner" style="margin:0 auto 12px"></div></div>';
+  try{
+    const {data,error}=await sb.from('page_content').select('*').eq('page',tab).maybeSingle();
+    if(error)throw error;
+    _pcItem=data;
+    const c=data?.content||{};
+    document.getElementById('items-list').innerHTML=
+      tab==='home'?homeContentForm(c):
+      tab==='about'?aboutContentForm(c):
+      podcastContentForm(c);
+    if(tab==='home'){renderPills(c.pills||[]);renderTicker(c.ticker||[]);}
+    if(tab==='about')renderAchievements(c.achievements||[]);
+    if(tab==='podcast')renderEpisodes(c.episodes||[]);
+  }catch(e){
+    toast('Load failed: '+e.message,'err');
+    document.getElementById('items-list').innerHTML=`<div class="empty-state">${e.message}</div>`;
+  }
+}
+
+async function savePageContent(){
+  const btn=document.getElementById('save-pc-btn');
+  btn.disabled=true;btn.textContent='Saving…';
+  try{
+    const content=collectPageContent(activeTab);
+    let result;
+    if(_pcItem){
+      result=await sb.from('page_content').update({content}).eq('id',_pcItem.id);
+    }else{
+      result=await sb.from('page_content').upsert({page:activeTab,content},{onConflict:'page'});
+    }
+    if(result?.error)throw result.error;
+    toast('Saved ✓','ok');
+    await loadPageContentTab(activeTab);
+  }catch(e){toast('Save failed: '+e.message,'err');}
+  btn.disabled=false;btn.textContent='Save changes';
+}
+
+function collectPageContent(tab){
+  const v=id=>{const el=document.getElementById(id);return el?el.value.trim():'';}
+  if(tab==='home'){
+    return{
+      hero_sub:v('hm-hero-sub'),
+      about_title:v('hm-about-title'),
+      about_p1:v('hm-about-p1'),
+      about_p2:v('hm-about-p2'),
+      pills:collectPills(),
+      ticker:collectTicker(),
+      features_heading:v('hm-feat-heading'),
+      features_desc:v('hm-feat-desc'),
+      features:[0,1,2,3,4,5].map(i=>({title:v(`hm-ft-${i}`),desc:v(`hm-fd-${i}`)})),
+      scroll_desc:v('hm-scroll-desc'),
+      cta_eyebrow:v('hm-cta-ey'),
+      cta_heading:v('hm-cta-h'),
+      cta_desc:v('hm-cta-p'),
+    };
+  }
+  if(tab==='about'){
+    return{
+      badge:v('ab-badge'),
+      h1_name:v('ab-h1name'),
+      hero_sub:v('ab-hero-sub'),
+      bio_title:v('ab-bio-title'),
+      p1:v('ab-p1'),p2:v('ab-p2'),p3:v('ab-p3'),p4:v('ab-p4'),
+      achievements:collectAchievements(),
+    };
+  }
+  if(tab==='podcast'){
+    return{
+      badge:v('pc-badge'),
+      heading:v('pc-heading'),
+      sub:v('pc-sub'),
+      episodes:collectEpisodes(),
+    };
+  }
+  return{};
+}
+
+/* ── HOME FORM ── */
+const _homeFeats=[
+  'User-centric Mindset','AI-powered Products','Agile & Scrum',
+  'UX / UI in Mind','International Delivery','Data-driven Roadmapping'
+];
+function homeContentForm(c){
+  const feats=(c.features||[]);
+  return`<div class="pc-form">
+    <div class="pc-section">
+      <div class="pc-section-hdr">Hero</div>
+      <div class="field"><label>Hero subtitle</label><textarea id="hm-hero-sub" rows="2">${esc(c.hero_sub||'')}</textarea></div>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">About section (on home)</div>
+      <div class="field"><label>Title</label><input id="hm-about-title" value="${esc(c.about_title||'')}"></div>
+      <div class="field"><label>Paragraph 1 (HTML allowed)</label><textarea id="hm-about-p1" rows="3">${esc(c.about_p1||'')}</textarea></div>
+      <div class="field"><label>Paragraph 2 (HTML allowed)</label><textarea id="hm-about-p2" rows="3">${esc(c.about_p2||'')}</textarea></div>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">Achievement Pills</div>
+      <div id="pills-list"></div>
+      <button class="btn-add-rpt" onclick="addPill()">+ Add pill</button>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">Ticker (scrolling brands)</div>
+      <div id="ticker-list"></div>
+      <button class="btn-add-rpt" onclick="addTicker()">+ Add ticker item</button>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">What I Bring section</div>
+      <div class="field"><label>Heading</label><input id="hm-feat-heading" value="${esc(c.features_heading||'')}"></div>
+      <div class="field"><label>Sub-description</label><textarea id="hm-feat-desc" rows="2">${esc(c.features_desc||'')}</textarea></div>
+      <div class="pc-feat-grid">${_homeFeats.map((name,i)=>`
+        <div class="pc-feat-card">
+          <label>${name}</label>
+          <input id="hm-ft-${i}" placeholder="Title" value="${esc(feats[i]?.title||name)}">
+          <textarea id="hm-fd-${i}" rows="2" placeholder="Description">${esc(feats[i]?.desc||'')}</textarea>
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">Scroll Section</div>
+      <div class="field"><label>Description paragraph</label><textarea id="hm-scroll-desc" rows="3">${esc(c.scroll_desc||'')}</textarea></div>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">CTA Section (dark banner)</div>
+      <div class="field"><label>Eyebrow label</label><input id="hm-cta-ey" value="${esc(c.cta_eyebrow||'')}"></div>
+      <div class="field"><label>Heading (HTML allowed)</label><input id="hm-cta-h" value="${esc(c.cta_heading||'')}"></div>
+      <div class="field"><label>Description</label><textarea id="hm-cta-p" rows="2">${esc(c.cta_desc||'')}</textarea></div>
+    </div>
+    <button class="btn-save-pc" id="save-pc-btn" onclick="savePageContent()">Save changes</button>
+  </div>`;
+}
+
+/* Pills repeater */
+let _pills=[];
+function renderPills(arr){_pills=arr.map(p=>({...p}));_drawPills();}
+function _drawPills(){
+  const list=document.getElementById('pills-list');
+  if(!list)return;
+  list.innerHTML=_pills.map((p,i)=>`
+    <div class="rpt-item" style="grid-template-columns:40px 1fr">
+      <button class="rpt-rm" onclick="removePill(${i})">✕</button>
+      <input type="color" value="${p.color||'#7c3aed'}" oninput="_pills[${i}].color=this.value" style="width:36px;height:36px;border:none;background:none;cursor:pointer;padding:0">
+      <input value="${esc(p.text||'')}" placeholder="Pill text" oninput="_pills[${i}].text=this.value">
+    </div>`).join('');
+}
+function addPill(){_pills.push({color:'#7c3aed',text:''});_drawPills();}
+function removePill(i){_pills.splice(i,1);_drawPills();}
+function collectPills(){
+  return Array.from(document.querySelectorAll('#pills-list .rpt-item')).map(r=>{
+    return{color:r.querySelector('input[type=color]')?.value||'#7c3aed',text:r.querySelector('input:not([type=color])')?.value||''};
+  }).filter(p=>p.text);
+}
+
+/* Ticker repeater */
+let _ticker=[];
+function renderTicker(arr){_ticker=arr.map(t=>({...t}));_drawTicker();}
+function _drawTicker(){
+  const list=document.getElementById('ticker-list');
+  if(!list)return;
+  list.innerHTML=_ticker.map((t,i)=>`
+    <div class="rpt-item" style="grid-template-columns:1fr 1fr auto">
+      <input value="${esc(t.name||'')}" placeholder="Brand name" oninput="_ticker[${i}].name=this.value">
+      <input value="${esc(t.tag||'')}" placeholder="Tag (e.g. SaaS B2B)" oninput="_ticker[${i}].tag=this.value">
+      <button class="rpt-rm" style="position:static" onclick="removeTicker(${i})">✕</button>
+    </div>`).join('');
+}
+function addTicker(){_ticker.push({name:'',tag:''});_drawTicker();}
+function removeTicker(i){_ticker.splice(i,1);_drawTicker();}
+function collectTicker(){
+  return Array.from(document.querySelectorAll('#ticker-list .rpt-item')).map(r=>{
+    const ins=r.querySelectorAll('input');return{name:ins[0]?.value||'',tag:ins[1]?.value||''};
+  }).filter(t=>t.name);
+}
+
+/* ── ABOUT FORM ── */
+function aboutContentForm(c){
+  return`<div class="pc-form">
+    <div class="pc-section">
+      <div class="pc-section-hdr">Hero</div>
+      <div class="field"><label>Hero badge</label><input id="ab-badge" value="${esc(c.badge||'')}"></div>
+      <div class="field"><label>Name (accent part of "Hi, I'm …")</label><input id="ab-h1name" value="${esc(c.h1_name||'Huynh Tran')}"></div>
+      <div class="field"><label>Hero subtitle</label><textarea id="ab-hero-sub" rows="2">${esc(c.hero_sub||'')}</textarea></div>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">Bio Story</div>
+      <div class="field"><label>Section heading</label><input id="ab-bio-title" value="${esc(c.bio_title||'')}"></div>
+      <div class="field"><label>Paragraph 1 (HTML allowed)</label><textarea id="ab-p1" rows="3">${esc(c.p1||'')}</textarea></div>
+      <div class="field"><label>Paragraph 2 (HTML allowed)</label><textarea id="ab-p2" rows="3">${esc(c.p2||'')}</textarea></div>
+      <div class="field"><label>Paragraph 3 (HTML allowed)</label><textarea id="ab-p3" rows="3">${esc(c.p3||'')}</textarea></div>
+      <div class="field"><label>Paragraph 4 (HTML allowed)</label><textarea id="ab-p4" rows="3">${esc(c.p4||'')}</textarea></div>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">Achievement Cards</div>
+      <div id="achievements-list"></div>
+      <button class="btn-add-rpt" onclick="addAchievement()">+ Add achievement card</button>
+    </div>
+    <button class="btn-save-pc" id="save-pc-btn" onclick="savePageContent()">Save changes</button>
+  </div>`;
+}
+
+/* Achievements repeater */
+let _achievements=[];
+function renderAchievements(arr){_achievements=arr.map(a=>({...a}));_drawAchievements();}
+function _drawAchievements(){
+  const list=document.getElementById('achievements-list');
+  if(!list)return;
+  list.innerHTML=_achievements.map((a,i)=>`
+    <div class="rpt-item" style="grid-template-columns:1fr">
+      <button class="rpt-rm" onclick="removeAchievement(${i})">✕</button>
+      <div class="field-row">
+        <div class="field"><label>Period / Company tag</label><input value="${esc(a.period||'')}" oninput="_achievements[${i}].period=this.value"></div>
+        <div class="field"><label>Company / Title</label><input value="${esc(a.company||'')}" oninput="_achievements[${i}].company=this.value"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Role / Sub-title</label><input value="${esc(a.role||'')}" oninput="_achievements[${i}].role=this.value"></div>
+        <div class="field"><label>Mode badge (optional)</label><input value="${esc(a.mode||'')}" placeholder="e.g. Impact" oninput="_achievements[${i}].mode=this.value"></div>
+      </div>
+      <div class="field"><label>Description (HTML allowed)</label><textarea rows="3" oninput="_achievements[${i}].desc=this.value">${esc(a.desc||'')}</textarea></div>
+      <div class="field-row">
+        <div class="field"><label>Badge link URL</label><input value="${esc(a.badge_link||'')}" placeholder="https://…" oninput="_achievements[${i}].badge_link=this.value"></div>
+        <div class="field"><label>Badge link text</label><input value="${esc(a.badge_text||'')}" placeholder="Read case study →" oninput="_achievements[${i}].badge_text=this.value"></div>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-top:2px">
+        <input type="checkbox" ${a.featured?'checked':''} onchange="_achievements[${i}].featured=this.checked"> Featured (wider card)
+      </label>
+    </div>`).join('');
+}
+function addAchievement(){_achievements.push({period:'',company:'',role:'',mode:'',desc:'',badge_link:'',badge_text:'',featured:false});_drawAchievements();}
+function removeAchievement(i){_achievements.splice(i,1);_drawAchievements();}
+function collectAchievements(){return _achievements;}
+
+/* ── PODCAST FORM ── */
+function podcastContentForm(c){
+  return`<div class="pc-form">
+    <div class="pc-section">
+      <div class="pc-section-hdr">Hero</div>
+      <div class="field"><label>Badge text</label><input id="pc-badge" value="${esc(c.badge||'')}"></div>
+      <div class="field"><label>Heading (after "Conversations about")</label><input id="pc-heading" value="${esc(c.heading||'Product.')}"></div>
+      <div class="field"><label>Subtitle</label><textarea id="pc-sub" rows="2">${esc(c.sub||'')}</textarea></div>
+    </div>
+    <div class="pc-section">
+      <div class="pc-section-hdr">Episodes</div>
+      <div id="episodes-list"></div>
+      <button class="btn-add-rpt" onclick="addEpisode()">+ Add episode</button>
+    </div>
+    <button class="btn-save-pc" id="save-pc-btn" onclick="savePageContent()">Save changes</button>
+  </div>`;
+}
+
+/* Episodes repeater */
+let _episodes=[];
+function renderEpisodes(arr){_episodes=arr.map(e=>({...e}));_drawEpisodes();}
+function _drawEpisodes(){
+  const list=document.getElementById('episodes-list');
+  if(!list)return;
+  const colorOpts=['c1','c2','c3','c4','c5','c6'].map(c=>`<option value="${c}">${c}</option>`).join('');
+  list.innerHTML=_episodes.map((e,i)=>`
+    <div class="rpt-item" style="grid-template-columns:1fr">
+      <button class="rpt-rm" onclick="removeEpisode(${i})">✕</button>
+      <div class="field-row">
+        <div class="field"><label>Episode label</label><input value="${esc(e.num||'')}" placeholder="Episode 01" oninput="_episodes[${i}].num=this.value"></div>
+        <div class="field"><label>Icon (emoji)</label><input value="${esc(e.icon||'🎙️')}" placeholder="🎙️" oninput="_episodes[${i}].icon=this.value" style="max-width:80px"></div>
+        <div class="field"><label>Color class</label><select onchange="_episodes[${i}].color_cls=this.value">${['c1','c2','c3','c4','c5','c6'].map(c=>`<option value="${c}"${e.color_cls===c?' selected':''}>${c}</option>`).join('')}</select></div>
+      </div>
+      <div class="field"><label>Title</label><input value="${esc(e.title||'')}" oninput="_episodes[${i}].title=this.value"></div>
+      <div class="field"><label>Link URL</label><input value="${esc(e.link||'')}" placeholder="https://…" oninput="_episodes[${i}].link=this.value"></div>
+    </div>`).join('');
+}
+function addEpisode(){_episodes.push({num:'',title:'',link:'',icon:'🎙️',color_cls:'c1'});_drawEpisodes();}
+function removeEpisode(i){_episodes.splice(i,1);_drawEpisodes();}
+function collectEpisodes(){return _episodes;}
 
 async function loadTab(tab){
   document.getElementById('items-list').innerHTML='<div class="empty-state"><div class="init-spinner" style="margin:0 auto 12px"></div></div>';
@@ -789,6 +1098,7 @@ function updateImgPreview(url){
 
 /* ── SAVE ── */
 async function saveItem(){
+  if(PAGE_CONTENT_TABS.includes(activeTab)){savePageContent();return;}
   const btn=document.getElementById('save-btn');
   btn.disabled=true;btn.textContent='Saving…';
 
