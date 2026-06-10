@@ -354,13 +354,91 @@ async function switchTab(tab){
 /* ═══════════ PAGE CONTENT EDITOR ═══════════ */
 let _pcItem=null; // current page_content row from Supabase
 
+/* ── DEFAULTS (mirrors current live site content) ── */
+const PAGE_DEFAULTS={
+  home:{
+    hero_sub:'Senior Product Owner with 6+ years across SaaS, OTA, and social platforms. Currently at Inspectorio, building AI-powered supply chain products for global brands.',
+    about_title:'Senior Product Owner / Product Manager.',
+    about_p1:'I started with a Business degree from <strong>Foreign Trade University</strong>, stumbled into Product Management, and never looked back. 6+ years later I\'ve shipped products in <strong>B2B SaaS, B2C travel, and social platforms</strong> — always close to users, data, and the team.',
+    about_p2:'Currently at <strong>Inspectorio</strong>, building AI-powered supply chain tools for Walmart, Target &amp; Tesco. I also run <strong>Product Buddy</strong>, a mentorship course that helped 100+ students land their first PM role.',
+    pills:[
+      {color:'#7c3aed',text:'🏆 Employee of the Year · Inspectorio'},
+      {color:'#f59e0b',text:'🥇 2× Hackathon Champion'},
+      {color:'#2563eb',text:'🌍 Walmart · Target · Tesco · Crocs'},
+      {color:'#059669',text:'📈 130% Traffic Growth MoM · Goyolo'},
+      {color:'#0891b2',text:'💰 +15% Revenue via Freemium · GMS'},
+      {color:'#4f46e5',text:'👥 100+ Mentees → First PM Role'},
+    ],
+    ticker:[
+      {name:'Inspectorio',tag:'SaaS B2B'},{name:'VeXeRe',tag:'Travel OTA'},
+      {name:'Golden Equator',tag:'Social Platform'},{name:'Walmart',tag:'Global Retail'},
+      {name:'Target',tag:'US Retail'},{name:'Tesco',tag:'UK Retail'},
+      {name:'Product Buddy',tag:'EdTech'},{name:'Foreign Trade University',tag:'Vietnam'},
+    ],
+    features_heading:'6 years of product thinking.',
+    features_desc:'From AI-powered supply chain tools to travel apps and mentorship — here\'s the craft I bring to every team and problem.',
+    features:[
+      {title:'User-centric Mindset',desc:'User interviews, usability tests, and pilot programs ground every product decision in real behaviour — not assumptions.'},
+      {title:'AI-powered Products',desc:'Shipped AI agents for document validation, auto-fill, and compliance at Inspectorio — leveraging AI to accelerate scope and quality.'},
+      {title:'Agile & Scrum',desc:'PSPO I certified. Led 2-week sprint cycles and all Scrum ceremonies for cross-functional squads of 10+ members.'},
+      {title:'UX / UI in Mind',desc:'Collaborate with designers on PRDs that balance user needs, business goals, and technical constraints — from discovery through delivery.'},
+      {title:'International Delivery',desc:'Products live in Vietnam, Singapore, and the US — used by Walmart, Target, Tesco, and Crocs at global enterprise scale.'},
+      {title:'Data-driven Roadmapping',desc:'Mixpanel, Microsoft Clarity, and funnel analysis replace gut feel — every roadmap decision tied to measurable product outcomes.'},
+    ],
+    scroll_desc:'I\'m a Product Owner who leads with user empathy, thinks in long-term outcomes, and uses AI to extend my reach into design and engineering — building faster, scaling smarter, and shipping products that actually last.',
+    cta_eyebrow:'Career support',
+    cta_heading:'Need help landing<br>a PM job?',
+    cta_desc:'I\'ve interviewed at Employment Hero, Nakivo, Katalon, Inspectorio and landed offers. I can help you prepare, build your portfolio, and ace your interviews.',
+  },
+  about:{
+    badge:'Senior Product Owner · Vietnam',
+    h1_name:'Huynh Tran',
+    hero_sub:'Product Owner, builder, and mentor. I love shipping products that solve real problems — and helping others do the same.',
+    bio_title:'From business student to product builder.',
+    p1:'I graduated with a <strong>Bachelor\'s in International Business Economics from Foreign Trade University</strong>, GPA 3.6. My product career started by accident — I applied for a warehouse role, and a sharp boss saw something else in me.',
+    p2:'I\'ve spent 6+ years building products across <strong>B2B SaaS, B2C travel, and social platforms</strong> — starting at VeXeRe where I built a cargo management SaaS for 500+ bus operators and launched a flight platform that drove 130% traffic growth MoM. Then at Golden Equator, I led Swish — an invite-only professional social network on iOS, Android, and Web — growing MAU 20%+ in 3 months.',
+    p3:'At <strong>Inspectorio</strong>, I spearheaded 4 major products: Responsible Sourcing Compliance, Digital Assets, LabSync, and Traceability. I work directly with global brands — Walmart, Target, Tesco, DICK\'S Sporting Goods, Crocs — and was honoured as <strong>Employee of the Year</strong> and <strong>2× Hackathon Champion</strong>. I leverage AI extensively to extend my scope into design and engineering, accelerating delivery and raising quality.',
+    p4:'Outside work, I founded <strong>Product Buddy</strong> — a knowledge-sharing community that has helped 40+ Vietnamese freshers land their first BA/PO roles through mentorship, real case studies, and practical curriculum.',
+    achievements:[
+      {period:'Inspectorio · 2023',company:'Traceability $300K Pilot Win',role:'Creative problem-solving under constraints',mode:'',featured:true,desc:'Leveraged existing platform features and a creative manual hack — "fake it until you make it" — to win a major pilot and sign a +$300K client contract. The solution was designed from day one to scale cleanly into full development.',badge_link:'',badge_text:''},
+      {period:'Inspectorio · 2× Champion',company:'Hackathon Champion',role:'Company-wide innovation competition',mode:'2× Winner',featured:false,desc:'Won Inspectorio\'s hackathon twice — competing to identify real problems, ideate solutions, and ship fast in front of the whole company.\n\n<strong>Win 1:</strong> Spotlight Search — improved platform navigation for all users.\n<strong>Win 2:</strong> AI Assistant Agent — automated manual processes using AI.',badge_link:'https://huynhproduct.webflow.io/case-studies/inspectorio-hackathon-championship',badge_text:'Read case study →'},
+      {period:'Inspectorio · 2024',company:'API Cost Optimisation',role:'Digital Assets · $40K/year saved',mode:'Impact',featured:false,desc:'Digital Assets consumed costly 3rd-party API calls. Partnered with engineers to redesign code and user flows — significantly reducing API usage, saving the company $40K+/year and making the product more scalable.',badge_link:'https://huynhproduct.webflow.io/case-studies/inspectorio-optimizing-apis-to-save-cost',badge_text:'Read case study →'},
+      {period:'Personal · 2024–Present',company:'Product Buddy',role:'Community Founder & Mentor',mode:'Side project',featured:false,desc:'Built a knowledge-sharing community to help Vietnamese freshers break into BA/PO roles. Mentored 40+ people through real case studies, practical curriculum, and 1:1 support — and helped them land their first dream jobs.',badge_link:'https://www.facebook.com/productbuddy.official',badge_text:'Visit community →'},
+    ],
+  },
+  podcast:{
+    badge:'Product Buddy · Podcast',
+    heading:'Product.',
+    sub:'Interviews with PMs, career stories, and honest lessons from people who build products for a living. In Vietnamese &amp; English.',
+    episodes:[
+      {num:'Episode 06',title:'Từ QA sang Product Owner — câu chuyện chuyển ngành thực tế',link:'https://www.facebook.com/productbuddy.official',icon:'🎙️',color_cls:'c1'},
+      {num:'Episode 05',title:'How I got 5 PM job offers in 3 months — my exact prep strategy',link:'https://www.facebook.com/productbuddy.official',icon:'💼',color_cls:'c2'},
+      {num:'Episode 04',title:'AI in product development — what actually changes for a PO?',link:'https://www.facebook.com/productbuddy.official',icon:'🤖',color_cls:'c3'},
+      {num:'Episode 03',title:'Viết PRD như thế nào cho đúng? — Template thực chiến',link:'https://www.facebook.com/productbuddy.official',icon:'📋',color_cls:'c4'},
+      {num:'Episode 02',title:'Building a product from 0 to MVP — lessons from GMS and Goyolo',link:'https://www.facebook.com/productbuddy.official',icon:'🚀',color_cls:'c5'},
+      {num:'Episode 01',title:'Tại sao tôi bắt đầu Product Buddy — và điều tôi muốn bạn biết',link:'https://www.facebook.com/productbuddy.official',icon:'🎓',color_cls:'c6'},
+    ],
+  },
+};
+
 async function loadPageContentTab(tab){
   document.getElementById('items-list').innerHTML='<div class="empty-state"><div class="init-spinner" style="margin:0 auto 12px"></div></div>';
   try{
     const {data,error}=await sb.from('page_content').select('*').eq('page',tab).maybeSingle();
     if(error)throw error;
     _pcItem=data;
-    const c=data?.content||{};
+    /* Merge saved data over defaults so fields are never empty on first visit */
+    const def=PAGE_DEFAULTS[tab]||{};
+    const saved=data?.content||{};
+    const c={...def,...saved};
+    /* For arrays, use saved version if it exists and is non-empty, else use defaults */
+    if(tab==='home'){
+      c.pills=saved.pills?.length?saved.pills:def.pills;
+      c.ticker=saved.ticker?.length?saved.ticker:def.ticker;
+      c.features=saved.features?.length?saved.features:def.features;
+    }
+    if(tab==='about'){c.achievements=saved.achievements?.length?saved.achievements:def.achievements;}
+    if(tab==='podcast'){c.episodes=saved.episodes?.length?saved.episodes:def.episodes;}
     document.getElementById('items-list').innerHTML=
       tab==='home'?homeContentForm(c):
       tab==='about'?aboutContentForm(c):
